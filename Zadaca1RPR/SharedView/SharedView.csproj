@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49108213-E4E3-4727-8E3B-089AF8B558DB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{96B20E6E-4DC0-45CA-8DF5-6EB9FDC2A5D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zadaca1RPR</RootNamespace>
-    <AssemblyName>Zadaca1RPR</AssemblyName>
+    <RootNamespace>SharedView</RootNamespace>
+    <AssemblyName>SharedView</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,32 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstracts\Patient.cs" />
-    <Compile Include="Enums\EnumGender.cs" />
-    <Compile Include="Interfaces\IOrdination.cs" />
-    <Compile Include="Abstracts\Staff.cs" />
-    <Compile Include="Models\Clinic.cs" />
-    <Compile Include="Models\Ordinations\Laboratory.cs" />
-    <Compile Include="Models\Employees\Doctor.cs" />
-    <Compile Include="Models\PatientInformation\HealthBook.cs" />
-    <Compile Include="Models\PatientInformation\HealthCard.cs" />
-    <Compile Include="Models\Patients\NormalPatient.cs" />
-    <Compile Include="Models\Patients\UrgentPatient.cs" />
-    <Compile Include="Models\Employees\Technician.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="SView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\DoctorView.cs" />
-    <Compile Include="Views\ManagementView.cs" />
-    <Compile Include="Views\TechView.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharedView\SharedView.csproj">
-      <Project>{96b20e6e-4dc0-45ca-8df5-6eb9fdc2a5d5}</Project>
-      <Name>SharedView</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

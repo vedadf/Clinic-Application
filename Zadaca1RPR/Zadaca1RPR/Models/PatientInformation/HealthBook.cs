@@ -9,20 +9,20 @@ namespace Zadaca1RPR.Models
 {
     class HealthBook
     {
-        public string[] DoctorNotes { get; set; }
-        public string[] CurrentHealthIssues { get; set; }
-        public string[] PastHealthIssues { get; set; }
-        public string[] FamilyHealthIssues { get; set; }
+        public string DoctorNotes { get; set; }
+        public List<string> CurrentHealthIssues { get; set; }
+        public List<string> PastHealthIssues { get; set; }
+        public string FamilyHealthIssue { get; set; }
 
-        public HealthBook(string[] doctorNotes,
-            string[] currentHealthIssues = default(string[]),
-            string[] pastHealthIssues = default(string[]),
-            string[] familyHealthIssues = default(string[]))
+        public HealthBook(string doctorNotes,
+            List<string> currentHealthIssues = default(List<string>),
+            List<string> pastHealthIssues = default(List<string>),
+            string familyHealthIssue = default(string))
         {
             DoctorNotes = doctorNotes;
             CurrentHealthIssues = currentHealthIssues;
             PastHealthIssues = pastHealthIssues;
-            FamilyHealthIssues = familyHealthIssues;
+            FamilyHealthIssue = familyHealthIssue;
         }
 
     }
