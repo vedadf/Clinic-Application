@@ -21,6 +21,7 @@ namespace Zadaca1RPR.Models.Patients
         public override List<string> Schedule { get; set; }
         public override int IDnum { get; set; }
         public override double Cost { get; set; }
+        public override int numOfTimesVisited { get; set; }
 
         public NormalPatient(string name, string surname, DateTime birthDate, string address,
            bool married, DateTime registerDate, EnumGender gender,

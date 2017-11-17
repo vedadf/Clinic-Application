@@ -42,7 +42,7 @@ namespace Zadaca1RPR.Views
                     else
                     {
                         schedule = clinic.GetPatientSchedule(id);
-                        if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                        if (schedule == null || schedule.Count == 0) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
                         else
                         {
                             Console.WriteLine("Raspored je sljedeci: ");
@@ -127,11 +127,11 @@ namespace Zadaca1RPR.Views
                             choice = Console.ReadLine();
                             if (choice != ".")
                             {
-                                if (input == "L" || input == "K" || input == "R" || input == "H" || input == "D")
+                                if (choice == "L" || choice == "K" || choice == "R" || choice == "H" || choice == "D")
                                 {
-                                    bool exists = schedule1.Exists(i => i == input);
+                                    bool exists = schedule1.Exists(i => i == choice);
                                     if (exists) Console.WriteLine("Vec je unesena ordinacija.");
-                                    else schedule1.Add(input);
+                                    else schedule1.Add(choice);
                                 }
                                 else SView.NoCommand();
                             }
@@ -162,7 +162,11 @@ namespace Zadaca1RPR.Views
                         foreach (string ordin in ordinationsDoctorAbsent) dynamic.Add(ordin);
                         foreach (string ordin in ordinationsDeviceBroken) dynamic.Add(ordin);
 
-                        clinic.GetPatientFromID(id3).Schedule = dynamic;
+                        Patient pat = clinic.GetPatientFromID(id3);
+                        clinic.Ordinations.Find(o => o.Name == pat.Schedule[0]).PatientsQueue.Remove(pat);
+                        pat.Schedule = dynamic;
+                        clinic.Ordinations.Find(o => o.Name == pat.Schedule[0]).NewPatient(pat);
+                        
 
                         Console.WriteLine("Generisani raspored je sljedeci: ");
                         for (int i = 0; i < dynamic.Count; i++)
@@ -170,6 +174,7 @@ namespace Zadaca1RPR.Views
                             if (i != dynamic.Count - 1) Console.Write("{0}, ", dynamic[i]);
                             else Console.Write("{0} ", dynamic[i]);
                         }
+                        Console.WriteLine("Pacijent je izbrisan iz reda prosle ordinacije, i dodan u red ordinacije {0}", dynamic[0]);
                         Console.WriteLine();
                     }
                     Main(ref clinic);
@@ -200,13 +205,14 @@ namespace Zadaca1RPR.Views
                             ordination.Patient.HealthBook.ExaminationResults.Add(ther);
                             Console.WriteLine("Pregled ce biti dodan na danasnji datum: {0}", DateTime.Today.ToString("dd/MM/yyyy"));
                             ordination.Patient.HealthBook.ExaminationDates.Add(DateTime.Today);
-
+                            ordination.Patient.HealthBook.CompletedOrdinations.Add(ordination.Name);
                             Patient patient = ordination.Patient;
                             ordination.ProcessPatient();
                             Console.WriteLine("Pacijent je uspjesno procesuiran");
+                            
                             if(patient.Schedule == null || patient.Schedule.Count == 0)
                             {
-                                Console.WriteLine("Pacijent vise zakazanih pregleda na rasporedu, uputite ga ka portirnici.");
+                                Console.WriteLine("Pacijent nema vise zakazanih pregleda na rasporedu, uputite ga ka portirnici.");
                             }
                             else
                             {

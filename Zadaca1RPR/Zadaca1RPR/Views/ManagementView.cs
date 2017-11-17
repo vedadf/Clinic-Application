@@ -36,7 +36,7 @@ namespace Zadaca1RPR.Views
                     else
                     {
                         schedule = clinic.GetPatientSchedule(id);
-                        if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                        if (schedule == null || schedule.Count == 0) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
                         else
                         {
                             Console.WriteLine("Raspored je sljedeci: ");

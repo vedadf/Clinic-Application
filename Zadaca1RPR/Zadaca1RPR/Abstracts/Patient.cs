@@ -38,5 +38,7 @@ namespace Zadaca1RPR.Abstracts
         
         public virtual double Cost { get; set; }
 
+        public virtual int numOfTimesVisited { get; set; }
+
     }
 }

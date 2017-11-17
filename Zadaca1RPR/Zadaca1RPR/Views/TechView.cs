@@ -51,7 +51,7 @@ namespace Zadaca1RPR.Views
                         else
                         {
                             schedule = clinic.GetPatientSchedule(id);
-                            if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                            if (schedule == null || schedule.Count == 0) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
                             else
                             {
                                 Console.WriteLine("Raspored je sljedeci: ");
@@ -73,7 +73,65 @@ namespace Zadaca1RPR.Views
                         else { SView.NoCommand(); Main(ref clinic); }
                         break;
                     case "4":
+                        int idd;
+                        Console.WriteLine("Upisite identifikacijski broj pacijenta kojem zelite naplatiti: ");
+                        idd = Convert.ToInt32(Console.ReadLine());
+                        Patient pat = clinic.GetPatientFromID(idd);
+                        if (pat == null) Console.WriteLine("Pacijent ne postoji.");
+                        else if (!pat.HasHealthCard) Console.WriteLine("Pacijent nema karton.");
+                        else if (pat.Schedule.Count > 0) Console.WriteLine("Pacijent nije zavrsio sa svojim pregledima.");
+                        else
+                        {
+                            bool regular = false;
+                            Console.WriteLine("Pacijent je {0} {1}", pat.Name, pat.Surname);
+                            Console.WriteLine("Pacijent je posjetio kliniku {0} puta.", pat.numOfTimesVisited);
+                            if (pat.numOfTimesVisited > 3) regular = true;
+                            else regular = false;
+                            Console.WriteLine("Pacijent je odradio {0} pregleda.", pat.HealthBook.ExaminationDates.Count);
+                            string cc;
+                            while (true)
+                            {
+                                Console.WriteLine("Da li pacijent zeli platiti na rate ili gotovinom? (R/G)");
+                                cc = Console.ReadLine();
+                                if (cc == "R" || cc == "G") break;
+                                else SView.NoCommand();
+                            }
 
+                            Console.WriteLine("Glavna cijena je: {0}", pat.Cost);
+
+                            foreach (string str in pat.HealthBook.CompletedOrdinations)
+                                Console.WriteLine("Ordinacija: {0}; Cijena: {1};", str, clinic.Ordinations.Find(o => o.Name == str).Price);
+                                
+
+                            if (cc == "R")
+                            {
+                                Console.WriteLine("Pacijent moze platiti na 3 rate podijeljene na 3 jednaka dijela.");
+                                if (regular)
+                                {
+                                    Console.WriteLine("Cijena za placanje na rate za redovnog pacijenta ostaje ista.");
+                                    Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", pat.Cost / 3.0);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Cijena za placanje na rate za novog pacijenta: {0}KM", pat.Cost + 0.15 * pat.Cost);
+                                    Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", (pat.Cost + 0.15 * pat.Cost) / 3.0);
+                                }
+                            }
+                            else
+                            {
+                                if (regular)
+                                    Console.WriteLine("Cijena za placanje gotovinom za redovnog pacijenta: {0}KM.", pat.Cost - 0.1 * pat.Cost);
+                                else
+                                    Console.WriteLine("Cijena za placanje gotovinom za novog pacijenta ostaje ista.");
+                            }
+
+                            Console.WriteLine("Karton za pacijenta je zatvoren.");
+                            clinic.GetCardFromPatientID(idd).CardActive = false;
+                            pat.HasHealthCard = false;
+                            clinic.HealthCards.Remove(clinic.GetCardFromPatientID(idd));
+
+                        }
+                        Main(ref clinic);
                         break;
                     case "5":
                         Program.ChooseRole(ref clinic);
@@ -186,56 +244,50 @@ namespace Zadaca1RPR.Views
 
             if (!deceased)
             {
-                string input;
-                Console.WriteLine("Koje ordinacije pacijent treba posjetiti? (Odvojite u novi red, ne smiju se ordinacije ponavljati)");
-                Console.WriteLine("Laboratoriju - L");
-                Console.WriteLine("Kardiolosku ordinaciju - K");
-                Console.WriteLine("Radiolosku ordinaciju - R");
-                Console.WriteLine("Hirursku ordinaciju - H");
-                Console.WriteLine("Dermatolosku ordinaciju - D");
-                Console.WriteLine("--Upisite . za prekid--");
-                do
+                string inp;
+                Console.WriteLine("Da li zelite preglede za vozacki? (D/N)");
+                while (true)
                 {
-                    input = Console.ReadLine();
-                    if (input != ".")
+                    inp = Console.ReadLine();
+                    if (inp == "D" || inp == "N") break;
+                    else SView.NoCommand();
+                }
+
+                if (inp == "D")
+                {
+                    schedule = ScheduleForDriver();
+                    Console.WriteLine("Raspored za vozacki je sljedeci: ");
+                }
+                else
+                {
+                    string input;
+                    Console.WriteLine("Koje ordinacije pacijent treba posjetiti? (Odvojite u novi red, ne smiju se ordinacije ponavljati)");
+                    Console.WriteLine("Laboratoriju - L");
+                    Console.WriteLine("Kardiolosku ordinaciju - K");
+                    Console.WriteLine("Radiolosku ordinaciju - R");
+                    Console.WriteLine("Hirursku ordinaciju - H");
+                    Console.WriteLine("Dermatolosku ordinaciju - D");
+                    Console.WriteLine("--Upisite . za prekid--");
+                    do
                     {
-                        if (input == "L" || input == "K" || input == "R" || input == "H" || input == "D")
+                        input = Console.ReadLine();
+                        if (input != ".")
                         {
-                            bool exists = schedule.Exists(i => i == input);
-                            if (exists) Console.WriteLine("Vec je unesena ordinacija.");
-                            else schedule.Add(input);
+                            if (input == "L" || input == "K" || input == "R" || input == "H" || input == "D")
+                            {
+                                bool exists = schedule.Exists(i => i == input);
+                                if (exists) Console.WriteLine("Vec je unesena ordinacija.");
+                                else schedule.Add(input);
+                            }
+                            else SView.NoCommand();
                         }
-                        else SView.NoCommand();
                     }
+                    while (input != ".");
+
+                    schedule = GenerateSchedule(schedule, clinic);
+                    Console.WriteLine("Generisani raspored je sljedeci: ");
                 }
-                while (input != ".");
-
-                List<string> dynamic = new List<string>();
-
-                List<string> ordinationsDoctorAbsent = new List<string>();
-                List<IOrdination> ordinationsQueueExists = new List<IOrdination>();
-                List<string> ordinationsDeviceBroken = new List<string>();
-                List<string> ordinationsAvailable = new List<string>();
-
-                foreach (string ord in schedule)
-                {
-                    IOrdination ordination = clinic.Ordinations.Find(o => o.Name == ord);
-                    if (ordination.DoctorAbsent) ordinationsDoctorAbsent.Add(ord);
-                    else if (ordination is Cardiology && (ordination as Cardiology).DeviceBroken) ordinationsDeviceBroken.Add(ord);
-                    else if (!ordination.OrdBusy) ordinationsAvailable.Add(ord);
-                    else ordinationsQueueExists.Add(ordination);
-                }
-
-                if (ordinationsQueueExists != null)
-                    ordinationsQueueExists.Sort((a, b) => (a.PatientsQueue.Count.CompareTo(b.PatientsQueue.Count)));
-
-                foreach (string ord in ordinationsAvailable) dynamic.Add(ord);
-                foreach (IOrdination ord in ordinationsQueueExists) dynamic.Add(ord.Name);
-                foreach (string ord in ordinationsDoctorAbsent) dynamic.Add(ord);
-                foreach (string ord in ordinationsDeviceBroken) dynamic.Add(ord);
-                schedule = dynamic;
-
-                Console.WriteLine("Generisani raspored je sljedeci: ");
+                
                 for (int i = 0; i < schedule.Count; i++)
                 {
                     if (i != schedule.Count - 1) Console.Write("{0}, ", schedule[i]);
@@ -359,8 +411,48 @@ namespace Zadaca1RPR.Views
             }
             Main(ref clinic);
         }
-        
+
+        List<string> GenerateSchedule(List<string> schedule, Clinic clinic)
+        {
+            List<string> dynamic = new List<string>();
+
+            List<string> ordinationsDoctorAbsent = new List<string>();
+            List<IOrdination> ordinationsQueueExists = new List<IOrdination>();
+            List<string> ordinationsDeviceBroken = new List<string>();
+            List<string> ordinationsAvailable = new List<string>();
+
+            foreach (string ord in schedule)
+            {
+                IOrdination ordination = clinic.Ordinations.Find(o => o.Name == ord);
+                if (ordination.DoctorAbsent) ordinationsDoctorAbsent.Add(ord);
+                else if (ordination is Cardiology && (ordination as Cardiology).DeviceBroken) ordinationsDeviceBroken.Add(ord);
+                else if (!ordination.OrdBusy) ordinationsAvailable.Add(ord);
+                else ordinationsQueueExists.Add(ordination);
+            }
+
+            if (ordinationsQueueExists != null)
+                ordinationsQueueExists.Sort((a, b) => (a.PatientsQueue.Count.CompareTo(b.PatientsQueue.Count)));
+
+            foreach (string ord in ordinationsAvailable) dynamic.Add(ord);
+            foreach (IOrdination ord in ordinationsQueueExists) dynamic.Add(ord.Name);
+            foreach (string ord in ordinationsDoctorAbsent) dynamic.Add(ord);
+            foreach (string ord in ordinationsDeviceBroken) dynamic.Add(ord);
+
+            return dynamic;
+        }
+
+        List<string> ScheduleForDriver()
+        {
+            List<string> res = new List<string>();
+            res.Add("L");
+            res.Add("K");
+            res.Add("R");
+            return res;
+        }
+
     }
+
+    
 
     partial class TechView
     {

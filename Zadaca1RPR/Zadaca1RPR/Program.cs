@@ -52,7 +52,7 @@ namespace Zadaca1RPR
             cards.Add(hc2);
 
             lab.NewPatient(patient);
-            //lab.NewPatient(patient2);
+            rad.NewPatient(patient2);
 
             ordinations.Add(lab);
             ordinations.Add(derm);

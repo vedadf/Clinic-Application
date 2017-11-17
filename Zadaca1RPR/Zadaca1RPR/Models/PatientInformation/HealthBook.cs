@@ -18,18 +18,23 @@ namespace Zadaca1RPR.Models
         public List<string> ExaminationResults { get; set; }
         public List<DateTime> ExaminationDates { get; set; }
 
+        public List<string> CompletedOrdinations { get; set; }
+
         public HealthBook(string doctorNotes,
             List<string> currentHealthIssues = default(List<string>),
             List<string> pastHealthIssues = default(List<string>),
             string familyHealthIssue = default(string))
         {
             DoctorNotes = doctorNotes;
-            CurrentHealthIssues = currentHealthIssues;
-            PastHealthIssues = pastHealthIssues;
+            if (CurrentHealthIssues == null) CurrentHealthIssues = new List<string>();
+            else CurrentHealthIssues = currentHealthIssues;
+            if (PastHealthIssues == null) PastHealthIssues = new List<string>();
+            else PastHealthIssues = pastHealthIssues;
             FamilyHealthIssue = familyHealthIssue;
             Therapies = new List<string>();
             ExaminationResults = new List<string>();
             ExaminationDates = new List<DateTime>();
+            CompletedOrdinations = new List<string>();
         }
 
     }

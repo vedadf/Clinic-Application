@@ -25,6 +25,7 @@ namespace Zadaca1RPR.Models.Patients
         public override List<string> Schedule { get; set; }
         public override int IDnum { get; set; }
         public override double Cost { get; set; }
+        public override int numOfTimesVisited { get; set; }
 
         public UrgentPatient(string firstAid, bool deceased,
             string name, string surname, DateTime birthDate, string address,

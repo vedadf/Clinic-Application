@@ -26,8 +26,6 @@ namespace Zadaca1RPR.Models
 
         public List<string> Ordinations { get; set; }
 
-        public int numOfTimesVisited { get; set; }
-
         public HealthCard(UrgentPatient patient, string causeOfDeath = "", string timeOfDeath = "", DateTime dateOfDeath = default(DateTime))
         {
             if (!patient.Deceased && (causeOfDeath != "" || dateOfDeath != default(DateTime)))
@@ -51,11 +49,11 @@ namespace Zadaca1RPR.Models
             else
             {
                 CardActive = true;
-                Ordinations = patient.Schedule; 
+                Ordinations = patient.Schedule;
             }
             Patient.HasHealthCard = true;
             IDnumber = ID; ID++;
-            numOfTimesVisited++;
+            patient.numOfTimesVisited++;
         }
 
         public HealthCard(NormalPatient patient)
@@ -67,7 +65,7 @@ namespace Zadaca1RPR.Models
             IDnumber = ID; ID++;
             Patient.HasHealthCard = true;
             Ordinations = patient.Schedule;
-            numOfTimesVisited++;
+            patient.numOfTimesVisited++;
         }
 
     }
