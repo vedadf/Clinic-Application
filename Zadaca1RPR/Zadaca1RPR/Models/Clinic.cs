@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zadaca1RPR.Abstracts;
 using Zadaca1RPR.Interfaces;
+using Zadaca1RPR.Models.Employees;
 using Zadaca1RPR.Models.Patients;
 
 namespace Zadaca1RPR.Models
@@ -17,6 +18,8 @@ namespace Zadaca1RPR.Models
         public List<IOrdination> Ordinations { get; set; }
         public List<Staff> Employees { get; set; }
 
+        public List<Doctor> Doctors { get; set; }
+
         public Clinic(List<Staff> employees,
             List<IOrdination> ordinations,
             List<HealthCard> healthCards = default(List<HealthCard>),
@@ -26,6 +29,10 @@ namespace Zadaca1RPR.Models
             Ordinations = ordinations;
             HealthCards = healthCards;
             Patients = patients;
+
+            Doctors = new List<Doctor>();
+            foreach (IOrdination ord in Ordinations)
+                Doctors.Add(ord.Doctor);
 
             foreach(Patient p in Patients)
                 if(!p.HasHealthCard && p is UrgentPatient)
@@ -101,6 +108,44 @@ namespace Zadaca1RPR.Models
         public HealthCard GetCardFromPatientID(int patientID)
         {
             return HealthCards.Find(h => h.Patient.IDnum == patientID);
+        }
+
+        public Doctor GetDoctorMostVisited()
+        {
+            Doctor res = Doctors[0];
+            int max = 0;
+            foreach (Doctor doc in Doctors)
+            {
+                if (max < doc.NumOfPatientsProcessed)
+                {
+                    res = doc;
+                    max = doc.NumOfPatientsProcessed;
+                }
+            }                    
+            return res;
+        }
+
+        public int GetNumOfUrgentCases()
+        {
+            int cnt = 0;
+            foreach (Patient p in Patients)
+                if (p is UrgentPatient)
+                    cnt++;
+            return cnt;
+        }
+
+        public Patient GetPatientMostHealthIssues()
+        {
+            Patient pat = Patients[0];
+            int max = 0;
+            foreach (Patient p in Patients) {
+                if (p.HealthBook.CurrentHealthIssues.Count > max)
+                {
+                    max = p.HealthBook.CurrentHealthIssues.Count;
+                    pat = p;
+                }
+            }
+            return pat;
         }
 
     }

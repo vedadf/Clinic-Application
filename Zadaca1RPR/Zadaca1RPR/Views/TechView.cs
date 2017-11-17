@@ -15,12 +15,14 @@ namespace Zadaca1RPR.Views
     partial class TechView
     {
 
+        delegate double CalculatePatientDebt();
+
         public void Main(ref Clinic clinic)
         {
             SView.WaitInput();
             Console.Clear();
             string input;
-            Console.WriteLine("PORTIR: ");
+            Console.WriteLine("TEHNICAR: ");
             Console.WriteLine("Dobro došli! Odaberite neku od opcija: ");
             Console.WriteLine("1. Registruj/Brisi pacijenta");
             Console.WriteLine("2. Prikazi raspored pregleda pacijenta");
@@ -45,8 +47,11 @@ namespace Zadaca1RPR.Views
                     case "2":
                         int id;
                         List<string> schedule = null;
-                        Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
-                        id = Convert.ToInt32(Console.ReadLine());
+                        while (true) {
+                            Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
+                            if (!Int32.TryParse(Console.ReadLine(), out id)) Console.WriteLine("Uneseni podatak nije broj");
+                            else break;
+                        }
                         if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
                         else
                         {
@@ -74,8 +79,12 @@ namespace Zadaca1RPR.Views
                         break;
                     case "4":
                         int idd;
-                        Console.WriteLine("Upisite identifikacijski broj pacijenta kojem zelite naplatiti: ");
-                        idd = Convert.ToInt32(Console.ReadLine());
+                        while (true)
+                        {
+                            Console.WriteLine("Upisite identifikacijski broj pacijenta kojem zelite naplatiti: ");
+                            if (Int32.TryParse(Console.ReadLine(), out idd)) break;
+                            else Console.WriteLine("Uneseni podatak nije broj.");
+                        }
                         Patient pat = clinic.GetPatientFromID(idd);
                         if (pat == null) Console.WriteLine("Pacijent ne postoji.");
                         else if (!pat.HasHealthCard) Console.WriteLine("Pacijent nema karton.");
@@ -101,7 +110,19 @@ namespace Zadaca1RPR.Views
 
                             foreach (string str in pat.HealthBook.CompletedOrdinations)
                                 Console.WriteLine("Ordinacija: {0}; Cijena: {1};", str, clinic.Ordinations.Find(o => o.Name == str).Price);
-                                
+
+                            //delegat iskoristen za racunanje cijene za pacijenta
+                            CalculatePatientDebt price = () =>
+                            {
+                                double res = pat.Cost;
+                                if (cc == "R")
+                                    if (!regular) res = pat.Cost + 0.15 * pat.Cost;
+                                else if(cc == "G")
+                                    if (regular) res = pat.Cost - 0.1 * pat.Cost;
+                                return res;
+                            };
+
+                            double cost = price();
 
                             if (cc == "R")
                             {
@@ -109,18 +130,18 @@ namespace Zadaca1RPR.Views
                                 if (regular)
                                 {
                                     Console.WriteLine("Cijena za placanje na rate za redovnog pacijenta ostaje ista.");
-                                    Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", pat.Cost / 3.0);
+                                    Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", cost / 3.0);
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Cijena za placanje na rate za novog pacijenta: {0}KM", pat.Cost + 0.15 * pat.Cost);
-                                    Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", (pat.Cost + 0.15 * pat.Cost) / 3.0);
+                                    Console.WriteLine("Cijena za placanje na rate za novog pacijenta: {0}KM", cost);
+                                    Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", cost / 3.0);
                                 }
                             }
                             else
                             {
                                 if (regular)
-                                    Console.WriteLine("Cijena za placanje gotovinom za redovnog pacijenta: {0}KM.", pat.Cost - 0.1 * pat.Cost);
+                                    Console.WriteLine("Cijena za placanje gotovinom za redovnog pacijenta: {0}KM.", cost);
                                 else
                                     Console.WriteLine("Cijena za placanje gotovinom za novog pacijenta ostaje ista.");
                             }
@@ -149,7 +170,7 @@ namespace Zadaca1RPR.Views
 
             Patient patient = null;
 
-            string urgent, firstAid = "", timeOfDeath = "", causeOfDeath = "";
+            string urgent, firstAid = "", timeOfDeath = "", causeOfDeath = "", obduction = "";
             DateTime dateOfDeath = default(DateTime);
             bool deceased = false;
 
@@ -173,19 +194,26 @@ namespace Zadaca1RPR.Views
                     }
                     if (deceased)
                     {
-                        int dd, mm, yy;
-                        Console.WriteLine("Datum smrti: ");
-                        Console.Write("-> Dan: ");
-                        dd = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("-> Mjesec: ");
-                        mm = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("-> Godina: ");
-                        yy = Convert.ToInt32(Console.ReadLine());
-                        dateOfDeath = new DateTime(yy, mm, dd);
-                        Console.Write("Vrijeme smrti: (hh:mm) ");
+                        string dd, mm, yy;
+                        while (true)
+                        {
+                            Console.WriteLine("Datum smrti: ");
+                            Console.Write("-> Dan: ");
+                            dd = Console.ReadLine();
+                            Console.Write("-> Mjesec: ");
+                            mm = Console.ReadLine();
+                            Console.Write("-> Godina: ");
+                            yy = Console.ReadLine();
+                            if (DateTime.TryParse(yy + "-" + mm + "-" + dd, out dateOfDeath))
+                                break;
+                            else Console.WriteLine("Nije ispravan datum.");
+                        }
+                        Console.Write("Vrijeme smrti: ");
                         timeOfDeath = Console.ReadLine();
                         Console.WriteLine("Razlog smrti: ");
                         causeOfDeath = Console.ReadLine();
+                        Console.WriteLine("Ako je obavljena obdukcija, unesite potrebne informacije.");
+                        obduction = Console.ReadLine();
                     }
                     break;
                 }
@@ -194,7 +222,7 @@ namespace Zadaca1RPR.Views
 
             string name, surname, address;
             bool married = false;
-            int day, month, year;
+            string day, month, year;
             DateTime bDate, regDate = DateTime.Today;
             EnumGender gender = EnumGender.Female;
 
@@ -205,14 +233,48 @@ namespace Zadaca1RPR.Views
             Console.Write("Adresa: ");
             address = Console.ReadLine();
 
-            Console.WriteLine("Datum rodjenja: ");
-            Console.Write("-> Dan: ");
-            day = Convert.ToInt32(Console.ReadLine());
-            Console.Write("-> Mjesec: ");
-            month = Convert.ToInt32(Console.ReadLine());
-            Console.Write("-> Godina: ");
-            year = Convert.ToInt32(Console.ReadLine());
-            bDate = new DateTime(year, month, day);
+            while (true)
+            {
+                Console.WriteLine("Datum rodjenja: ");
+                Console.Write("-> Dan: ");
+                day = Console.ReadLine();
+                Console.Write("-> Mjesec: ");
+                month = Console.ReadLine();
+                Console.Write("-> Godina: ");
+                year = Console.ReadLine();
+                if(Convert.ToInt32(year) < 500)
+                {
+                    Console.WriteLine("Nije ispravan datum.");
+                    continue;
+                }
+
+                if (DateTime.TryParse(year + "-" + month + "-" + day, out bDate))
+                    break;
+                else Console.WriteLine("Nije ispravan datum.");
+            }
+            
+            string cID = "";
+            DateTime now = DateTime.Today;
+            int age = now.Year - bDate.Year;
+            if (bDate > now.AddYears(-age)) age--;
+            if (bDate.Year < 1000) age = 20;
+
+            if (age >= 18)
+            {
+                while (true)
+                {
+                    Console.WriteLine("Pacijent punoljetan, upisite JMBG: (13 cifara formata DD MM YYYY RRR BB, spojeno)");
+                    cID = Console.ReadLine();
+                    if (cID.Length != 13) Console.WriteLine("JMBG nije ispravne velicine.");
+                    else
+                    {
+                        if (!ValidateCitizenID(bDate ,cID)) Console.WriteLine("Format JMBG nije ispravan. Mozda se datumi rodjenja ne poklapaju?");
+                        else break;
+                    }
+                }
+                
+            }
+            else Console.WriteLine("Pacijent nije punoljetan");
             
             while (true)
             {
@@ -300,12 +362,12 @@ namespace Zadaca1RPR.Views
 
             if (urgent == "N")
             {
-                patient = new NormalPatient(name, surname, bDate, address, married, regDate, gender, schedule);
+                patient = new NormalPatient(name, surname, bDate, cID, address, married, regDate, gender, schedule);
                 DoAnamnesis(ref patient);
             }
             else if (urgent == "D")
             {
-                patient = new UrgentPatient(firstAid, deceased, name, surname, bDate, address, married, regDate, gender, schedule);
+                patient = new UrgentPatient(firstAid, deceased, name, surname, bDate, cID, address, married, regDate, gender, schedule, obduction);
                 HealthCard card = new HealthCard(patient as UrgentPatient, causeOfDeath, timeOfDeath, dateOfDeath);
                 if (deceased == false) DoAnamnesis(ref patient);
                 clinic.HealthCards.Add(card);
@@ -349,15 +411,25 @@ namespace Zadaca1RPR.Views
             string notes, familyHI;
 
             Console.WriteLine("ANAMNEZA: ");
-            Console.WriteLine("Koliko zdravstvenih problema je pacijent imao u proslosti? (Mora biti broj)");
-            num = Convert.ToInt32(Console.ReadLine());
+            
+            while (true)
+            {
+                Console.WriteLine("Koliko zdravstvenih problema je pacijent imao u proslosti?");
+                if (Int32.TryParse(Console.ReadLine(), out num)) break;
+                else Console.WriteLine("Nije broj.");
+            }
             for (int i = 0; i < num; i++)
             {
                 Console.WriteLine("Problem {0}: ", i + 1);
                 pastHealthIssues.Add(Console.ReadLine());
             }
-            Console.WriteLine("Koliko zdravstvenih problema pacijent ima trenutno? (Mora biti broj)");
-            num = Convert.ToInt32(Console.ReadLine());
+            num = 0;
+            while (true)
+            {
+                Console.WriteLine("Koliko zdravstvenih problema pacijent ima trenutno?");
+                if (Int32.TryParse(Console.ReadLine(), out num)) break;
+                else Console.WriteLine("Nije broj.");
+            }
             for (int i = 0; i < num; i++)
             {
                 Console.WriteLine("Problem {0}: ", i + 1);
@@ -380,9 +452,13 @@ namespace Zadaca1RPR.Views
             if (i == "1")
             {
                 int id;
-                Console.WriteLine("Unesite identifikacijski broj kartona");
-                id = Convert.ToInt32(Console.ReadLine());
-
+                while (true)
+                {
+                    Console.WriteLine("Unesite identifikacijski broj kartona");
+                    if (Int32.TryParse(Console.ReadLine(), out id)) break;
+                    else Console.WriteLine("Uneseni podatak nije broj.");
+                }
+                
                 HealthCard card = clinic.GetCardFromID(id);
                 if (card == null)
                 {
@@ -398,7 +474,7 @@ namespace Zadaca1RPR.Views
                 string surname;
                 Console.WriteLine("Unesite prezime pacijenta");
                 surname = Console.ReadLine();
-
+               
                 List<HealthCard> cards = clinic.GetCardsFromSurname(surname);
                 if (cards.Count == 0)
                 {
@@ -430,6 +506,7 @@ namespace Zadaca1RPR.Views
                 else ordinationsQueueExists.Add(ordination);
             }
 
+            //Lambda izraz iskoristen da bi se sortirale ordinacije od najmanjeg reda cekanja do najveceg, za generisanje rasporeda
             if (ordinationsQueueExists != null)
                 ordinationsQueueExists.Sort((a, b) => (a.PatientsQueue.Count.CompareTo(b.PatientsQueue.Count)));
 
@@ -449,6 +526,33 @@ namespace Zadaca1RPR.Views
             res.Add("R");
             return res;
         }
+
+        bool ValidateCitizenID(DateTime bdayy, string id)
+        {
+            bool parse = true;
+            //da li su svi brojevi
+            foreach(char c in id)
+            {
+                int n;
+                parse = Int32.TryParse(c.ToString(), out n);
+                if (!parse) return false;
+            }
+
+            //da li je datum ispravan
+            string day = "" + id[0] + id[1];
+            string month = "" + id[2] + id[3];
+            string year = "" + id[4] + id[5] + id[6] + id[7];
+            string Bdate = year + "-" + month + "-" + day;
+            DateTime bDate = new DateTime();
+            if (!DateTime.TryParse(Bdate, out bDate)) return false;
+            
+            //da li se datum rodjenja poklapa           
+            if (bdayy != bDate) return false; 
+
+            return true;
+            
+        }
+
 
     }
 
@@ -474,6 +578,7 @@ namespace Zadaca1RPR.Views
             Console.WriteLine("Ime: {0}", card.Patient.Name);
             Console.WriteLine("Prezime: {0}", card.Patient.Surname);
             Console.WriteLine("Adresa: {0}", card.Patient.Address);
+            Console.WriteLine("JMBG: {0}", card.Patient.CitizenID);
 
             Console.WriteLine("Spol: {0}", gender);
             Console.WriteLine("Datum rodjenja: {0}", card.Patient.BirthDate.ToString("dd/MM/yyyy"));

@@ -22,8 +22,9 @@ namespace Zadaca1RPR.Models.Patients
         public override int IDnum { get; set; }
         public override double Cost { get; set; }
         public override int numOfTimesVisited { get; set; }
+        public override string CitizenID { get; set; }
 
-        public NormalPatient(string name, string surname, DateTime birthDate, string address,
+        public NormalPatient(string name, string surname, DateTime birthDate, string citizenID, string address,
            bool married, DateTime registerDate, EnumGender gender,
            List<string> schedule, HealthBook healthBook = null)
         {
@@ -39,6 +40,7 @@ namespace Zadaca1RPR.Models.Patients
             Schedule = schedule;
             IDnum = ID; ID++;
             Cost = 0;
+            CitizenID = citizenID;
         }
 
         public override int GetID() { return IDnum; }

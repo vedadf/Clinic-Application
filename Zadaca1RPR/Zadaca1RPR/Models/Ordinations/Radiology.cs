@@ -31,7 +31,7 @@ namespace Zadaca1RPR.Models.Ordinations
             OrdBusy = false;
             DoctorAbsent = true;
             Patient = null;
-            Price = 12.8;
+            Price = 152.5;
             Name = "R";
         }
 
@@ -53,7 +53,9 @@ namespace Zadaca1RPR.Models.Ordinations
         {
             if (Patient != null)
             {
-                Doctor.numOfPatientsProcessed++;
+                Doctor.NumOfPatientsProcessed++;
+                if (Doctor.NumOfPatientsProcessed <= 20)
+                    Doctor.CurrentSalary += (Doctor.BaseSalary * 0.01);
                 Patient.Cost += Price;
                 Patient.Schedule.Remove("R");
                 if (PatientsQueue == null || PatientsQueue.Count == 0)

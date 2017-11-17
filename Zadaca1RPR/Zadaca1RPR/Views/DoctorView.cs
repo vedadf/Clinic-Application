@@ -36,8 +36,13 @@ namespace Zadaca1RPR.Views
                 case "1":
                     int id;
                     List<string> schedule = null;
-                    Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
-                    id = Convert.ToInt32(Console.ReadLine());
+
+                    while (true)
+                    {
+                        Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
+                        if (Int32.TryParse(Console.ReadLine(), out id)) break;
+                        else Console.WriteLine("Uneseni podatak nije broj.");
+                    }
                     if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
                     else
                     {
@@ -67,8 +72,13 @@ namespace Zadaca1RPR.Views
                     while (true)
                     {
                         int id2;
-                        Console.WriteLine("Unesite identifikacijski broj pacijenta kojem zelite napraviti karton: ");
-                        id2 = Convert.ToInt32(Console.ReadLine());
+                        
+                        while (true)
+                        {
+                            Console.WriteLine("Unesite identifikacijski broj pacijenta kojem zelite napraviti karton: ");
+                            if (Int32.TryParse(Console.ReadLine(), out id2)) break;
+                            else Console.WriteLine("Uneseni podatak nije broj.");
+                        }
                         if (clinic.CardExists(id2)) Console.WriteLine("Odabrani pacijent vec ima karton.");
                         else if (!clinic.PatientExists(id2)) Console.WriteLine("Odabrani pacijent ne postoji.");
                         else
@@ -107,8 +117,13 @@ namespace Zadaca1RPR.Views
                     break;
                 case "5":
                     int id3;
-                    Console.WriteLine("Upisite identifikacijski broj pacijenta: (mora biti broj)");
-                    id3 = Convert.ToInt32(Console.ReadLine());
+                    
+                    while (true)
+                    {
+                        Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
+                        if (Int32.TryParse(Console.ReadLine(), out id3)) break;
+                        else Console.WriteLine("Uneseni podatak nije broj.");
+                    }
                     string choice;
                     if (clinic.GetPatientFromID(id3) == null || clinic.GetCardFromPatientID(id3) == null) Console.WriteLine("Karton za pacijenta ne postoji.");
                     else
@@ -154,6 +169,7 @@ namespace Zadaca1RPR.Views
                             else ordinationsQueueExists.Add(ordination);
                         }
 
+                        //Lambda izraz iskoristen da bi se sortirale ordinacije od najmanjeg reda cekanja do najveceg, za generisanje raspored
                         if (ordinationsQueueExists != null)
                             ordinationsQueueExists.Sort((a, b) => (a.PatientsQueue.Count.CompareTo(b.PatientsQueue.Count)));
 
@@ -244,8 +260,13 @@ namespace Zadaca1RPR.Views
             if (i == "1")
             {
                 int id;
-                Console.WriteLine("Unesite identifikacijski broj kartona");
-                id = Convert.ToInt32(Console.ReadLine());
+                
+                while (true)
+                {
+                    Console.WriteLine("Unesite identifikacijski broj kartona");
+                    if (Int32.TryParse(Console.ReadLine(), out id)) break;
+                    else Console.WriteLine("Uneseni podatak nije broj.");
+                }
 
                 HealthCard card = clinic.GetCardFromID(id);
                 if (card == null)
@@ -299,6 +320,7 @@ namespace Zadaca1RPR.Views
             Console.WriteLine("Ime: {0}", card.Patient.Name);
             Console.WriteLine("Prezime: {0}", card.Patient.Surname);
             Console.WriteLine("Adresa: {0}", card.Patient.Address);
+            Console.WriteLine("JMBG: {0}", card.Patient.CitizenID);
 
             Console.WriteLine("Spol: {0}", gender);
             Console.WriteLine("Datum rodjenja: {0}", card.Patient.BirthDate);

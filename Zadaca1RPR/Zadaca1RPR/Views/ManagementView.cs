@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zadaca1RPR.Models;
+using Zadaca1RPR.Models.Employees;
 using Zadaca1RPR.Models.Patients;
 
 namespace Zadaca1RPR.Views
@@ -30,8 +31,13 @@ namespace Zadaca1RPR.Views
                 case "1":
                     int id;
                     List<string> schedule = null;
-                    Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
-                    id = Convert.ToInt32(Console.ReadLine());
+                    
+                    while (true)
+                    {
+                        Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
+                        if (Int32.TryParse(Console.ReadLine(), out id)) break;
+                        else Console.WriteLine("Uneseni podatak nije broj.");
+                    }
                     if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
                     else
                     {
@@ -55,10 +61,49 @@ namespace Zadaca1RPR.Views
                     Console.WriteLine("2. Pretraga po prezimenu");
                     i4 = Console.ReadLine();
                     if (i4 != "1" || i4 != "2") ProcessCardSearch(ref clinic, i4);
-                    else SView.NoCommand();
-                    Main(ref clinic);
+                    else { SView.NoCommand(); Main(ref clinic); }
                     break;
                 case "3":
+                    int choice;                    
+                   
+                    while (true)
+                    {
+                        Console.WriteLine("1. Najposjeceniji doktor ikada na klinici.");
+                        Console.WriteLine("2. Broj hitnih slucajeva ikada na klinici.");
+                        Console.WriteLine("3. Pacijent sa najvecim brojem trenutnih zdravstvenih problema (pri registraciji u kliniku).");
+                        Console.WriteLine("4. Trenutna plata doktora.");
+                        if (Int32.TryParse(Console.ReadLine(), out choice)) break;
+                        else Console.WriteLine("Uneseni podatak nije broj.");
+                    }
+
+                    if (choice == 1)
+                        Console.WriteLine("Doktor {0} {1}. Broj pacijenata {2}.", clinic.GetDoctorMostVisited().Name, clinic.GetDoctorMostVisited().Surname, clinic.GetDoctorMostVisited().NumOfPatientsProcessed);
+                    else if (choice == 2)
+                        Console.WriteLine("Broj hitnih slucajeva {0}.", clinic.GetNumOfUrgentCases());
+                    else if (choice == 3)
+                        Console.WriteLine("Pacijent je {0} {1}. Broj zdravstvenih problema {2}.", clinic.GetPatientMostHealthIssues().Name, clinic.GetPatientMostHealthIssues().Surname, clinic.GetPatientMostHealthIssues().HealthBook.CurrentHealthIssues.Count);
+                    else if (choice == 4)
+                    {
+                        int idd;
+
+                        while (true)
+                        {
+                            Console.WriteLine("Unesite identifikacijski broj doktora.");
+                            if (Int32.TryParse(Console.ReadLine(), out idd)) break;
+                            else Console.WriteLine("Uneseni podatak nije broj.");
+                        }
+                        Doctor doc = clinic.Doctors.Find(d => d.IDnumber == idd);
+                        if (doc == null) Console.WriteLine("Doktor ne postoji.");
+                        else
+                        {
+                            Console.WriteLine("Doktor {0} {1}", doc.Name, doc.Surname);
+                            Console.WriteLine("Broj procesuiranih pacijenata {0}", doc.NumOfPatientsProcessed);
+                            Console.WriteLine("Pocetna plata {0}", doc.BaseSalary);
+                            Console.WriteLine("Trenutna plata {0}", doc.CurrentSalary);
+                        }
+                    }
+                    else { SView.NoCommand(); Main(ref clinic); }
+                    Main(ref clinic);
                     break;
                 case "4":
                     Program.ChooseRole(ref clinic);
@@ -74,8 +119,13 @@ namespace Zadaca1RPR.Views
             if (i == "1")
             {
                 int id;
-                Console.WriteLine("Unesite identifikacijski broj kartona");
-                id = Convert.ToInt32(Console.ReadLine());
+                
+                while (true)
+                {
+                    Console.WriteLine("Unesite identifikacijski broj kartona");
+                    if (Int32.TryParse(Console.ReadLine(), out id)) break;
+                    else Console.WriteLine("Uneseni podatak nije broj.");
+                }
 
                 HealthCard card = clinic.GetCardFromID(id);
                 if (card == null)
@@ -128,6 +178,7 @@ namespace Zadaca1RPR.Views
             Console.WriteLine("Ime: {0}", card.Patient.Name);
             Console.WriteLine("Prezime: {0}", card.Patient.Surname);
             Console.WriteLine("Adresa: {0}", card.Patient.Address);
+            Console.WriteLine("JMBG: {0}", card.Patient.CitizenID);
 
             Console.WriteLine("Spol: {0}", gender);
             Console.WriteLine("Datum rodjenja: {0}", card.Patient.BirthDate);

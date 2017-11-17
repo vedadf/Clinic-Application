@@ -12,6 +12,7 @@ namespace Zadaca1RPR.Models.Patients
         
         public string FirstAid { get; set; }
         public bool Deceased { get; set; }
+        public string Obduction { get; set; }
 
         public override string Name { get; set; }
         public override string Surname { get; set; }
@@ -26,10 +27,11 @@ namespace Zadaca1RPR.Models.Patients
         public override int IDnum { get; set; }
         public override double Cost { get; set; }
         public override int numOfTimesVisited { get; set; }
+        public override string CitizenID { get; set; }
 
         public UrgentPatient(string firstAid, bool deceased,
-            string name, string surname, DateTime birthDate, string address,
-            bool married, DateTime registerDate, EnumGender gender, List<string> schedule,
+            string name, string surname, DateTime birthDate, string citizenID ,string address,
+            bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string Obduction = "",
             HealthBook healthBook = default(HealthBook))
         {
             FirstAid = firstAid;
@@ -46,6 +48,7 @@ namespace Zadaca1RPR.Models.Patients
             IDnum = ID; ID++;
             Schedule = schedule;
             Cost = 0;
+            CitizenID = citizenID;
         }
 
         public override int GetID() { return IDnum; }

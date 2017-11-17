@@ -40,5 +40,7 @@ namespace Zadaca1RPR.Abstracts
 
         public virtual int numOfTimesVisited { get; set; }
 
+        public virtual string CitizenID { get; set; }
+
     }
 }

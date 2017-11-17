@@ -15,7 +15,7 @@ namespace Zadaca1RPR.Abstracts
 
         int IDnumber { get; set; }
 
-        int Salary { get; set; }
+        double BaseSalary { get; set; }
 
         static int ID = 0;
 

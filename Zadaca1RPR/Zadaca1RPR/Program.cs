@@ -17,50 +17,50 @@ namespace Zadaca1RPR
     class Program
     {
         static void Main(string[] args)
-        {
-            
+        {            
+            List<Staff> employees17336_1 = new List<Staff>();
+            List<IOrdination> ordinations17336_1 = new List<IOrdination>();
+            List<Patient> patients17336_1 = new List<Patient>();
+            List<HealthCard> cards17336_1 = new List<HealthCard>();
 
-            List<Staff> employees = new List<Staff>();
-            List<IOrdination> ordinations = new List<IOrdination>();
-            List<Patient> patients = new List<Patient>();
-            List<HealthCard> cards = new List<HealthCard>();
-
-            Staff doct = new Doctor("Vedad", "Fejzagic", 2000);
-            Staff doct2 = new Doctor("Kerim", "Jamakovic", 2100);
-            Staff doct3 = new Doctor("Amar", "Emir", 1700);
-            Staff doct4 = new Doctor("Ter", "Er", 1700);
-            Staff doct5 = new Doctor("Ar", "Es", 1700);
-            Staff tech = new Technician("Ekrem", "Ekric" ,1500);
-            employees.Add(tech);
-            employees.Add(doct);
-
-            IOrdination lab = new Laboratory((Doctor)doct);
-            IOrdination derm = new Dermatology((Doctor)doct2);
-            IOrdination card = new Cardiology((Doctor)doct3);
-            IOrdination surg = new Surgeoncy((Doctor)doct4);
-            IOrdination rad = new Radiology((Doctor)doct5);
+            Staff doctor17336_1 = new Doctor("Emir", "Amar", 2000.0);
+            Staff doctor17336_2 = new Doctor("Mirza", "Mirzic", 2100.0);
+            Staff doctor17336_3 = new Doctor("Amar", "Emir", 1700.0);
+            Staff doctor17336_4 = new Doctor("Hamza", "Hamzic", 1700.0);
+            Staff doctor17336_5 = new Doctor("Tata", "Mamic", 1700.0);
+            Staff technician17336_1 = new Technician("Ekrem", "Ekric" , 1500.0);
+            employees17336_1.Add(technician17336_1);
+            employees17336_1.Add(doctor17336_1);
+            IOrdination ordination17336_1 = new Laboratory((Doctor)doctor17336_1);
+            IOrdination ordination17336_2 = new Dermatology((Doctor)doctor17336_2);
+            IOrdination ordination17336_3 = new Cardiology((Doctor)doctor17336_3);
+            IOrdination ordination17336_4 = new Surgeoncy((Doctor)doctor17336_4);
+            IOrdination ordination17336_5 = new Radiology((Doctor)doctor17336_5);
 
             EnumGender male = EnumGender.Male;
-            Patient patient = new NormalPatient("Amar", "Buric", new DateTime(1, 1, 1), "Visoko, piramida 2", false, DateTime.Today, male, new List<string> { "L", "K" });
-            Patient patient2 = new UrgentPatient("Lose lose", false, "Elvir", "Crncevic", new DateTime(1, 1, 1), "Dobrinja 4568", false, DateTime.Today, male, new List<string> {"R"});
-            patients.Add(patient);
-            patients.Add(patient2);
+            HealthBook healthbook17336_1 = new HealthBook("Pacijent je jos u losem stanju", new List<string> { "Teska povreda noge" }, new List<string> { "Nema" }, "Nema");
+            HealthBook healthbook17336_2 = new HealthBook("Pacijent je jos u dobrom stanju", new List<string> { "Prehlada", "Glavobolja" }, new List<string> { "Problemi" }, "Nema");
+            Patient patient17336_1 = new NormalPatient("Amar", "Buric", new DateTime(1996, 1, 1), "0101199612345", "Visoko, Piramida 2", false, DateTime.Today, male, new List<string> { "L", "K" }, healthbook17336_2);
+            Patient patient17336_2 = new UrgentPatient("Prva pomoc je uspjesna.", false, "Elvir", "Crncevic", new DateTime(1996, 8, 17), "1708199612345", "Dobrinja 4568", false, DateTime.Today, male, new List<string> {"L", "R", "H"}, "Nema", healthbook17336_1);
+            patients17336_1.Add(patient17336_1);
+            patients17336_1.Add(patient17336_2);
 
-            HealthCard hc = new HealthCard((NormalPatient)patient);
-            HealthCard hc2 = new HealthCard((UrgentPatient)patient2);
-            cards.Add(hc);
-            cards.Add(hc2);
+            HealthCard healthcard17336_1 = new HealthCard((NormalPatient)patient17336_1);
+            HealthCard healthcard17336_2 = new HealthCard((UrgentPatient)patient17336_2);
 
-            lab.NewPatient(patient);
-            rad.NewPatient(patient2);
+            cards17336_1.Add(healthcard17336_1);
+            cards17336_1.Add(healthcard17336_2);
 
-            ordinations.Add(lab);
-            ordinations.Add(derm);
-            ordinations.Add(card);
-            ordinations.Add(surg);
-            ordinations.Add(rad);
+            ordination17336_1.NewPatient(patient17336_1);
+            ordination17336_1.NewPatient(patient17336_2);
 
-            Clinic clinic = new Clinic(employees, ordinations, cards, patients);
+            ordinations17336_1.Add(ordination17336_1);
+            ordinations17336_1.Add(ordination17336_2);
+            ordinations17336_1.Add(ordination17336_3);
+            ordinations17336_1.Add(ordination17336_4);
+            ordinations17336_1.Add(ordination17336_5);
+
+            Clinic clinic = new Clinic(employees17336_1, ordinations17336_1, cards17336_1, patients17336_1);
 
             ChooseRole(ref clinic);
             
@@ -72,12 +72,12 @@ namespace Zadaca1RPR
             {
                 string choice;
                 Console.WriteLine("Vi ste?");
-                Console.WriteLine("1. Portir");
+                Console.WriteLine("1. Tehnicar");
                 Console.WriteLine("2. Doktor");
                 Console.WriteLine("3. Uprava");
                 Console.WriteLine("4. Izlaz");
                 choice = Console.ReadLine();
-                if (choice == "1" || choice == "portir" || choice == "Portir")
+                if (choice == "1" || choice == "tehnicar" || choice == "Tehnicar")
                 {
                     TechView techv = new TechView();
                     techv.Main(ref clinic);

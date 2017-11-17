@@ -26,10 +26,8 @@ namespace Zadaca1RPR.Models
             string familyHealthIssue = default(string))
         {
             DoctorNotes = doctorNotes;
-            if (CurrentHealthIssues == null) CurrentHealthIssues = new List<string>();
-            else CurrentHealthIssues = currentHealthIssues;
-            if (PastHealthIssues == null) PastHealthIssues = new List<string>();
-            else PastHealthIssues = pastHealthIssues;
+            CurrentHealthIssues = currentHealthIssues;
+            PastHealthIssues = pastHealthIssues;
             FamilyHealthIssue = familyHealthIssue;
             Therapies = new List<string>();
             ExaminationResults = new List<string>();

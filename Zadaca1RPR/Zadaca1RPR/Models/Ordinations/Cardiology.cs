@@ -42,6 +42,7 @@ namespace Zadaca1RPR.Models.Ordinations
 
         public bool NewPatient(Patient patient)
         {
+            
             if (!patient.HasHealthCard) return false;
 
             if (Patient == null)
@@ -56,9 +57,15 @@ namespace Zadaca1RPR.Models.Ordinations
 
         public bool ProcessPatient()
         {
+            if (DeviceBroken)
+            {
+                throw new ArgumentException("Aparat je u kvaru. Nije moguce procesuirati pacijenta.");
+            }
             if (Patient != null)
             {
-                Doctor.numOfPatientsProcessed++;
+                Doctor.NumOfPatientsProcessed++;
+                if (Doctor.NumOfPatientsProcessed <= 20)
+                    Doctor.CurrentSalary += (Doctor.BaseSalary * 0.01);
                 Patient.Cost += Price;
                 Patient.Schedule.Remove("K");
                 if (PatientsQueue == null || PatientsQueue.Count == 0)

@@ -16,18 +16,21 @@ namespace Zadaca1RPR.Models.Employees
 
         public string Surname { get; set; }
 
-        public int Salary { get; set; }
+        public double BaseSalary { get; set; }
+
+        public double CurrentSalary { get; set; }
 
         public int IDnumber { get; set; }
 
-        public int numOfPatientsProcessed { get; set; }
+        public int NumOfPatientsProcessed { get; set; }
 
-        public Doctor(string name, string surname, int salary)
+        public Doctor(string name, string surname, double baseSalary)
         {
             Name = name;
             Surname = surname;
             ID++; IDnumber = ID;
-            Salary = salary;
+            BaseSalary = baseSalary;
+            CurrentSalary = baseSalary;
         }
 
     }

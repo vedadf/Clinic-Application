@@ -54,7 +54,9 @@ namespace Zadaca1RPR.Models.Ordinations
         {
             if(Patient != null)
             {
-                Doctor.numOfPatientsProcessed++;
+                Doctor.NumOfPatientsProcessed++;
+                if(Doctor.NumOfPatientsProcessed <= 20)
+                    Doctor.CurrentSalary += (Doctor.BaseSalary * 0.01);
                 Patient.Cost += Price;
                 Patient.Schedule.Remove("L");
                 if (PatientsQueue == null || PatientsQueue.Count == 0)
