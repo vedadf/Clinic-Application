@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zadaca1RPR.Abstracts;
+using Zadaca1RPR.Interfaces;
 using Zadaca1RPR.Models;
+using Zadaca1RPR.Models.Ordinations;
 using Zadaca1RPR.Models.Patients;
 
 namespace Zadaca1RPR.Views
@@ -36,17 +38,21 @@ namespace Zadaca1RPR.Views
                     List<string> schedule = null;
                     Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    schedule = clinic.GetPatientSchedule(id);
-                    if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                    if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
                     else
                     {
-                        Console.WriteLine("Raspored je sljedeci: ");
-                        for (int it = 0; it < schedule.Count; it++)
+                        schedule = clinic.GetPatientSchedule(id);
+                        if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                        else
                         {
-                            if (it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
-                            else Console.Write("{0}, ", schedule[it]);
+                            Console.WriteLine("Raspored je sljedeci: ");
+                            for (int it = 0; it < schedule.Count; it++)
+                            {
+                                if (it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
+                                else Console.Write("{0}, ", schedule[it]);
+                            }
                         }
-                    }
+                    } 
                     Main(ref clinic);
                     break;
                 case "2":
@@ -69,6 +75,13 @@ namespace Zadaca1RPR.Views
                         {
                             Patient patient = clinic.GetPatientFromID(id2);
                             clinic.HealthCards.Add(new HealthCard((NormalPatient)patient));
+                            if (patient.Schedule == null || patient.Schedule.Count == 0)
+                                Console.WriteLine("Pacijent nema kreiran raspored.");
+                            else
+                            {
+                                clinic.Ordinations.Find(o => o.Name == patient.Schedule[0]).NewPatient(patient);
+                                Console.WriteLine("Pacijent je prosljedjen u ordinaciju {0}.", patient.Schedule[0]);
+                            }
                             Console.WriteLine("Karton uspjesno kreiran.");
                             break;
                         }                        
@@ -87,6 +100,7 @@ namespace Zadaca1RPR.Views
                             Console.WriteLine("Prezime: {0}", pat.Surname);
                             Console.WriteLine("Adresa: {0}", pat.Address);
                             Console.WriteLine("Identifikacijski broj pacijenta: {0}", pat.IDnum);
+                            Console.WriteLine();
                         }
                     }
                     Main(ref clinic);
@@ -96,37 +110,118 @@ namespace Zadaca1RPR.Views
                     Console.WriteLine("Upisite identifikacijski broj pacijenta: (mora biti broj)");
                     id3 = Convert.ToInt32(Console.ReadLine());
                     string choice;
-                    Console.WriteLine("Pacijent: {0} {1}", clinic.GetPatientFromID(id3).Name, clinic.GetPatientFromID(id3).Surname);
-                    Console.WriteLine("Koje ordinacije pacijent treba posjetiti? (Odvojite u novi red, ne smiju se ordinacije ponavljati)");
-                    Console.WriteLine("Laboratoriju - L");
-                    Console.WriteLine("Kardiolosku ordinaciju - K");
-                    Console.WriteLine("Radiolosku ordinaciju - R");
-                    Console.WriteLine("Hirursku ordinaciju - H");
-                    Console.WriteLine("Ortopedsku ordinaciju - O");
-                    Console.WriteLine("Dermatolosku ordinaciju - D");
-                    Console.WriteLine("Stomatolosku ordinaciju - S");
-                    Console.WriteLine("--Upisite . za prekid--");
-                    List<string> schedule1 = clinic.GetPatientSchedule(id3);
-                    do
+                    if (clinic.GetPatientFromID(id3) == null || clinic.GetCardFromPatientID(id3) == null) Console.WriteLine("Karton za pacijenta ne postoji.");
+                    else
                     {
-                        choice = Console.ReadLine();
-                        if (choice != ".")
+                        Console.WriteLine("Pacijent: {0} {1}", clinic.GetPatientFromID(id3).Name, clinic.GetPatientFromID(id3).Surname);
+                        Console.WriteLine("Koje ordinacije pacijent treba posjetiti? (Odvojite u novi red, ne smiju se ordinacije ponavljati)");
+                        Console.WriteLine("Laboratoriju - L");
+                        Console.WriteLine("Kardiolosku ordinaciju - K");
+                        Console.WriteLine("Radiolosku ordinaciju - R");
+                        Console.WriteLine("Hirursku ordinaciju - H");
+                        Console.WriteLine("Dermatolosku ordinaciju - D");
+                        Console.WriteLine("--Upisite . za prekid--");
+                        List<string> schedule1 = clinic.GetPatientSchedule(id3);
+                        do
                         {
-                            if (choice != "L" || choice != "K" || choice != "R" || choice != "H" || choice != "O" || choice != "D" || choice != "S")
+                            choice = Console.ReadLine();
+                            if (choice != ".")
                             {
-                                bool exists = schedule1.Exists(i => i == choice);
-                                if (exists) Console.WriteLine("Ordinacija vec postoji u rasporedu.");
-                                else schedule1.Add(choice);
+                                if (input == "L" || input == "K" || input == "R" || input == "H" || input == "D")
+                                {
+                                    bool exists = schedule1.Exists(i => i == input);
+                                    if (exists) Console.WriteLine("Vec je unesena ordinacija.");
+                                    else schedule1.Add(input);
+                                }
+                                else SView.NoCommand();
                             }
-                            else SView.NoCommand();
                         }
+                        while (choice != ".");
+
+                        List<string> dynamic = new List<string>();
+
+                        List<string> ordinationsDoctorAbsent = new List<string>();
+                        List<IOrdination> ordinationsQueueExists = new List<IOrdination>();
+                        List<string> ordinationsDeviceBroken = new List<string>();
+                        List<string> ordinationsAvailable = new List<string>();
+
+                        foreach (string ordin in schedule1)
+                        {
+                            IOrdination ordination = clinic.Ordinations.Find(o => o.Name == ordin);
+                            if (ordination.DoctorAbsent) ordinationsDoctorAbsent.Add(ordin);
+                            else if (ordination is Cardiology && (ordination as Cardiology).DeviceBroken) ordinationsDeviceBroken.Add(ordin);
+                            else if (!ordination.OrdBusy) ordinationsAvailable.Add(ordin);
+                            else ordinationsQueueExists.Add(ordination);
+                        }
+
+                        if (ordinationsQueueExists != null)
+                            ordinationsQueueExists.Sort((a, b) => (a.PatientsQueue.Count.CompareTo(b.PatientsQueue.Count)));
+
+                        foreach (string ordin in ordinationsAvailable) dynamic.Add(ordin);
+                        foreach (IOrdination ordin in ordinationsQueueExists) dynamic.Add(ordin.Name);
+                        foreach (string ordin in ordinationsDoctorAbsent) dynamic.Add(ordin);
+                        foreach (string ordin in ordinationsDeviceBroken) dynamic.Add(ordin);
+
+                        clinic.GetPatientFromID(id3).Schedule = dynamic;
+
+                        Console.WriteLine("Generisani raspored je sljedeci: ");
+                        for (int i = 0; i < dynamic.Count; i++)
+                        {
+                            if (i != dynamic.Count - 1) Console.Write("{0}, ", dynamic[i]);
+                            else Console.Write("{0} ", dynamic[i]);
+                        }
+                        Console.WriteLine();
                     }
-                    while (choice != ".");
-                    clinic.GetPatientFromID(id3).Schedule = schedule1;
                     Main(ref clinic);
                     break;
                 case "6":
-                    
+                    string ord;
+                    Console.WriteLine("Odaberite ordinaciju: ");
+                    Console.WriteLine("Laboratorija (L)");
+                    Console.WriteLine("Kardioloska (K)");
+                    Console.WriteLine("Radioloska (R)");
+                    Console.WriteLine("Hirurska (H)");
+                    Console.WriteLine("Dermatoloska (D)");
+                    ord = Console.ReadLine();
+
+                    if (ord == "L" || ord == "K" || ord == "R" || ord == "H" || ord == "D")
+                    {
+                        IOrdination ordination = clinic.Ordinations.Find(o => o.Name == ord);
+                        Console.WriteLine("Dobrodosli doktore {0} {1}", ordination.Doctor.Name, ordination.Doctor.Surname);
+                        if (ordination.Patient != null)
+                        {
+                            Console.WriteLine("Pacijent koji ce biti procesovan je: {0} {1}", ordination.Patient.Name, ordination.Patient.Surname);
+                            Console.WriteLine("Upisite informacije o terapiji: ");
+                            string ther;
+                            ther = Console.ReadLine();
+                            ordination.Patient.HealthBook.Therapies.Add(ther);
+                            Console.WriteLine("Upisite rezultat pregleda: ");
+                            ther = Console.ReadLine();
+                            ordination.Patient.HealthBook.ExaminationResults.Add(ther);
+                            Console.WriteLine("Pregled ce biti dodan na danasnji datum: {0}", DateTime.Today.ToString("dd/MM/yyyy"));
+                            ordination.Patient.HealthBook.ExaminationDates.Add(DateTime.Today);
+
+                            Patient patient = ordination.Patient;
+                            ordination.ProcessPatient();
+                            Console.WriteLine("Pacijent je uspjesno procesuiran");
+                            if(patient.Schedule == null || patient.Schedule.Count == 0)
+                            {
+                                Console.WriteLine("Pacijent vise zakazanih pregleda na rasporedu, uputite ga ka portirnici.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Sljedeca ordinacija za pacijeta je {0}, dodan je u red cekanja za tu ordinaciju.", patient.Schedule[0]);
+                                clinic.Ordinations.Find(o => o.Name == patient.Schedule[0]).NewPatient(patient);
+                            }
+
+                            if (ordination.OrdBusy == false) Console.WriteLine("Nema vise pacijenata u redu za ovu ordinaciju.");
+                            else Console.WriteLine("Pacijent iz reda cekanja je prosljedjen u ovu ordinaciju.");
+                        }
+                        else Console.WriteLine("Nema pacijenta na redu");
+                        
+                    }
+                    else SView.NoCommand();
+                    Main(ref clinic);
                     break;
                 case "7":
                     Program.ChooseRole(ref clinic);

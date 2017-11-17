@@ -20,6 +20,7 @@ namespace Zadaca1RPR.Models.Patients
         public override bool HasHealthCard { get; set; }
         public override List<string> Schedule { get; set; }
         public override int IDnum { get; set; }
+        public override double Cost { get; set; }
 
         public NormalPatient(string name, string surname, DateTime birthDate, string address,
            bool married, DateTime registerDate, EnumGender gender,
@@ -32,9 +33,11 @@ namespace Zadaca1RPR.Models.Patients
             Married = married;
             RegisterDate = registerDate;
             Gender = gender;
-            healthBook = HealthBook;
+            if (healthBook == null) HealthBook = new HealthBook("");
+            else HealthBook = healthBook;
             Schedule = schedule;
             IDnum = ID; ID++;
+            Cost = 0;
         }
 
         public override int GetID() { return IDnum; }

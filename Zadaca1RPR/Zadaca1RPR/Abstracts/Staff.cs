@@ -11,6 +11,8 @@ namespace Zadaca1RPR.Abstracts
 
         string Name { get; set; }
 
+        string Surname { get; set; }
+
         int IDnumber { get; set; }
 
         int Salary { get; set; }

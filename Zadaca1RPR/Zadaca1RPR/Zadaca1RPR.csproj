@@ -48,6 +48,10 @@
     <Compile Include="Interfaces\IOrdination.cs" />
     <Compile Include="Abstracts\Staff.cs" />
     <Compile Include="Models\Clinic.cs" />
+    <Compile Include="Models\Ordinations\Cardiology.cs" />
+    <Compile Include="Models\Ordinations\Radiology.cs" />
+    <Compile Include="Models\Ordinations\Surgeoncy.cs" />
+    <Compile Include="Models\Ordinations\Dermatology.cs" />
     <Compile Include="Models\Ordinations\Laboratory.cs" />
     <Compile Include="Models\Employees\Doctor.cs" />
     <Compile Include="Models\PatientInformation\HealthBook.cs" />

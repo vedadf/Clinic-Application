@@ -32,15 +32,19 @@ namespace Zadaca1RPR.Views
                     List<string> schedule = null;
                     Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
                     id = Convert.ToInt32(Console.ReadLine());
-                    schedule = clinic.GetPatientSchedule(id);
-                    if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                    if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
                     else
                     {
-                        Console.WriteLine("Raspored je sljedeci: ");
-                        for (int it = 0; it < schedule.Count; it++)
+                        schedule = clinic.GetPatientSchedule(id);
+                        if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                        else
                         {
-                            if (it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
-                            else Console.Write("{0}, ", schedule[it]);
+                            Console.WriteLine("Raspored je sljedeci: ");
+                            for (int it = 0; it < schedule.Count; it++)
+                            {
+                                if (it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
+                                else Console.Write("{0}, ", schedule[it]);
+                            }
                         }
                     }
                     Main(ref clinic);

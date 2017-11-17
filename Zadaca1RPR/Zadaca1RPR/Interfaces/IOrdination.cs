@@ -10,13 +10,19 @@ namespace Zadaca1RPR.Interfaces
 {
     interface IOrdination
     {
-        bool DoctorBusy { get; set; }
+        bool OrdBusy { get; set; }
         bool DoctorAbsent { get; set; }
         Doctor Doctor { get; set; }
 
-        List<Patient> Patients { get; set; }
+        Patient Patient { get; set; }
+        List<Patient> PatientsQueue { get; set; }
 
         double Price { get; set; }
+
+        string Name { get; set; }
+
+        bool ProcessPatient();
+        bool NewPatient(Patient patient);
 
     }
 }

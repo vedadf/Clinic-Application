@@ -15,13 +15,16 @@ namespace Zadaca1RPR.Models.Employees
 
         public string Name { get; set; }
 
+        public string Surname { get; set; }
+
         public int IDnumber { get; set; }
 
         public int Salary { get; set; }
 
-        public Technician(string name, int salary)
+        public Technician(string name, string surname, int salary)
         {
             Name = name;
+            Surname = surname;
             ID++; IDnumber = ID;
             Salary = salary;
         }

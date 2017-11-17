@@ -63,6 +63,7 @@ namespace Zadaca1RPR.Models
                 {
                     if (hc.IDnumber == id)
                     {
+                        hc.Patient.HasHealthCard = false;
                         HealthCards.Remove(hc);
                         break;
                     }
@@ -95,6 +96,11 @@ namespace Zadaca1RPR.Models
         public Patient GetPatientFromID(int patientID)
         {
             return Patients.Find(p => p.IDnum == patientID);
+        }
+
+        public HealthCard GetCardFromPatientID(int patientID)
+        {
+            return HealthCards.Find(h => h.Patient.IDnum == patientID);
         }
 
     }

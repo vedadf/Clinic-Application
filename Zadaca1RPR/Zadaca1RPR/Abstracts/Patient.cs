@@ -35,6 +35,8 @@ namespace Zadaca1RPR.Abstracts
         public virtual List<string> Schedule { get; set; }
 
         public virtual int GetID() { return IDnum;  }
+        
+        public virtual double Cost { get; set; }
 
     }
 }

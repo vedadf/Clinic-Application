@@ -47,15 +47,19 @@ namespace Zadaca1RPR.Views
                         List<string> schedule = null;
                         Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
                         id = Convert.ToInt32(Console.ReadLine());
-                        schedule = clinic.GetPatientSchedule(id);
-                        if(schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                        if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
                         else
                         {
-                            Console.WriteLine("Raspored je sljedeci: ");
-                            for(int it = 0; it < schedule.Count; it++)
+                            schedule = clinic.GetPatientSchedule(id);
+                            if (schedule == null) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                            else
                             {
-                                if(it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
-                                else Console.Write("{0}, ", schedule[it]);
+                                Console.WriteLine("Raspored je sljedeci: ");
+                                for (int it = 0; it < schedule.Count; it++)
+                                {
+                                    if (it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
+                                    else Console.Write("{0}, ", schedule[it]);
+                                }
                             }
                         }
                         Main(ref clinic);
@@ -188,16 +192,14 @@ namespace Zadaca1RPR.Views
                 Console.WriteLine("Kardiolosku ordinaciju - K");
                 Console.WriteLine("Radiolosku ordinaciju - R");
                 Console.WriteLine("Hirursku ordinaciju - H");
-                Console.WriteLine("Ortopedsku ordinaciju - O");
                 Console.WriteLine("Dermatolosku ordinaciju - D");
-                Console.WriteLine("Stomatolosku ordinaciju - S");
                 Console.WriteLine("--Upisite . za prekid--");
                 do
                 {
                     input = Console.ReadLine();
                     if (input != ".")
                     {
-                        if (input != "L" || input != "K" || input != "R" || input != "H" || input != "O" || input != "D" || input != "S")
+                        if (input == "L" || input == "K" || input == "R" || input == "H" || input == "D")
                         {
                             bool exists = schedule.Exists(i => i == input);
                             if (exists) Console.WriteLine("Vec je unesena ordinacija.");
@@ -207,6 +209,40 @@ namespace Zadaca1RPR.Views
                     }
                 }
                 while (input != ".");
+
+                List<string> dynamic = new List<string>();
+
+                List<string> ordinationsDoctorAbsent = new List<string>();
+                List<IOrdination> ordinationsQueueExists = new List<IOrdination>();
+                List<string> ordinationsDeviceBroken = new List<string>();
+                List<string> ordinationsAvailable = new List<string>();
+
+                foreach (string ord in schedule)
+                {
+                    IOrdination ordination = clinic.Ordinations.Find(o => o.Name == ord);
+                    if (ordination.DoctorAbsent) ordinationsDoctorAbsent.Add(ord);
+                    else if (ordination is Cardiology && (ordination as Cardiology).DeviceBroken) ordinationsDeviceBroken.Add(ord);
+                    else if (!ordination.OrdBusy) ordinationsAvailable.Add(ord);
+                    else ordinationsQueueExists.Add(ordination);
+                }
+
+                if (ordinationsQueueExists != null)
+                    ordinationsQueueExists.Sort((a, b) => (a.PatientsQueue.Count.CompareTo(b.PatientsQueue.Count)));
+
+                foreach (string ord in ordinationsAvailable) dynamic.Add(ord);
+                foreach (IOrdination ord in ordinationsQueueExists) dynamic.Add(ord.Name);
+                foreach (string ord in ordinationsDoctorAbsent) dynamic.Add(ord);
+                foreach (string ord in ordinationsDeviceBroken) dynamic.Add(ord);
+                schedule = dynamic;
+
+                Console.WriteLine("Generisani raspored je sljedeci: ");
+                for (int i = 0; i < schedule.Count; i++)
+                {
+                    if (i != schedule.Count - 1) Console.Write("{0}, ", schedule[i]);
+                    else Console.Write("{0} ", schedule[i]);
+                }
+                Console.WriteLine();
+
             }
             else schedule = null;
 

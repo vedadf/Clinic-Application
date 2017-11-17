@@ -24,6 +24,7 @@ namespace Zadaca1RPR.Models.Patients
         public override bool HasHealthCard { get; set; }
         public override List<string> Schedule { get; set; }
         public override int IDnum { get; set; }
+        public override double Cost { get; set; }
 
         public UrgentPatient(string firstAid, bool deceased,
             string name, string surname, DateTime birthDate, string address,
@@ -39,9 +40,11 @@ namespace Zadaca1RPR.Models.Patients
             Married = married;
             RegisterDate = registerDate;
             Gender = gender;
-            healthBook = HealthBook;
+            if (healthBook == null) HealthBook = new HealthBook("");
+            else HealthBook = healthBook;
             IDnum = ID; ID++;
             Schedule = schedule;
+            Cost = 0;
         }
 
         public override int GetID() { return IDnum; }

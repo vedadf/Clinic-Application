@@ -25,18 +25,19 @@ namespace Zadaca1RPR.Models
         public bool CardActive { get; set; }
 
         public List<string> Ordinations { get; set; }
-        
+
+        public int numOfTimesVisited { get; set; }
 
         public HealthCard(UrgentPatient patient, string causeOfDeath = "", string timeOfDeath = "", DateTime dateOfDeath = default(DateTime))
         {
             if (!patient.Deceased && (causeOfDeath != "" || dateOfDeath != default(DateTime)))
             {
-                //throw exception
+                throw new ArgumentException("Pacijent nije preminuo, parametri nemaju smisla");
             }
             
             if(patient.Deceased && (causeOfDeath == "" || dateOfDeath == default(DateTime)))
             {
-                //throw exception
+                throw new ArgumentException("Pacijent je preminuo, parametri nisu popunjeni");
             }
 
             Patient = patient;
@@ -54,6 +55,7 @@ namespace Zadaca1RPR.Models
             }
             Patient.HasHealthCard = true;
             IDnumber = ID; ID++;
+            numOfTimesVisited++;
         }
 
         public HealthCard(NormalPatient patient)
@@ -65,6 +67,7 @@ namespace Zadaca1RPR.Models
             IDnumber = ID; ID++;
             Patient.HasHealthCard = true;
             Ordinations = patient.Schedule;
+            numOfTimesVisited++;
         }
 
     }

@@ -10,9 +10,9 @@ using Zadaca1RPR.Models.Patients;
 
 namespace Zadaca1RPR.Models.Ordinations
 {
-    class Laboratory : IOrdination
+    class Dermatology : IOrdination
     {
-        
+
         public bool OrdBusy { get; set; }
         public bool DoctorAbsent { get; set; }
 
@@ -25,21 +25,20 @@ namespace Zadaca1RPR.Models.Ordinations
 
         public string Name { get; set; }
 
-        public Laboratory(Doctor doctor)
+        public Dermatology(Doctor doctor)
         {
             Doctor = doctor;
             OrdBusy = false;
-            DoctorAbsent = false;
+            DoctorAbsent = true;
             Patient = null;
-            Price = 10.6;
-            Name = "L";
-            PatientsQueue = new List<Patient>();
+            Price = 12.8;
+            Name = "D";
         }
 
         public bool NewPatient(Patient patient)
         {
-            if (!patient.HasHealthCard) return false;    
-                   
+            if (!patient.HasHealthCard) return false;
+
             if (Patient == null)
             {
                 Patient = patient;
@@ -49,14 +48,14 @@ namespace Zadaca1RPR.Models.Ordinations
 
             return true;
         }
-       
+
         public bool ProcessPatient()
         {
-            if(Patient != null)
+            if (Patient != null)
             {
                 Doctor.numOfPatientsProcessed++;
                 Patient.Cost += Price;
-                Patient.Schedule.Remove("L");
+                Patient.Schedule.Remove("D");
                 if (PatientsQueue == null || PatientsQueue.Count == 0)
                 {
                     Patient = null;
