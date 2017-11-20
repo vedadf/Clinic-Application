@@ -89,6 +89,7 @@ namespace Zadaca1RPR.Views
                         Patient pat = clinic.GetPatientFromID(idd);
                         if (pat == null) Console.WriteLine("Pacijent ne postoji.");
                         else if (!pat.HasHealthCard) Console.WriteLine("Pacijent nema karton.");
+                        else if (pat.Schedule == null) Console.Write("Pacijent nema kreiran raspored.");
                         else if (pat.Schedule.Count > 0) Console.WriteLine("Pacijent nije zavrsio sa svojim pregledima.");
                         else
                         {
@@ -118,8 +119,8 @@ namespace Zadaca1RPR.Views
                                 double res = pat.Cost;
                                 if (cc == "R")
                                     if (!regular) res = pat.Cost + 0.15 * pat.Cost;
-                                else if(cc == "G")
-                                    if (regular) res = pat.Cost - 0.1 * pat.Cost;
+                                    else if (cc == "G")
+                                        if (regular) res = pat.Cost - 0.1 * pat.Cost;
                                 return res;
                             };
 

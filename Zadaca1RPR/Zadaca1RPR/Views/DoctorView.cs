@@ -125,6 +125,7 @@ namespace Zadaca1RPR.Views
                     }
                     string choice;
                     if (clinic.GetPatientFromID(id3) == null || clinic.GetCardFromPatientID(id3) == null) Console.WriteLine("Karton za pacijenta ne postoji.");
+                    else if (clinic.GetPatientFromID(id3).Schedule == null) Console.WriteLine("Pacijent od pocetka nema kreiran raspored. Mozda je preminuo.");
                     else
                     {
                         Console.WriteLine("Pacijent: {0} {1}", clinic.GetPatientFromID(id3).Name, clinic.GetPatientFromID(id3).Surname);
@@ -181,7 +182,7 @@ namespace Zadaca1RPR.Views
                         clinic.Ordinations.Find(o => o.Name == pat.Schedule[0]).PatientsQueue.Remove(pat);
                         pat.Schedule = dynamic;
                         clinic.Ordinations.Find(o => o.Name == pat.Schedule[0]).NewPatient(pat);
-                        
+
 
                         Console.WriteLine("Generisani raspored je sljedeci: ");
                         for (int i = 0; i < dynamic.Count; i++)

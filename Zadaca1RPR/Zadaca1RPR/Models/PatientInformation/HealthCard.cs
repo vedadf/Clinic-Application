@@ -54,6 +54,7 @@ namespace Zadaca1RPR.Models
             Patient.HasHealthCard = true;
             IDnumber = ID; ID++;
             patient.numOfTimesVisited++;
+            patient.Cost = 0;
         }
 
         public HealthCard(NormalPatient patient)
@@ -66,6 +67,7 @@ namespace Zadaca1RPR.Models
             Patient.HasHealthCard = true;
             Ordinations = patient.Schedule;
             patient.numOfTimesVisited++;
+            patient.Cost = 0;
         }
 
     }

@@ -35,8 +35,7 @@ namespace Zadaca1RPR.Models.Patients
             Married = married;
             RegisterDate = registerDate;
             Gender = gender;
-            if (healthBook == null) HealthBook = new HealthBook("");
-            else HealthBook = healthBook;
+            HealthBook = healthBook;
             Schedule = schedule;
             IDnum = ID; ID++;
             Cost = 0;

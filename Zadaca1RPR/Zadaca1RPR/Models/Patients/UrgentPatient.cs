@@ -32,7 +32,7 @@ namespace Zadaca1RPR.Models.Patients
         public UrgentPatient(string firstAid, bool deceased,
             string name, string surname, DateTime birthDate, string citizenID ,string address,
             bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string Obduction = "",
-            HealthBook healthBook = default(HealthBook))
+            HealthBook healthBook = null)
         {
             FirstAid = firstAid;
             Deceased = deceased;
@@ -43,8 +43,7 @@ namespace Zadaca1RPR.Models.Patients
             Married = married;
             RegisterDate = registerDate;
             Gender = gender;
-            if (healthBook == null) HealthBook = new HealthBook("");
-            else HealthBook = healthBook;
+            HealthBook = healthBook;
             IDnum = ID; ID++;
             Schedule = schedule;
             Cost = 0;
