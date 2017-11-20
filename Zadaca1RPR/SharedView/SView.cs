@@ -46,5 +46,15 @@ namespace SharedView
 
         }
 
+        public static bool ValidateCitizenIDReg(List<string> Cids, DateTime bdayy, string id)
+        {
+            if (!ValidateCitizenID(bdayy, id)) return false;
+
+            if (Cids.Find(i => i == id) == null) return true;
+
+            return false;
+
+        }
+
     }
 }

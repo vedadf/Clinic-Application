@@ -243,6 +243,12 @@ namespace Zadaca1RPR.Views
                 month = Console.ReadLine();
                 Console.Write("-> Godina: ");
                 year = Console.ReadLine();
+                if(day == "" || month == "" || year == "")
+                {
+                    Console.WriteLine("Nije ispravan datum.");
+                    continue;
+                }
+
                 if(Convert.ToInt32(year) < 500)
                 {
                     Console.WriteLine("Nije ispravan datum.");
@@ -269,7 +275,11 @@ namespace Zadaca1RPR.Views
                     if (cID.Length != 13) Console.WriteLine("JMBG nije ispravne velicine.");
                     else
                     {
-                        if (!SView.ValidateCitizenID(bDate ,cID)) Console.WriteLine("Format JMBG nije ispravan. Mozda se datumi rodjenja ne poklapaju?");
+                        List<string> ciDs = new List<string>();
+                        foreach(Patient pat in clinic.Patients)
+                            ciDs.Add(pat.CitizenID);
+                        
+                        if (!SView.ValidateCitizenIDReg(ciDs, bDate ,cID)) Console.WriteLine("Pacijent sa ovim JMBG vec postoji ili format JMBG nije ispravan.");
                         else break;
                     }
                 }
@@ -279,7 +289,7 @@ namespace Zadaca1RPR.Views
             
             while (true)
             {
-                Console.WriteLine("Spol: (Musko/Zenso) ili (M/Z)");
+                Console.WriteLine("Spol: (Musko/Zensko) ili (M/Z)");
                 string inputG = Console.ReadLine();
                 if (inputG == "Musko" || inputG == "M" || inputG == "m" || inputG == "musko")
                 {
