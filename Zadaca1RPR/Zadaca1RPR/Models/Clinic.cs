@@ -148,5 +148,10 @@ namespace Zadaca1RPR.Models
             return pat;
         }
 
+        public HealthCard GetCardFromCitizenID(string citID)
+        {
+            return HealthCards.Find(hc => hc.Patient.CitizenID == citID);
+        }
+
     }
 }

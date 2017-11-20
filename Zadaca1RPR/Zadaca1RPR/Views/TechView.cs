@@ -49,7 +49,7 @@ namespace Zadaca1RPR.Views
                         List<string> schedule = null;
                         while (true) {
                             Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
-                            if (!Int32.TryParse(Console.ReadLine(), out id)) Console.WriteLine("Uneseni podatak nije broj");
+                            if (!Int32.TryParse(Console.ReadLine(), out id)) Console.WriteLine("Uneseni podatak nije cijeli broj");
                             else break;
                         }
                         if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
@@ -73,8 +73,9 @@ namespace Zadaca1RPR.Views
                         string i4;
                         Console.WriteLine("1. Pretraga po identifikacijskom broju");
                         Console.WriteLine("2. Pretraga po prezimenu");
+                        Console.WriteLine("3. Pretraga po JMBG");
                         i4 = Console.ReadLine();
-                        if (i4 != "1" || i4 != "2") ProcessCardSearch(ref clinic, i4);
+                        if (i4 != "1" || i4 != "2" || i4 != "3") ProcessCardSearch(ref clinic, i4);
                         else { SView.NoCommand(); Main(ref clinic); }
                         break;
                     case "4":
@@ -83,7 +84,7 @@ namespace Zadaca1RPR.Views
                         {
                             Console.WriteLine("Upisite identifikacijski broj pacijenta kojem zelite naplatiti: ");
                             if (Int32.TryParse(Console.ReadLine(), out idd)) break;
-                            else Console.WriteLine("Uneseni podatak nije broj.");
+                            else Console.WriteLine("Uneseni podatak nije cijeli broj.");
                         }
                         Patient pat = clinic.GetPatientFromID(idd);
                         if (pat == null) Console.WriteLine("Pacijent ne postoji.");
@@ -268,7 +269,7 @@ namespace Zadaca1RPR.Views
                     if (cID.Length != 13) Console.WriteLine("JMBG nije ispravne velicine.");
                     else
                     {
-                        if (!ValidateCitizenID(bDate ,cID)) Console.WriteLine("Format JMBG nije ispravan. Mozda se datumi rodjenja ne poklapaju?");
+                        if (!SView.ValidateCitizenID(bDate ,cID)) Console.WriteLine("Format JMBG nije ispravan. Mozda se datumi rodjenja ne poklapaju?");
                         else break;
                     }
                 }
@@ -456,7 +457,7 @@ namespace Zadaca1RPR.Views
                 {
                     Console.WriteLine("Unesite identifikacijski broj kartona");
                     if (Int32.TryParse(Console.ReadLine(), out id)) break;
-                    else Console.WriteLine("Uneseni podatak nije broj.");
+                    else Console.WriteLine("Uneseni podatak nije cijeli broj.");
                 }
                 
                 HealthCard card = clinic.GetCardFromID(id);
@@ -484,6 +485,20 @@ namespace Zadaca1RPR.Views
                 Console.WriteLine();
                 Console.WriteLine("Pronadjeno {0} pacijenata: ", cards.Count);
                 foreach (HealthCard card in cards) PrintPatientInfoFromCard(card);
+            }
+            else if (i == "3")
+            {
+                string citizenID;
+                Console.WriteLine("Unesite JMBG pacijenta");
+                citizenID = Console.ReadLine();
+
+                HealthCard card = clinic.GetCardFromCitizenID(citizenID);
+                if (card == null)
+                {
+                    Console.WriteLine("Karton ne postoji ili JMBG nije ispravan.");
+                    Main(ref clinic);
+                }
+                PrintPatientInfoFromCard(card);
             }
             Main(ref clinic);
         }
@@ -527,31 +542,7 @@ namespace Zadaca1RPR.Views
             return res;
         }
 
-        bool ValidateCitizenID(DateTime bdayy, string id)
-        {
-            bool parse = true;
-            //da li su svi brojevi
-            foreach(char c in id)
-            {
-                int n;
-                parse = Int32.TryParse(c.ToString(), out n);
-                if (!parse) return false;
-            }
-
-            //da li je datum ispravan
-            string day = "" + id[0] + id[1];
-            string month = "" + id[2] + id[3];
-            string year = "" + id[4] + id[5] + id[6] + id[7];
-            string Bdate = year + "-" + month + "-" + day;
-            DateTime bDate = new DateTime();
-            if (!DateTime.TryParse(Bdate, out bDate)) return false;
-            
-            //da li se datum rodjenja poklapa           
-            if (bdayy != bDate) return false; 
-
-            return true;
-            
-        }
+        
 
 
     }

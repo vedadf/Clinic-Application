@@ -60,9 +60,9 @@ namespace Zadaca1RPR
             ordinations17336_1.Add(ordination17336_4);
             ordinations17336_1.Add(ordination17336_5);
 
-            Clinic clinic = new Clinic(employees17336_1, ordinations17336_1, cards17336_1, patients17336_1);
+            Clinic clinic17336_1 = new Clinic(employees17336_1, ordinations17336_1, cards17336_1, patients17336_1);
 
-            ChooseRole(ref clinic);
+            ChooseRole(ref clinic17336_1);
             
         }
         

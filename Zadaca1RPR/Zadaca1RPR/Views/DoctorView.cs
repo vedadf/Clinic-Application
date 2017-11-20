@@ -41,7 +41,7 @@ namespace Zadaca1RPR.Views
                     {
                         Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
                         if (Int32.TryParse(Console.ReadLine(), out id)) break;
-                        else Console.WriteLine("Uneseni podatak nije broj.");
+                        else Console.WriteLine("Uneseni podatak nije cijeli broj.");
                     }
                     if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
                     else
@@ -64,38 +64,37 @@ namespace Zadaca1RPR.Views
                     string i4;
                     Console.WriteLine("1. Pretraga po identifikacijskom broju");
                     Console.WriteLine("2. Pretraga po prezimenu");
+                    Console.WriteLine("3. Pretraga po JMBG");
                     i4 = Console.ReadLine();
-                    if (i4 != "1" || i4 != "2") ProcessCardSearch(ref clinic, i4);
+                    if (i4 != "1" || i4 != "2" || i4 != "3") ProcessCardSearch(ref clinic, i4);
                     else { SView.NoCommand(); Main(ref clinic); }
                     break;
                 case "3":
+                    int id2;
+                        
                     while (true)
                     {
-                        int id2;
-                        
-                        while (true)
-                        {
-                            Console.WriteLine("Unesite identifikacijski broj pacijenta kojem zelite napraviti karton: ");
-                            if (Int32.TryParse(Console.ReadLine(), out id2)) break;
-                            else Console.WriteLine("Uneseni podatak nije broj.");
-                        }
-                        if (clinic.CardExists(id2)) Console.WriteLine("Odabrani pacijent vec ima karton.");
-                        else if (!clinic.PatientExists(id2)) Console.WriteLine("Odabrani pacijent ne postoji.");
+                        Console.WriteLine("Unesite identifikacijski broj pacijenta kojem zelite napraviti karton: ");
+                        if (Int32.TryParse(Console.ReadLine(), out id2)) break;
+                        else Console.WriteLine("Uneseni podatak nije cijeli broj.");
+                    }
+                    if (clinic.CardExists(id2)) Console.WriteLine("Odabrani pacijent vec ima karton.");
+                    else if (!clinic.PatientExists(id2)) Console.WriteLine("Odabrani pacijent ne postoji.");
+                    else
+                    {
+                        Patient patient = clinic.GetPatientFromID(id2);
+                        clinic.HealthCards.Add(new HealthCard((NormalPatient)patient));
+                        if (patient.Schedule == null || patient.Schedule.Count == 0)
+                            Console.WriteLine("Pacijent nema kreiran raspored.");
                         else
                         {
-                            Patient patient = clinic.GetPatientFromID(id2);
-                            clinic.HealthCards.Add(new HealthCard((NormalPatient)patient));
-                            if (patient.Schedule == null || patient.Schedule.Count == 0)
-                                Console.WriteLine("Pacijent nema kreiran raspored.");
-                            else
-                            {
-                                clinic.Ordinations.Find(o => o.Name == patient.Schedule[0]).NewPatient(patient);
-                                Console.WriteLine("Pacijent je prosljedjen u ordinaciju {0}.", patient.Schedule[0]);
-                            }
-                            Console.WriteLine("Karton uspjesno kreiran.");
-                            break;
-                        }                        
-                    }
+                            clinic.Ordinations.Find(o => o.Name == patient.Schedule[0]).NewPatient(patient);
+                            Console.WriteLine("Pacijent je prosljedjen u ordinaciju {0}.", patient.Schedule[0]);
+                        }
+                        Console.WriteLine("Karton uspjesno kreiran.");
+                        break;
+                    }                        
+                    
                     Main(ref clinic);
                     break;
                 case "4":
@@ -122,7 +121,7 @@ namespace Zadaca1RPR.Views
                     {
                         Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
                         if (Int32.TryParse(Console.ReadLine(), out id3)) break;
-                        else Console.WriteLine("Uneseni podatak nije broj.");
+                        else Console.WriteLine("Uneseni podatak nije cijeli broj.");
                     }
                     string choice;
                     if (clinic.GetPatientFromID(id3) == null || clinic.GetCardFromPatientID(id3) == null) Console.WriteLine("Karton za pacijenta ne postoji.");
@@ -265,7 +264,7 @@ namespace Zadaca1RPR.Views
                 {
                     Console.WriteLine("Unesite identifikacijski broj kartona");
                     if (Int32.TryParse(Console.ReadLine(), out id)) break;
-                    else Console.WriteLine("Uneseni podatak nije broj.");
+                    else Console.WriteLine("Uneseni podatak nije cijeli broj.");
                 }
 
                 HealthCard card = clinic.GetCardFromID(id);
@@ -293,6 +292,20 @@ namespace Zadaca1RPR.Views
                 Console.WriteLine();
                 Console.WriteLine("Pronadjeno {0} pacijenata: ", cards.Count);
                 foreach (HealthCard card in cards) PrintPatientInfoFromCard(card);
+            }
+            else if(i == "3")
+            {
+                string citizenID;
+                Console.WriteLine("Unesite JMBG pacijenta");
+                citizenID = Console.ReadLine();
+
+                HealthCard card = clinic.GetCardFromCitizenID(citizenID);
+                if (card == null)
+                {
+                    Console.WriteLine("Karton ne postoji ili JMBG nije ispravan.");
+                    Main(ref clinic);
+                }
+                PrintPatientInfoFromCard(card);
             }
             Main(ref clinic);
         }

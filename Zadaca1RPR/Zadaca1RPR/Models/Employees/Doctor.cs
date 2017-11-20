@@ -28,7 +28,7 @@ namespace Zadaca1RPR.Models.Employees
         {
             Name = name;
             Surname = surname;
-            ID++; IDnumber = ID;
+            IDnumber = ID; ID++;
             BaseSalary = baseSalary;
             CurrentSalary = baseSalary;
         }

@@ -20,5 +20,31 @@ namespace SharedView
             Console.ReadLine();
         }
 
+        public static bool ValidateCitizenID(DateTime bdayy, string id)
+        {
+            bool parse = true;
+            //da li su svi brojevi
+            foreach (char c in id)
+            {
+                int n;
+                parse = Int32.TryParse(c.ToString(), out n);
+                if (!parse) return false;
+            }
+
+            //da li je datum ispravan
+            string day = "" + id[0] + id[1];
+            string month = "" + id[2] + id[3];
+            string year = "" + id[4] + id[5] + id[6] + id[7];
+            string Bdate = year + "-" + month + "-" + day;
+            DateTime bDate = new DateTime();
+            if (!DateTime.TryParse(Bdate, out bDate)) return false;
+
+            //da li se datum rodjenja poklapa           
+            if (bdayy != bDate) return false;
+
+            return true;
+
+        }
+
     }
 }
