@@ -8,7 +8,7 @@ using Zadaca1RPR.Models.Employees;
 
 namespace Zadaca1RPR.Interfaces
 {
-    interface IOrdination
+    public interface IOrdination
     {
         bool OrdBusy { get; set; }
         bool DoctorAbsent { get; set; }

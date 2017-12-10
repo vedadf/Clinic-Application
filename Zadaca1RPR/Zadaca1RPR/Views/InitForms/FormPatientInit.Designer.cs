@@ -33,7 +33,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -69,30 +68,31 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
             this.listBox5 = new System.Windows.Forms.ListBox();
-            this.listBox6 = new System.Windows.Forms.ListBox();
+            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -118,6 +118,7 @@
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
@@ -143,18 +144,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Osnovne Informacije";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(745, 411);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Zdravstvena Knjizica";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -473,12 +462,14 @@
             // 
             // button1
             // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Location = new System.Drawing.Point(349, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 32);
             this.button1.TabIndex = 2;
             this.button1.Text = "Trazi";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
@@ -496,22 +487,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Vas JMBG:";
             // 
-            // groupBox4
+            // tabPage2
             // 
-            this.groupBox4.Controls.Add(this.listBox6);
-            this.groupBox4.Controls.Add(this.listBox5);
-            this.groupBox4.Controls.Add(this.listBox4);
-            this.groupBox4.Controls.Add(this.listBox3);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.label17);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Location = new System.Drawing.Point(36, 17);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(347, 388);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Pregledi";
+            this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(745, 411);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Zdravstvena Knjizica";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -521,19 +507,28 @@
             this.groupBox5.Controls.Add(this.label18);
             this.groupBox5.Location = new System.Drawing.Point(389, 17);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(324, 388);
+            this.groupBox5.Size = new System.Drawing.Size(350, 388);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Zdravstveni Problemi";
             // 
-            // label18
+            // listBox2
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 38);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(199, 17);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "Sadasnji Zdravstveni Problemi";
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
+            this.listBox2.Location = new System.Drawing.Point(9, 233);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(335, 132);
+            this.listBox2.TabIndex = 3;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(9, 58);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(335, 132);
+            this.listBox1.TabIndex = 2;
             // 
             // label19
             // 
@@ -544,50 +539,65 @@
             this.label19.TabIndex = 1;
             this.label19.Text = "Prijasnji Zdravstveni Problemi";
             // 
-            // listBox1
+            // label18
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(9, 58);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(309, 132);
-            this.listBox1.TabIndex = 2;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 38);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(199, 17);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Sadasnji Zdravstveni Problemi";
             // 
-            // listBox2
+            // groupBox4
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(9, 233);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(309, 132);
-            this.listBox2.TabIndex = 3;
+            this.groupBox4.Controls.Add(this.textBox16);
+            this.groupBox4.Controls.Add(this.listBox5);
+            this.groupBox4.Controls.Add(this.listBox4);
+            this.groupBox4.Controls.Add(this.listBox3);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Location = new System.Drawing.Point(21, 17);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(362, 388);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Pregledi";
             // 
-            // label20
+            // textBox16
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 286);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(131, 17);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Napomene Doktora";
+            this.textBox16.Location = new System.Drawing.Point(6, 319);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(350, 22);
+            this.textBox16.TabIndex = 7;
             // 
-            // label17
+            // listBox5
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 38);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(60, 17);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Terapije";
+            this.listBox5.FormattingEnabled = true;
+            this.listBox5.ItemHeight = 16;
+            this.listBox5.Location = new System.Drawing.Point(9, 221);
+            this.listBox5.Name = "listBox5";
+            this.listBox5.Size = new System.Drawing.Size(347, 52);
+            this.listBox5.TabIndex = 6;
             // 
-            // label21
+            // listBox4
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 118);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(142, 17);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "Posjecene Ordinacije";
+            this.listBox4.FormattingEnabled = true;
+            this.listBox4.ItemHeight = 16;
+            this.listBox4.Location = new System.Drawing.Point(9, 138);
+            this.listBox4.Name = "listBox4";
+            this.listBox4.Size = new System.Drawing.Size(347, 52);
+            this.listBox4.TabIndex = 5;
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 16;
+            this.listBox3.Location = new System.Drawing.Point(9, 58);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(347, 52);
+            this.listBox3.TabIndex = 4;
             // 
             // label22
             // 
@@ -598,41 +608,32 @@
             this.label22.TabIndex = 3;
             this.label22.Text = "Rezultati Pregleda";
             // 
-            // listBox3
+            // label21
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(9, 58);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(332, 52);
-            this.listBox3.TabIndex = 4;
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 118);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(142, 17);
+            this.label21.TabIndex = 2;
+            this.label21.Text = "Posjecene Ordinacije";
             // 
-            // listBox4
+            // label17
             // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 16;
-            this.listBox4.Location = new System.Drawing.Point(9, 138);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(332, 52);
-            this.listBox4.TabIndex = 5;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 38);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(60, 17);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Terapije";
             // 
-            // listBox5
+            // label20
             // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.ItemHeight = 16;
-            this.listBox5.Location = new System.Drawing.Point(9, 221);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(332, 52);
-            this.listBox5.TabIndex = 6;
-            // 
-            // listBox6
-            // 
-            this.listBox6.FormattingEnabled = true;
-            this.listBox6.ItemHeight = 16;
-            this.listBox6.Location = new System.Drawing.Point(9, 306);
-            this.listBox6.Name = "listBox6";
-            this.listBox6.Size = new System.Drawing.Size(332, 52);
-            this.listBox6.TabIndex = 7;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 299);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(123, 17);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Komentar Doktora";
             // 
             // FormPatientInit
             // 
@@ -648,7 +649,6 @@
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -656,10 +656,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -718,9 +719,9 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.ListBox listBox6;
         private System.Windows.Forms.ListBox listBox5;
         private System.Windows.Forms.ListBox listBox4;
         private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.TextBox textBox16;
     }
 }

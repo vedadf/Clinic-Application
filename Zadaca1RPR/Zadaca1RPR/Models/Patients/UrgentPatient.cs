@@ -7,7 +7,7 @@ using Zadaca1RPR.Abstracts;
 
 namespace Zadaca1RPR.Models.Patients
 {
-    class UrgentPatient : Patient
+    public class UrgentPatient : Patient
     {
         
         public string FirstAid { get; set; }
@@ -31,7 +31,7 @@ namespace Zadaca1RPR.Models.Patients
 
         public UrgentPatient(string firstAid, bool deceased,
             string name, string surname, DateTime birthDate, string citizenID ,string address,
-            bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string Obduction = "",
+            bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string obduction = "",
             HealthBook healthBook = null)
         {
             FirstAid = firstAid;
@@ -48,6 +48,7 @@ namespace Zadaca1RPR.Models.Patients
             Schedule = schedule;
             Cost = 0;
             CitizenID = citizenID;
+            Obduction = obduction;
         }
 
         public override int GetID() { return IDnum; }

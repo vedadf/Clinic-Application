@@ -7,7 +7,7 @@ using Zadaca1RPR.Abstracts;
 
 namespace Zadaca1RPR.Models.Patients
 {
-    class NormalPatient : Patient
+    public class NormalPatient : Patient
     {
         public override string Name { get; set; }
         public override string Surname { get; set; }

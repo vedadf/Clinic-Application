@@ -10,7 +10,7 @@ using Zadaca1RPR.Interfaces;
 
 namespace Zadaca1RPR.Models.Employees
 {
-    class Technician : Staff
+    public class Technician : Staff
     {
 
         static int ID;

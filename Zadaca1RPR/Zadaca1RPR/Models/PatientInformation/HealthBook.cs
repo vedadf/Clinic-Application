@@ -7,7 +7,7 @@ using Zadaca1RPR.Models.Patients;
 //ZDRAVSTVENA KNJIZICA
 namespace Zadaca1RPR.Models
 {
-    class HealthBook
+    public class HealthBook
     {
         public string DoctorNotes { get; set; }
         public List<string> CurrentHealthIssues { get; set; }

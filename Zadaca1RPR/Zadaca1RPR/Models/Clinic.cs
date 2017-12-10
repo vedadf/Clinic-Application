@@ -10,7 +10,7 @@ using Zadaca1RPR.Models.Patients;
 
 namespace Zadaca1RPR.Models
 {
-    sealed class Clinic
+    public sealed class Clinic
     {
 
         public List<HealthCard> HealthCards { get; set; }

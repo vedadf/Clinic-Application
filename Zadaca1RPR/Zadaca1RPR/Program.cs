@@ -18,7 +18,8 @@ namespace Zadaca1RPR
 {
     class Program
     {       
-        static void Init()
+        [STAThread]
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -67,13 +68,8 @@ namespace Zadaca1RPR
 
             Clinic clinic17336_1 = new Clinic(employees17336_1, ordinations17336_1, cards17336_1, patients17336_1);
 
-        }
-        [STAThread]
-        static void Main(string[] args)
-        {
-            Init();
             //ChooseRole(ref clinic17336_1);
-            Application.Run(new FormInitial());
+            Application.Run(new FormInitial(ref clinic17336_1));
         }
         
         public static void ChooseRole(ref Clinic clinic)

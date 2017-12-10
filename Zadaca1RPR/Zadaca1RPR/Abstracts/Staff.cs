@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace Zadaca1RPR.Abstracts
 {
-    abstract class Staff
+    public abstract class Staff
     {
 
         string Name { get; set; }

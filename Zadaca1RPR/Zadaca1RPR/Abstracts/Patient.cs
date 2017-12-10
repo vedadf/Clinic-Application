@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Zadaca1RPR.Abstracts
 {
-    abstract class Patient
+    public abstract class Patient
     {
 
         protected static int ID { get; set; }

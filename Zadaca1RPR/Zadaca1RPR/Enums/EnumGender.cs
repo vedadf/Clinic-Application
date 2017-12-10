@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadaca1RPR
 {
-    enum EnumGender
+    public enum EnumGender
     {
         Male,
         Female

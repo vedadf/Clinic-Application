@@ -9,7 +9,7 @@ using Zadaca1RPR.Abstracts;
 
 namespace Zadaca1RPR.Models.Employees
 {
-    class Doctor : Staff
+    public class Doctor : Staff
     {
 
         static int ID = 0;

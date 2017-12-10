@@ -9,7 +9,7 @@ using Zadaca1RPR.Models.Patients;
 //KARTON
 namespace Zadaca1RPR.Models
 {
-    class HealthCard
+    public class HealthCard
     {
 
         public static int ID;
