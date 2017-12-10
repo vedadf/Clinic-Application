@@ -43,7 +43,7 @@ namespace Zadaca1RPR.Abstracts
 
         public virtual string CitizenID { get; set; }
 
-        //public virtual Image img { get; set; }
+        public virtual Image img { get; set; }
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Zadaca1RPR.Models.Patients
         public override double Cost { get; set; }
         public override int numOfTimesVisited { get; set; }
         public override string CitizenID { get; set; }
+        public override Image img { get; set; }
 
         public NormalPatient(string name, string surname, DateTime birthDate, string citizenID, string address,
            bool married, DateTime registerDate, EnumGender gender,
