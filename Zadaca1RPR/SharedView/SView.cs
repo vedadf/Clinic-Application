@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,12 @@ namespace SharedView
         {
             Console.WriteLine("Unesite bilo sta za otvaranje menija.");
             Console.ReadLine();
+        }
+
+        public static void PrintList<T>(List<T> list)
+        {
+            foreach (var item in list)
+                Console.WriteLine(item);
         }
 
         public static bool ValidateCitizenID(DateTime bdayy, string id)
@@ -54,6 +61,27 @@ namespace SharedView
 
             return false;
 
+        }
+
+        public static string GetHash(MD5 md, string pw)
+        {
+            byte[] data = md.ComputeHash(Encoding.UTF8.GetBytes(pw));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+                sBuilder.Append(data[i].ToString("x2"));
+            return sBuilder.ToString();
+        }
+        
+        public static bool VerifyHash(MD5 md, string input, string hash)
+        {
+            string HashInput = GetHash(md, input);
+
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            if (0 == comparer.Compare(HashInput, hash))
+                return true;
+
+            return false;
         }
 
     }

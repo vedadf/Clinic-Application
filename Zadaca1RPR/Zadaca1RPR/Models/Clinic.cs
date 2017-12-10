@@ -153,5 +153,10 @@ namespace Zadaca1RPR.Models
             return HealthCards.Find(hc => hc.Patient.CitizenID == citID);
         }
 
+        public List<Patient> GetPatientsFromOrdination(string ord)
+        {
+            return Ordinations.Find(target => target.Name == ord).PatientsQueue;
+        }
+
     }
 }

@@ -45,28 +45,11 @@ namespace Zadaca1RPR.Views
                         else { SView.NoCommand(); Main(ref clinic); }
                         break;
                     case "2":
-                        int id;
-                        List<string> schedule = null;
-                        while (true) {
-                            Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
-                            if (!Int32.TryParse(Console.ReadLine(), out id)) Console.WriteLine("Uneseni podatak nije cijeli broj");
-                            else break;
-                        }
-                        if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
-                        else
-                        {
-                            schedule = clinic.GetPatientSchedule(id);
-                            if (schedule == null || schedule.Count == 0) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
-                            else
-                            {
-                                Console.WriteLine("Raspored je sljedeci: ");
-                                for (int it = 0; it < schedule.Count; it++)
-                                {
-                                    if (it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
-                                    else Console.Write("{0}, ", schedule[it]);
-                                }
-                            }
-                        }
+                        string ii;
+                        Console.WriteLine("1. Pretraga po identifikacijskom broju pacijenta");
+                        Console.WriteLine("2. Pretraga po ordinaciji");
+                        ii = Console.ReadLine();
+                        ScheduleSeach(ref clinic, ii);
                         Main(ref clinic);
                         break;
                     case "3":
@@ -165,6 +148,57 @@ namespace Zadaca1RPR.Views
                         break;
                 }
             }
+        }
+
+        void ScheduleSeach(ref Clinic clinic, string i)
+        {
+            if(i == "1")
+            {
+                int id;
+                List<string> schedule = null;
+                while (true)
+                {
+                    Console.WriteLine("Upisite identifikacijski broj pacijenta: ");
+                    if (!Int32.TryParse(Console.ReadLine(), out id)) Console.WriteLine("Uneseni podatak nije cijeli broj");
+                    else break;
+                }
+                if (!clinic.CardExists(id)) Console.WriteLine("Pacijent nema kreiran karton ili pacijent ne postoji.");
+                else
+                {
+                    schedule = clinic.GetPatientSchedule(id);
+                    if (schedule == null || schedule.Count == 0) Console.WriteLine("Nema rasporeda ili pacijent ne postoji.");
+                    else
+                    {
+                        Console.WriteLine("Raspored je sljedeci: ");
+                        for (int it = 0; it < schedule.Count; it++)
+                        {
+                            if (it == schedule.Count - 1) Console.WriteLine("{0}", schedule[it]);
+                            else Console.Write("{0}, ", schedule[it]);
+                        }
+                    }
+                }
+            }
+            else if(i == "2")
+            {
+                string ord;
+                Console.WriteLine("Unesite ime ordinacije");
+                Console.WriteLine("Laboratorija - L");
+                Console.WriteLine("Kardioloska ordinacija - K");
+                Console.WriteLine("Radioloska ordinacija - R");
+                Console.WriteLine("Hirurska ordinacija - H");
+                Console.WriteLine("Dermatoloska ordinacija - D");
+                ord = Console.ReadLine();
+                if (!clinic.Ordinations.Exists(target => target.Name == ord)) Console.WriteLine("Ordinacija ne postoji");
+                else
+                {
+                    List<Patient> patients = clinic.GetPatientsFromOrdination(ord);
+                    if (patients != null)
+                        foreach (Patient pat in patients)
+                            Console.WriteLine("{0} - {1} {2} {3}", pat.IDnum, pat.Name, pat.Surname, pat.CitizenID);
+                    else Console.WriteLine("Nema pacijenata zakazanih za ovu ordinaciju.");
+                }
+            }
+            Main(ref clinic);
         }
 
         void ProcessPatientRegistration(ref Clinic clinic)

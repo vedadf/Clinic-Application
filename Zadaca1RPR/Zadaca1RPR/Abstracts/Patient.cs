@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zadaca1RPR.Models;
+using System.Drawing;
 
 namespace Zadaca1RPR.Abstracts
 {
@@ -41,6 +42,8 @@ namespace Zadaca1RPR.Abstracts
         public virtual int numOfTimesVisited { get; set; }
 
         public virtual string CitizenID { get; set; }
+
+        //public virtual Image img { get; set; }
 
     }
 }

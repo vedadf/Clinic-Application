@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{49108213-E4E3-4727-8E3B-089AF8B558DB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zadaca1RPR</RootNamespace>
     <AssemblyName>Zadaca1RPR</AssemblyName>
@@ -32,9 +32,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,7 +67,26 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\DoctorView.cs" />
+    <Compile Include="Views\InitForms\FormInitial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InitForms\FormInitial.Designer.cs">
+      <DependentUpon>FormInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InitForms\FormPatientInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InitForms\FormPatientInit.Designer.cs">
+      <DependentUpon>FormPatientInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InitForms\FormStaffInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InitForms\FormStaffInit.Designer.cs">
+      <DependentUpon>FormStaffInit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ManagementView.cs" />
+    <Compile Include="Views\PatientView.cs" />
     <Compile Include="Views\TechView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +97,14 @@
       <Project>{96b20e6e-4dc0-45ca-8df5-6eb9fdc2a5d5}</Project>
       <Name>SharedView</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InitForms\FormInitial.resx">
+      <DependentUpon>FormInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\InitForms\FormPatientInit.resx">
+      <DependentUpon>FormPatientInit.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
