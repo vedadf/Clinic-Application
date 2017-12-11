@@ -1,0 +1,15 @@
+- u Sview dodana funkcija za ispisivanje liste
+	dodane funkcije za provjeru i kreiranje hasha(za validaciju passworda)
+
+- u techview, doctorview, managementview dodana opcija pregleda rasaporeda pacijenta po ordinaciji
+- dodan patientview i odgovarajuce funkcionalnosti
+	- pregled zauzetosti ordinacija(samo broj pacijenata)
+	- prikaz kartona
+	- prikaz duga -> treba od komentarisati
+- dodan image atribut kod pacijenta -> treba od komentarisati
+
+- u Staff.cs, Doctor.cs i Tech.cs dodani atributi za passworde i usernameove
+
+- Dodan rad sa formama u projekat
+- Dodane 3 forme
+- Dodan view za pretragu za pacijenta

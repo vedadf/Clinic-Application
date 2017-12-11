@@ -29,6 +29,8 @@ namespace Zadaca1RPR
             List<Patient> patients17336_1 = new List<Patient>();
             List<HealthCard> cards17336_1 = new List<HealthCard>();
 
+            Staff management17336_1 = new Management("Vedad", "Fejz", "Vedo", "123789");
+
             Staff doctor17336_1 = new Doctor("Emir", "Amar", 2000.0, "ea", "123456");
             Staff doctor17336_2 = new Doctor("Mirza", "Mirzic", 2100.0, "mm", "123");
             Staff doctor17336_3 = new Doctor("Amar", "Emir", 1700.0, "ae", "456");
@@ -37,6 +39,7 @@ namespace Zadaca1RPR
             Staff technician17336_1 = new Technician("Ekrem", "Ekric", 1500.0, "ee", "afad41");
             employees17336_1.Add(technician17336_1);
             employees17336_1.Add(doctor17336_1);
+            employees17336_1.Add(management17336_1);
             IOrdination ordination17336_1 = new Laboratory((Doctor)doctor17336_1);
             IOrdination ordination17336_2 = new Dermatology((Doctor)doctor17336_2);
             IOrdination ordination17336_3 = new Cardiology((Doctor)doctor17336_3);

@@ -10,19 +10,19 @@ namespace Zadaca1RPR.Abstracts
     public abstract class Staff
     {
 
-        string Name { get; set; }
+        public string Name { get; set; }
 
-        string Surname { get; set; }
+        public string Surname { get; set; }
 
-        int IDnumber { get; set; }
+        public int IDnumber { get; set; }
 
-        double BaseSalary { get; set; }
-        
-        string UserName { get; set; }
-        
-        string Password { get; set; }
+        public double BaseSalary { get; set; }
 
-        MD5 PasswordMD5 { get; set; }
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+
+        public MD5 PasswordMD5 { get; set; }
 
         static int ID = 0;
 

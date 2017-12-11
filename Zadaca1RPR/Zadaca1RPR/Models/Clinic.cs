@@ -33,6 +33,9 @@ namespace Zadaca1RPR.Models
             Doctors = new List<Doctor>();
             foreach (IOrdination ord in Ordinations)
                 Doctors.Add(ord.Doctor);
+            foreach (Staff emp in Employees)
+                if (emp is Doctor && !Doctors.Exists(doc => doc == emp))
+                    Doctors.Add((Doctor)emp);
 
             foreach(Patient p in Patients)
                 if(!p.HasHealthCard && p is UrgentPatient)

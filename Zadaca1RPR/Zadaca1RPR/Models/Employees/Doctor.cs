@@ -14,21 +14,7 @@ namespace Zadaca1RPR.Models.Employees
 
         static int ID = 0;
 
-        public string Name { get; set; }
-
-        public string Surname { get; set; }
-
-        public double BaseSalary { get; set; }
-
-        public double CurrentSalary { get; set; }
-
-        public string UserName { get; set; }
-
-        MD5 PasswordMD5 { get; set; }
-
-        string Password { get; set; }
-
-        public int IDnumber { get; set; }
+        public double CurrentSalary { get; set; }        
 
         public int NumOfPatientsProcessed { get; set; }
 
@@ -41,8 +27,7 @@ namespace Zadaca1RPR.Models.Employees
             CurrentSalary = baseSalary;
             UserName = userName;
             PasswordMD5 = MD5.Create();
-            Password = SView.GetHash(PasswordMD5, password);
-            
+            Password = SView.GetHash(PasswordMD5, password);     
         }
 
     }
