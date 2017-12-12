@@ -22,8 +22,6 @@ namespace Zadaca1RPR.Abstracts
 
         public string Password { get; set; }
 
-        public MD5 PasswordMD5 { get; set; }
-
         static int ID = 0;
 
     }

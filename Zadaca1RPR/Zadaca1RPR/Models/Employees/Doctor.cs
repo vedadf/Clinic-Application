@@ -26,7 +26,7 @@ namespace Zadaca1RPR.Models.Employees
             BaseSalary = baseSalary;
             CurrentSalary = baseSalary;
             UserName = userName;
-            PasswordMD5 = MD5.Create();
+            MD5 PasswordMD5 = MD5.Create();
             Password = SView.GetHash(PasswordMD5, password);     
         }
 

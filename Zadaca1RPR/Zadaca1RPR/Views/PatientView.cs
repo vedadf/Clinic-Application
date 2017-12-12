@@ -53,8 +53,8 @@ namespace Zadaca1RPR.Views
                         Main(ref clinic);
                         break;
                     case "3":
-                        Patient pat = clinic.GetPatientFromID(id);
-                        PrintPatientDebt(clinic, pat);
+                        Patient Pat = clinic.GetPatientFromID(id);
+                        PrintPatientDebt(clinic, Pat);
                         Main(ref clinic);
                         break;
                     case "4":
@@ -75,27 +75,27 @@ namespace Zadaca1RPR.Views
             if (c == "0") return -2;
             List<Patient> patients = new List<Patient>();
             patients = clinic.Patients;
-            foreach(Patient pat in patients)
-                if (pat.CitizenID == c) return pat.IDnum;
+            foreach(Patient Pat in patients)
+                if (Pat.CitizenID == c) return Pat.IDnum;
             return -1;
         }
 
-        void PrintPatientDebt(Clinic clinic, Patient pat)
+        void PrintPatientDebt(Clinic clinic, Patient Pat)
         {
             bool regular = false;
-            Console.WriteLine("{0} {1}", pat.Name, pat.Surname);
-            Console.WriteLine("Posjetili ste kliniku {0} puta.", pat.numOfTimesVisited);
-            if (pat.numOfTimesVisited > 3) regular = true;
+            Console.WriteLine("{0} {1}", Pat.Name, Pat.Surname);
+            Console.WriteLine("Posjetili ste kliniku {0} puta.", Pat.numOfTimesVisited);
+            if (Pat.numOfTimesVisited > 3) regular = true;
             else regular = false;
-            Console.WriteLine("Odradili ste {0} pregleda.", pat.HealthBook.ExaminationDates.Count);
-            Console.WriteLine("Glavna cijena je: {0}KM", pat.Cost);
+            Console.WriteLine("Odradili ste {0} pregleda.", Pat.HealthBook.ExaminationDates.Count);
+            Console.WriteLine("Glavna cijena je: {0}KM", Pat.Cost);
 
-            foreach (string str in pat.HealthBook.CompletedOrdinations)
+            foreach (string str in Pat.HealthBook.CompletedOrdinations)
                 Console.WriteLine("Ordinacija: {0}; Cijena: {1};", str, clinic.Ordinations.Find(o => o.Name == str).Price);
             
-            double res = pat.Cost;
-            if (!regular) res = pat.Cost + 0.15 * pat.Cost;
-            else res = pat.Cost - 0.1 * pat.Cost;
+            double res = Pat.Cost;
+            if (!regular) res = Pat.Cost + 0.15 * Pat.Cost;
+            else res = Pat.Cost - 0.1 * Pat.Cost;
             
             Console.WriteLine("Mozete platiti na 3 rate podijeljene na 3 jednaka dijela.");
             if (regular)

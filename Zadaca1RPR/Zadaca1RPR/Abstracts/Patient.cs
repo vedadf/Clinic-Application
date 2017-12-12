@@ -14,6 +14,10 @@ namespace Zadaca1RPR.Abstracts
 
         protected static int ID { get; set; }
 
+        public virtual string UserName { get; set; }
+        
+        public virtual string Password { get; set; }
+
         public virtual string Name { get; set; }
 
         public virtual string Surname { get; set; }

@@ -16,27 +16,12 @@ namespace Zadaca1RPR.Views.InitForms
     public partial class FormPatientInit : Form
     {
         Clinic Clinic;
-        public FormPatientInit(ref Clinic clinic)
+        public FormPatientInit(ref Clinic clinic, HealthCard card)
         {
             InitializeComponent();
             tabControl1.TabPages.Remove(tabPage2);
-            toolStripStatusLabel1.Text = "";
             Clinic = clinic;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ResetLists();
-            tabControl1.TabPages.Remove(tabPage2);
-            string input = textBox1.Text;
-            if (input.Length == 0) toolStripStatusLabel1.Text = "Prazan JMBG";
-            else
-            {
-                HealthCard card = Clinic.GetCardFromCitizenID(input);
-                if (card == null)
-                    toolStripStatusLabel1.Text = "Karton ne postoji ili JMBG nije ispravan";
-                else FillInfo(card);                
-            } 
+            FillInfo(card);
         }
 
         private void FillInfo(HealthCard card)
@@ -138,6 +123,6 @@ namespace Zadaca1RPR.Views.InitForms
             listBox4.Items.Clear();
             listBox5.Items.Clear();
         }
-
+        
     }
 }

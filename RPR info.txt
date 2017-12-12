@@ -15,3 +15,5 @@
 - Dodan view za pretragu za pacijenta
 
 - U formi InitStaff se provjerava hash
+
+- U formi FOrmManagement errorprovider done

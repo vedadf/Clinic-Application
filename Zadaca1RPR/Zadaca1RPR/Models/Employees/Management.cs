@@ -19,7 +19,7 @@ namespace Zadaca1RPR.Models.Employees
             Name = name;
             Surname = surname;
             UserName = userName;
-            PasswordMD5 = MD5.Create();
+            MD5 PasswordMD5 = MD5.Create();
             Password = SView.GetHash(PasswordMD5, password);
             IDnumber = ID; ID++;
         }

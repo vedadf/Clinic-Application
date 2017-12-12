@@ -69,19 +69,19 @@ namespace Zadaca1RPR.Views
                             if (Int32.TryParse(Console.ReadLine(), out idd)) break;
                             else Console.WriteLine("Uneseni podatak nije cijeli broj.");
                         }
-                        Patient pat = clinic.GetPatientFromID(idd);
-                        if (pat == null) Console.WriteLine("Pacijent ne postoji.");
-                        else if (!pat.HasHealthCard) Console.WriteLine("Pacijent nema karton.");
-                        else if (pat.Schedule == null) Console.Write("Pacijent nema kreiran raspored.");
-                        else if (pat.Schedule.Count > 0) Console.WriteLine("Pacijent nije zavrsio sa svojim pregledima.");
+                        Patient Pat = clinic.GetPatientFromID(idd);
+                        if (Pat == null) Console.WriteLine("Pacijent ne postoji.");
+                        else if (!Pat.HasHealthCard) Console.WriteLine("Pacijent nema karton.");
+                        else if (Pat.Schedule == null) Console.Write("Pacijent nema kreiran raspored.");
+                        else if (Pat.Schedule.Count > 0) Console.WriteLine("Pacijent nije zavrsio sa svojim pregledima.");
                         else
                         {
                             bool regular = false;
-                            Console.WriteLine("Pacijent je {0} {1}", pat.Name, pat.Surname);
-                            Console.WriteLine("Pacijent je posjetio kliniku {0} puta.", pat.numOfTimesVisited);
-                            if (pat.numOfTimesVisited > 3) regular = true;
+                            Console.WriteLine("Pacijent je {0} {1}", Pat.Name, Pat.Surname);
+                            Console.WriteLine("Pacijent je posjetio kliniku {0} puta.", Pat.numOfTimesVisited);
+                            if (Pat.numOfTimesVisited > 3) regular = true;
                             else regular = false;
-                            Console.WriteLine("Pacijent je odradio {0} pregleda.", pat.HealthBook.ExaminationDates.Count);
+                            Console.WriteLine("Pacijent je odradio {0} pregleda.", Pat.HealthBook.ExaminationDates.Count);
                             string cc;
                             while (true)
                             {
@@ -91,19 +91,19 @@ namespace Zadaca1RPR.Views
                                 else SView.NoCommand();
                             }
 
-                            Console.WriteLine("Glavna cijena je: {0}", pat.Cost);
+                            Console.WriteLine("Glavna cijena je: {0}", Pat.Cost);
 
-                            foreach (string str in pat.HealthBook.CompletedOrdinations)
+                            foreach (string str in Pat.HealthBook.CompletedOrdinations)
                                 Console.WriteLine("Ordinacija: {0}; Cijena: {1};", str, clinic.Ordinations.Find(o => o.Name == str).Price);
 
                             //delegat iskoristen za racunanje cijene za pacijenta
                             CalculatePatientDebt price = () =>
                             {
-                                double res = pat.Cost;
+                                double res = Pat.Cost;
                                 if (cc == "R")
-                                    if (!regular) res = pat.Cost + 0.15 * pat.Cost;
+                                    if (!regular) res = Pat.Cost + 0.15 * Pat.Cost;
                                     else if (cc == "G")
-                                        if (regular) res = pat.Cost - 0.1 * pat.Cost;
+                                        if (regular) res = Pat.Cost - 0.1 * Pat.Cost;
                                 return res;
                             };
 
@@ -133,7 +133,7 @@ namespace Zadaca1RPR.Views
 
                             Console.WriteLine("Karton za pacijenta je zatvoren.");
                             clinic.GetCardFromPatientID(idd).CardActive = false;
-                            pat.HasHealthCard = false;
+                            Pat.HasHealthCard = false;
                             clinic.HealthCards.Remove(clinic.GetCardFromPatientID(idd));
 
                         }
@@ -193,8 +193,8 @@ namespace Zadaca1RPR.Views
                 {
                     List<Patient> patients = clinic.GetPatientsFromOrdination(ord);
                     if (patients != null)
-                        foreach (Patient pat in patients)
-                            Console.WriteLine("{0} - {1} {2} {3}", pat.IDnum, pat.Name, pat.Surname, pat.CitizenID);
+                        foreach (Patient Pat in patients)
+                            Console.WriteLine("{0} - {1} {2} {3}", Pat.IDnum, Pat.Name, Pat.Surname, Pat.CitizenID);
                     else Console.WriteLine("Nema pacijenata zakazanih za ovu ordinaciju.");
                 }
             }
@@ -311,8 +311,8 @@ namespace Zadaca1RPR.Views
                     else
                     {
                         List<string> ciDs = new List<string>();
-                        foreach(Patient pat in clinic.Patients)
-                            ciDs.Add(pat.CitizenID);
+                        foreach(Patient Pat in clinic.Patients)
+                            ciDs.Add(Pat.CitizenID);
                         
                         if (!SView.ValidateCitizenIDReg(ciDs, bDate ,cID)) Console.WriteLine("Pacijent sa ovim JMBG vec postoji ili format JMBG nije ispravan.");
                         else break;
@@ -408,12 +408,12 @@ namespace Zadaca1RPR.Views
 
             if (urgent == "N")
             {
-                patient = new NormalPatient(name, surname, bDate, cID, address, married, regDate, gender, schedule);
+                patient = new NormalPatient(name, surname, bDate, cID, address, married, regDate, gender, "test", "pw", schedule);
                 DoAnamnesis(ref patient);
             }
             else if (urgent == "D")
             {
-                patient = new UrgentPatient(firstAid, deceased, name, surname, bDate, cID, address, married, regDate, gender, schedule, obduction);
+                patient = new UrgentPatient(firstAid, deceased, name, surname, bDate, cID, address, married, regDate, gender, schedule, "test", "pw", obduction);
                 HealthCard card = new HealthCard(patient as UrgentPatient, causeOfDeath, timeOfDeath, dateOfDeath);
                 if (deceased == false) DoAnamnesis(ref patient);
                 clinic.HealthCards.Add(card);

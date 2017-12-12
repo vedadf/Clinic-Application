@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SharedView;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Zadaca1RPR.Abstracts;
@@ -33,7 +35,8 @@ namespace Zadaca1RPR.Models.Patients
 
         public UrgentPatient(string firstAid, bool deceased,
             string name, string surname, DateTime birthDate, string citizenID ,string address,
-            bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string obduction = "",
+            bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string userName, string password,
+            string obduction = "",
             HealthBook healthBook = null)
         {
             FirstAid = firstAid;
@@ -51,6 +54,9 @@ namespace Zadaca1RPR.Models.Patients
             Cost = 0;
             CitizenID = citizenID;
             Obduction = obduction;
+            UserName = userName;
+            MD5 PasswordMD5 = MD5.Create();
+            Password = SView.GetHash(PasswordMD5, password);
         }
 
         public override int GetID() { return IDnum; }
