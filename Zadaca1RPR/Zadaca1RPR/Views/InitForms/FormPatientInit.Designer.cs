@@ -644,6 +644,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
             this.Name = "FormPatientInit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Prikaz Kartona";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

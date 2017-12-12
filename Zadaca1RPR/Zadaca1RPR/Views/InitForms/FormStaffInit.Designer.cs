@@ -94,6 +94,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(121, 82);
             this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '•';
             this.textBox2.Size = new System.Drawing.Size(237, 22);
             this.textBox2.TabIndex = 17;
             // 
@@ -183,6 +184,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "FormStaffInit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Prijava Zaposlenog";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

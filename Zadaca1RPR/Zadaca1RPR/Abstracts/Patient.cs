@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zadaca1RPR.Models;
 using System.Drawing;
+using System.Security.Cryptography;
 
 namespace Zadaca1RPR.Abstracts
 {

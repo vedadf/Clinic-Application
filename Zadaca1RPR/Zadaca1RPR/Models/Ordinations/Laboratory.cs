@@ -38,8 +38,8 @@ namespace Zadaca1RPR.Models.Ordinations
 
         public bool NewPatient(Patient patient)
         {
-            if (!patient.HasHealthCard) return false;    
-                   
+            if (!patient.HasHealthCard) return false;
+            
             if (Patient == null)
             {
                 Patient = patient;

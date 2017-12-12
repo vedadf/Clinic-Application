@@ -13,3 +13,5 @@
 - Dodan rad sa formama u projekat
 - Dodane 3 forme
 - Dodan view za pretragu za pacijenta
+
+- U formi InitStaff se provjerava hash

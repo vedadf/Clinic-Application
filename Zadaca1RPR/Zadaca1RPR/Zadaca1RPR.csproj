@@ -130,6 +130,12 @@
     <EmbeddedResource Include="Views\StaffForms\FormDoctor.resx">
       <DependentUpon>FormDoctor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\StaffForms\FormManagement.resx">
+      <DependentUpon>FormManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StaffForms\FormTech.resx">
+      <DependentUpon>FormTech.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

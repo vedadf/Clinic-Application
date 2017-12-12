@@ -41,26 +41,38 @@ namespace Zadaca1RPR.Views.InitForms
 
         private void ValidateDoctor(MD5 md5)
         {
+            bool found = false;
             foreach(Doctor doc in Clinic.Doctors)
                 if(doc.UserName == textBox1.Text && doc.Password == SView.GetHash(md5, textBox2.Text))
+                {
+                    found = true;
                     new FormDoctor(ref Clinic, doc).ShowDialog();
-            toolStripStatusLabel1.Text = "Doktor sa navedenim podacima ne postoji";
+                }                   
+            if(!found) toolStripStatusLabel1.Text = "Doktor sa navedenim podacima ne postoji";
         }
 
         private void ValidateTech(MD5 md5)
         {
+            bool found = false;
             foreach (Staff tech in Clinic.Employees)
                 if (tech is Technician && tech.UserName == textBox1.Text && tech.Password == SView.GetHash(md5, textBox2.Text))
-                    new FormTech(ref Clinic, tech).ShowDialog();
-            toolStripStatusLabel1.Text = "Tehnicar sa navedenim podacima ne postoji";
+                {
+                    found = true;
+                    new FormTech(ref Clinic, tech).ShowDialog();                    
+                }
+            if(!found) toolStripStatusLabel1.Text = "Tehnicar sa navedenim podacima ne postoji";
         }
 
         private void ValidateManagement(MD5 md5)
         {
+            bool found = false;
             foreach (Staff man in Clinic.Employees)
                 if (man is Management && man.UserName == textBox1.Text && man.Password == SView.GetHash(md5, textBox2.Text))
+                {
+                    found = true;
                     new FormManagement(ref Clinic, man).ShowDialog();
-            toolStripStatusLabel1.Text = "Uprava sa navedenim podacima ne postoji";
+                }
+            if(!found) toolStripStatusLabel1.Text = "Uprava sa navedenim podacima ne postoji";
         }
 
     }
