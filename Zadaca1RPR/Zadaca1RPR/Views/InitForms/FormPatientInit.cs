@@ -15,12 +15,12 @@ namespace Zadaca1RPR.Views.InitForms
 {
     public partial class FormPatientInit : Form
     {
-        Clinic Clinic;
+        Clinic Clin;
         public FormPatientInit(ref Clinic clinic, HealthCard card)
         {
             InitializeComponent();
             tabControl1.TabPages.Remove(tabPage2);
-            Clinic = clinic;
+            Clin = clinic;
             FillInfo(card);
         }
 

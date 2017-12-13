@@ -72,7 +72,7 @@
             this.toolStripStatusLabel1.ActiveLinkColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // groupBox1
             // 
@@ -91,7 +91,7 @@
             this.groupBox1.Size = new System.Drawing.Size(406, 211);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Prijava";
+            this.groupBox1.Text = "G";
             // 
             // radioButton4
             // 
@@ -200,7 +200,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormInitial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Prijava Korisnika";
+            this.Text = "G";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

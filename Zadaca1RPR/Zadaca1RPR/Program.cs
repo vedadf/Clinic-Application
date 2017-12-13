@@ -34,8 +34,8 @@ namespace Zadaca1RPR
             Staff doctor17336_1 = new Doctor("Emir", "Amar", 2000.0, "ea", "123456");
             Staff doctor17336_2 = new Doctor("Mirza", "Mirzic", 2100.0, "mm", "123");
             Staff doctor17336_3 = new Doctor("Amar", "Emir", 1700.0, "ae", "456");
-            Staff doctor17336_4 = new Doctor("Hamza", "Hamzic", 1700.0, "hh", "456fase");
-            Staff doctor17336_5 = new Doctor("Tata", "Mamic", 1700.0, "tm", "fsaer1");
+            Staff doctor17336_4 = new Doctor("Hamza", "Hamzic", 1740.0, "hh", "456fase");
+            Staff doctor17336_5 = new Doctor("Tata", "Mamic", 1600.0, "tm", "fsaer1");
             Staff technician17336_1 = new Technician("Ekrem", "Ekric", 1500.0, "ee", "afad41");
             employees17336_1.Add(technician17336_1);
             employees17336_1.Add(doctor17336_1);

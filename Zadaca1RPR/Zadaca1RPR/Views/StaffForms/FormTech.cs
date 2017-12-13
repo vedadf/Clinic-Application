@@ -14,12 +14,12 @@ namespace Zadaca1RPR.Views.StaffForms
 {
     public partial class FormTech : Form
     {
-        Clinic Clinic;
+        Clinic Clin;
         Staff Tech;
         public FormTech(ref Clinic clinic, Staff tech)
         {
             InitializeComponent();
-            Clinic = clinic;
+            Clin = clinic;
             Tech = tech;
         }
     }

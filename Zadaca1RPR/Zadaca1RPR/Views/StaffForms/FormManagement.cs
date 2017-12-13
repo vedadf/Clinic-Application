@@ -10,64 +10,40 @@ using System.Windows.Forms;
 using Zadaca1RPR.Abstracts;
 using Zadaca1RPR.Interfaces;
 using Zadaca1RPR.Models;
+using Zadaca1RPR.Models.Employees;
+using Zadaca1RPR.Views.InfoForms;
+using Zadaca1RPR.Views.InitForms;
 
 namespace Zadaca1RPR.Views.StaffForms
 {
     public partial class FormManagement : Form
     {
-        Clinic Clinic;
+        Clinic Clin;
         Staff Man;
 
         public FormManagement(ref Clinic clinic, Staff man)
         {
             InitializeComponent();
-            Clinic = clinic;
+            textBox1.Hide();
+            Clin = clinic;
             Man = man;
             label2.Text = "" + Man.Name + " " + Man.Surname;
+            label9.Text = "";
+            label10.Text = "";
+            label11.Hide();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            if (!Clinic.Ordinations.Exists(ord => ord.Name == comboBox1.SelectedItem.ToString()[0].ToString()))
-                toolStripStatusLabel1.Text = "Ime ordinacije nije ispravno, pogledajte 'Pomoc'";
-            else
-            {
-                IOrdination ord = Clinic.Ordinations.Find(ordd => ordd.Name == comboBox1.SelectedItem.ToString()[0].ToString());
-                if (ord.PatientsQueue == null) listBox1.Items.Add("Nema");
-                else
-                {
-                    listBox1.Items.Add("Ime Prezime JMBG");
-                    listBox1.Items.Add("");
-                    if (ord.Patient != null) listBox1.Items.Add(ord.Patient.Name + " " + ord.Patient.Surname + " " + ord.Patient.CitizenID);
-                    foreach (Patient pat in ord.PatientsQueue)
-                        listBox1.Items.Add(pat.Name + " " + pat.Surname + " " + pat.CitizenID);
-                }
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string ordinations = "Imena dostupnih ordinacija su: ";
-            for (int i = 0; i < Clinic.Ordinations.Count; i++)
-            {
-                ordinations += Clinic.Ordinations[i].Name;
-                if (i != Clinic.Ordinations.Count - 1) ordinations += ", ";
-            }
-            MessageBox.Show(ordinations);
-        }
-
-        private void FillListBox(string ordName)
-        {
-
-        }
-
+                
         private void button3_Click(object sender, EventArgs e)
         {
-
+            if (textBox3.Text != "")
+            {
+                HealthCard card = Clin.HealthCards.Find(hc => hc.Patient.CitizenID == textBox2.Text);
+                new FormPatientInit(ref Clin, card).ShowDialog();
+            }
+            if (textBox2.Text == "") toolStripStatusLabel1.Text = "Prazno polje";
         }
 
-        private void textBox2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void textBox2_Validating(object sender, CancelEventArgs e)
         {
             string error;
             if(!ValidCitizenID(textBox2.Text, out error))
@@ -109,7 +85,6 @@ namespace Zadaca1RPR.Views.StaffForms
                 error = "Datum nije ispravan";
                 return false;
             }
-
             error = "";
             return true;
         }
@@ -117,6 +92,116 @@ namespace Zadaca1RPR.Views.StaffForms
         private void textBox2_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(textBox2, "");
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "") errorProvider1.SetError(textBox2, "Prazan JMBG");
+            else
+            {
+                Patient pat = Clin.Patients.Find(patt => patt.CitizenID == textBox2.Text);
+                if (pat != null)
+                {
+                    errorProvider1.SetError(textBox2, "");
+                    toolStripStatusLabel1.Text = "";
+                    textBox3.Text = "" + pat.Name + " " + pat.Surname;
+                }
+                else
+                {
+                    toolStripStatusLabel1.Text = "Pacijent ne postoji";
+                    textBox3.Text = "";
+                }
+                    
+            }
+        }
+        
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Doctor doc in Clin.Doctors)
+            {
+                if (doc.UserName == textBox1.Text)
+                {
+                    toolStripStatusLabel1.Text = "";
+                    label10.Text = doc.CurrentSalary.ToString() + "KM";
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) toolStripStatusLabel1.Text = "Doktor ne postoji";
+        }
+
+        private void listaRegistrovanihKorisnikaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new FormAllUsers(ref Clin).ShowDialog();
+        }
+
+        private void pomocToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("JMBG mora sadrzavati 13 brojeva. Polja su osjetljiva na velika i mala slova.", "Pomoc");
+        }
+
+        private void odjavaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            if (comboBox1.SelectedItem == null)
+            {
+                toolStripStatusLabel1.Text = "Ordinacija ne postoji";
+                return;
+            }
+            else
+            {
+                toolStripStatusLabel1.Text = "";
+                IOrdination ord = Clin.Ordinations.Find(ordd => ordd.Name == comboBox1.SelectedItem.ToString()[0].ToString());
+                if (ord.PatientsQueue == null) listBox1.Items.Add("Nema");
+                else
+                {
+                    listBox1.Items.Add("Ime Prezime JMBG");
+                    listBox1.Items.Add("");
+                    if (ord.Patient != null) listBox1.Items.Add(ord.Patient.Name + " " + ord.Patient.Surname + " " + ord.Patient.CitizenID);
+                    foreach (Patient pat in ord.PatientsQueue)
+                        listBox1.Items.Add(pat.Name + " " + pat.Surname + " " + pat.CitizenID);
+                }
+            }
+        }
+
+        private void comboBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedItem == null)
+                toolStripStatusLabel1.Text = "Odaberite jednu od opcija";
+            else
+            {
+                textBox1.Hide();
+                label11.Hide();
+                toolStripStatusLabel1.Text = "";
+                if (comboBox2.SelectedItem == comboBox2.Items[0])
+                {
+                    label9.Text = "Najposjeceniji doktor: ";
+                    label10.Text = Clin.GetDoctorMostVisited().Name + " " + Clin.GetDoctorMostVisited().Surname;
+                }
+                else if (comboBox2.SelectedItem == comboBox2.Items[1])
+                {
+                    label9.Text = "Broj hitnih slucajeva: ";
+                    label10.Text = Clin.GetNumOfUrgentCases().ToString();
+                }
+                else if (comboBox2.SelectedItem == comboBox2.Items[2])
+                {
+                    label9.Text = "Pacijent: " + Clin.GetPatientMostHealthIssues().CitizenID;
+                    label10.Text = Clin.GetPatientMostHealthIssues().Name + " " + Clin.GetPatientMostHealthIssues().Surname;
+                }
+                else if (comboBox2.SelectedItem == comboBox2.Items[3])
+                {
+                    label9.Text = "Plata doktora: ";
+                    label10.Text = "";
+                    label11.Show();
+                    textBox1.Show();
+                }
+            }
         }
     }
 }

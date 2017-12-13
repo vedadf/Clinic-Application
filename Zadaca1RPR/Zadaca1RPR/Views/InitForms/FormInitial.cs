@@ -18,22 +18,22 @@ namespace Zadaca1RPR.Views.InitForms
 {
     public partial class FormInitial : Form
     {
-        Clinic Clinic;
+        Clinic Clin;
         public FormInitial(ref Clinic clinic)
         {
             InitializeComponent();            
-            Clinic = clinic;            
+            Clin = clinic;            
         }
         
         private void ValidatePatient(MD5 md5)
         {
             bool found = false;
-            foreach (Patient pat in Clinic.Patients)
+            foreach (Patient pat in Clin.Patients)
                 if (pat.UserName == textBox1.Text && pat.Password == SView.GetHash(md5, textBox2.Text))
                 {
                     found = true;
                     toolStripStatusLabel1.Text = "";
-                    new FormPatientInit(ref Clinic, Clinic.HealthCards.Find(hc => hc.Patient == pat)).ShowDialog();
+                    new FormPatientInit(ref Clin, Clin.HealthCards.Find(hc => hc.Patient == pat)).ShowDialog();
                 }
             if (!found) toolStripStatusLabel1.Text = "Pacijent sa navedenim podacima ne postoji";
         }
@@ -41,12 +41,12 @@ namespace Zadaca1RPR.Views.InitForms
         private void ValidateDoctor(MD5 md5)
         {
             bool found = false;
-            foreach (Doctor doc in Clinic.Doctors)
+            foreach (Doctor doc in Clin.Doctors)
                 if (doc.UserName == textBox1.Text && doc.Password == SView.GetHash(md5, textBox2.Text))
                 {
                     found = true;
                     toolStripStatusLabel1.Text = "";
-                    new FormDoctor(ref Clinic, doc).ShowDialog();
+                    new FormDoctor(ref Clin, doc).ShowDialog();
                 }
             if (!found) toolStripStatusLabel1.Text = "Doktor sa navedenim podacima ne postoji";
         }
@@ -54,12 +54,12 @@ namespace Zadaca1RPR.Views.InitForms
         private void ValidateTech(MD5 md5)
         {
             bool found = false;
-            foreach (Staff tech in Clinic.Employees)
+            foreach (Staff tech in Clin.Employees)
                 if (tech is Technician && tech.UserName == textBox1.Text && tech.Password == SView.GetHash(md5, textBox2.Text))
                 {
                     found = true;
                     toolStripStatusLabel1.Text = "";
-                    new FormTech(ref Clinic, tech).ShowDialog();
+                    new FormTech(ref Clin, tech).ShowDialog();
                 }
             if (!found) toolStripStatusLabel1.Text = "Tehnicar sa navedenim podacima ne postoji";
         }
@@ -67,12 +67,12 @@ namespace Zadaca1RPR.Views.InitForms
         private void ValidateManagement(MD5 md5)
         {
             bool found = false;
-            foreach (Staff man in Clinic.Employees)
+            foreach (Staff man in Clin.Employees)
                 if (man is Management && man.UserName == textBox1.Text && man.Password == SView.GetHash(md5, textBox2.Text))
                 {
                     found = true;
                     toolStripStatusLabel1.Text = "";
-                    new FormManagement(ref Clinic, man).ShowDialog();
+                    new FormManagement(ref Clin, man).ShowDialog();
                 }
             if (!found) toolStripStatusLabel1.Text = "Uprava sa navedenim podacima ne postoji";
         }
@@ -89,9 +89,7 @@ namespace Zadaca1RPR.Views.InitForms
                 else if (radioButton3.Checked) ValidateTech(pwMD5);
                 else if (radioButton4.Checked) ValidatePatient(pwMD5);
                 else toolStripStatusLabel1.Text = "Molimo odaberite neku od tri date opcije";
-
-                textBox1.Text = "";
-                textBox2.Text = "";
+                
                 radioButton1.Checked = false;
                 radioButton2.Checked = false;
                 radioButton3.Checked = false;
