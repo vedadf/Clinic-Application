@@ -91,7 +91,7 @@
             this.groupBox1.Size = new System.Drawing.Size(406, 211);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "G";
+            this.groupBox1.Text = "Unesite podatke";
             // 
             // radioButton4
             // 
@@ -200,7 +200,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormInitial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "G";
+            this.Text = "Prijava";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

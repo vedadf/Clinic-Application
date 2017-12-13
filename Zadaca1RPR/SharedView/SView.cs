@@ -9,7 +9,42 @@ namespace SharedView
 {
     public static class SView
     {
-        
+
+        public static bool ValidCitizenID(string input, out string error)
+        {
+            if (input.Length != 13)
+            {
+                error = "Velicina mora biti 13";
+                return false;
+            }
+            bool parse = true;
+            //da li su svi brojevi
+            foreach (char c in input)
+            {
+                int n;
+                parse = Int32.TryParse(c.ToString(), out n);
+                if (!parse)
+                {
+                    error = "JMBG mora sadrzavati samo brojeve";
+                    return false;
+                }
+            }
+
+            //da li je datum ispravan
+            string day = "" + input[0] + input[1];
+            string month = "" + input[2] + input[3];
+            string year = "" + input[4] + input[5] + input[6] + input[7];
+            string Bdate = year + "-" + month + "-" + day;
+            DateTime bDate = new DateTime();
+            if (!DateTime.TryParse(Bdate, out bDate))
+            {
+                error = "Datum nije ispravan";
+                return false;
+            }
+            error = "";
+            return true;
+        }
+
         public static void NoCommand()
         {
             Console.WriteLine("Komanda ne postoji.");
