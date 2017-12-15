@@ -131,37 +131,5 @@ namespace Zadaca1RPR.Views.InitForms
                 errorProvider1.SetError(textBox6, error);
             }
         }
-
-        private void comboBox3_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(comboBox3, "");
-        }
-
-        private void comboBox3_Validating(object sender, CancelEventArgs e)
-        {
-            string error;
-            if (!SView.HasOnlyLetters(comboBox3.Text, out error))
-            {
-                e.Cancel = true;
-                comboBox3.Select(0, comboBox3.Text.Length);
-                errorProvider1.SetError(comboBox3, error);
-            }
-        }
-
-        private void comboBox2_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(comboBox2, "");
-        }
-
-        private void comboBox2_Validating(object sender, CancelEventArgs e)
-        {
-            string error;
-            if (!SView.HasOnlyLetters(comboBox2.Text, out error))
-            {
-                e.Cancel = true;
-                comboBox2.Select(0, comboBox2.Text.Length);
-                errorProvider1.SetError(comboBox2, error);
-            }
-        }
     }
 }
