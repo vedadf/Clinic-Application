@@ -408,7 +408,7 @@ namespace Zadaca1RPR.Views
 
             if (urgent == "N")
             {
-                patient = new NormalPatient(name, surname, bDate, cID, address, married, regDate, gender, "test", "pw", schedule);
+                patient = new NormalPatient(name, surname, bDate, cID, address, married, regDate, gender, "test1", "pw2", schedule);
                 DoAnamnesis(ref patient);
             }
             else if (urgent == "D")

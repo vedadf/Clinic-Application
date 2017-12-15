@@ -53,6 +53,12 @@ namespace SharedView
                 error = "Velicina polja mora biti 10";
                 return false;
             }
+
+            if(input[2] != '-' || input[5] != '-')
+            {
+                error = "Format nije validan";
+                return false;
+            }
                         
             string day = "" + input[0] + input[1];
             string month = "" + input[3] + input[4];
@@ -67,6 +73,45 @@ namespace SharedView
 
             error = "";
             return true;
+        }
+
+        public static bool ValidTime(string time, out string error)
+        {
+            if(time.Length != 5)
+            {
+                error = "Velicina mora biti 5";
+                return false;
+            }
+
+            if(time[2] != ':')
+            {
+                error = "Format nije validan";
+                return false;
+            }
+
+            string hour = "" + time[0] + time[1];
+            string minute = "" + time[3] + time[4];
+            int hh, mm;
+            if(!Int32.TryParse(hour, out hh))
+            {
+                error = "Uneseni sat nije broj";
+                return false;
+            }
+
+            if(!Int32.TryParse(minute, out mm))
+            {
+                error = "Unesene minute nisu broj";
+                return false;
+            }
+
+            if(hh > 23 || hh < 0 || mm < 0 || mm > 59)
+            {
+                error = "Parametri vremena van opsega";
+                return false;
+            }
+            error = "";
+            return true;
+             
         }
 
         public static void NoCommand()
@@ -191,6 +236,6 @@ namespace SharedView
             error = "";
             return true;           
         }
-
+        
     }
 }

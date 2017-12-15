@@ -148,6 +148,7 @@ namespace Zadaca1RPR.Views.StaffForms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            errorProvider1.SetError(textBox2, "");
             new FormRegisterPatient(ref Clin).ShowDialog();
         }
     }

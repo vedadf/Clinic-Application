@@ -62,7 +62,7 @@
     <Compile Include="Models\Employees\Doctor.cs" />
     <Compile Include="Models\PatientInformation\HealthBook.cs" />
     <Compile Include="Models\PatientInformation\HealthCard.cs" />
-    <Compile Include="Models\NormalPatient.cs" />
+    <Compile Include="Models\Patients\NormalPatient.cs" />
     <Compile Include="Models\Patients\UrgentPatient.cs" />
     <Compile Include="Models\Employees\Technician.cs" />
     <Compile Include="Program.cs" />

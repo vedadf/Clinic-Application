@@ -37,20 +37,33 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.label25 = new System.Windows.Forms.Label();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,44 +86,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.listBox4 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -124,7 +109,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 452);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1067, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1096, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -141,7 +126,7 @@
             this.pomocToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1096, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -155,11 +140,10 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(12, 33);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1048, 417);
+            this.tabControl1.Size = new System.Drawing.Size(1072, 417);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
@@ -170,35 +154,151 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1040, 388);
+            this.tabPage1.Size = new System.Drawing.Size(1064, 388);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Osnovne Informacije";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox14);
-            this.groupBox1.Controls.Add(this.label26);
-            this.groupBox1.Controls.Add(this.radioButton5);
-            this.groupBox1.Controls.Add(this.radioButton6);
-            this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Controls.Add(this.textBox13);
-            this.groupBox1.Controls.Add(this.label24);
-            this.groupBox1.Controls.Add(this.textBox12);
-            this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.textBox11);
-            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.textBox10);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.radioButton4);
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Location = new System.Drawing.Point(723, 6);
+            this.groupBox1.Location = new System.Drawing.Point(742, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(295, 370);
+            this.groupBox1.Size = new System.Drawing.Size(316, 370);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dodatne informacije";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBox14);
+            this.groupBox4.Controls.Add(this.label26);
+            this.groupBox4.Controls.Add(this.radioButton5);
+            this.groupBox4.Controls.Add(this.radioButton6);
+            this.groupBox4.Controls.Add(this.label25);
+            this.groupBox4.Controls.Add(this.textBox13);
+            this.groupBox4.Controls.Add(this.label24);
+            this.groupBox4.Controls.Add(this.textBox12);
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.textBox11);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Location = new System.Drawing.Point(9, 135);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(301, 229);
+            this.groupBox4.TabIndex = 40;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Pacijent Preminuo";
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(9, 199);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(268, 22);
+            this.textBox14.TabIndex = 50;
+            this.textBox14.Validating += new System.ComponentModel.CancelEventHandler(this.textBox14_Validating);
+            this.textBox14.Validated += new System.EventHandler(this.textBox14_Validated);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(6, 173);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(147, 17);
+            this.label26.TabIndex = 49;
+            this.label26.Text = "Informacije o obdukciji";
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(230, 139);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(47, 21);
+            this.radioButton5.TabIndex = 48;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "Ne";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(159, 139);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(47, 21);
+            this.radioButton6.TabIndex = 47;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Da";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(6, 139);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(147, 17);
+            this.label25.TabIndex = 46;
+            this.label25.Text = "Odradjena obdukcija?";
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(98, 99);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(179, 22);
+            this.textBox13.TabIndex = 45;
+            this.textBox13.Validating += new System.ComponentModel.CancelEventHandler(this.textBox13_Validating);
+            this.textBox13.Validated += new System.EventHandler(this.textBox13_Validated);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 102);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(86, 17);
+            this.label24.TabIndex = 44;
+            this.label24.Text = "Razlog smrti";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(191, 53);
+            this.textBox12.MaxLength = 5;
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(86, 22);
+            this.textBox12.TabIndex = 43;
+            this.textBox12.Validating += new System.ComponentModel.CancelEventHandler(this.textBox12_Validating);
+            this.textBox12.Validated += new System.EventHandler(this.textBox12_Validated);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(33, 56);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(145, 17);
+            this.label23.TabIndex = 42;
+            this.label23.Text = "Vrijeme smrti (hh:mm)";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(191, 28);
+            this.textBox11.MaxLength = 10;
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(86, 22);
+            this.textBox11.TabIndex = 41;
+            this.textBox11.Validating += new System.ComponentModel.CancelEventHandler(this.textBox11_Validating);
+            this.textBox11.Validated += new System.EventHandler(this.textBox11_Validated);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 28);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(173, 17);
+            this.label16.TabIndex = 40;
+            this.label16.Text = "Datum smrti (dd-mm-yyyy)";
             // 
             // textBox10
             // 
@@ -206,6 +306,8 @@
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(268, 22);
             this.textBox10.TabIndex = 24;
+            this.textBox10.Validating += new System.ComponentModel.CancelEventHandler(this.textBox10_Validating);
+            this.textBox10.Validated += new System.EventHandler(this.textBox10_Validated);
             // 
             // label15
             // 
@@ -226,6 +328,7 @@
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Ne";
             this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // radioButton3
             // 
@@ -249,8 +352,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkedListBox1);
             this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Controls.Add(this.textBox7);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.comboBox4);
             this.groupBox3.Controls.Add(this.label11);
@@ -258,10 +361,24 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Location = new System.Drawing.Point(470, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(247, 370);
+            this.groupBox3.Size = new System.Drawing.Size(266, 370);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Zdravlje";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "Laboratorija",
+            "Kardiologija",
+            "Hirurgija",
+            "Dermatologija",
+            "Radiologija"});
+            this.checkedListBox1.Location = new System.Drawing.Point(10, 165);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(227, 106);
+            this.checkedListBox1.TabIndex = 23;
             // 
             // button1
             // 
@@ -272,22 +389,16 @@
             this.button1.TabIndex = 20;
             this.button1.Text = "Registruj";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(10, 214);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(223, 22);
-            this.textBox7.TabIndex = 23;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(7, 163);
+            this.label12.Location = new System.Drawing.Point(7, 145);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(211, 34);
+            this.label12.Size = new System.Drawing.Size(136, 17);
             this.label12.TabIndex = 22;
-            this.label12.Text = "Upisite imena ordinacija\r\nodvojena zarezom (format: L, K)\r\n";
+            this.label12.Text = "Odaberite ordinacije";
             // 
             // comboBox4
             // 
@@ -300,6 +411,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(223, 24);
             this.comboBox4.TabIndex = 21;
+            this.comboBox4.TextChanged += new System.EventHandler(this.comboBox4_TextChanged);
             // 
             // label11
             // 
@@ -321,6 +433,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(168, 24);
             this.comboBox1.TabIndex = 19;
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // label14
             // 
@@ -333,6 +446,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
             this.groupBox2.Controls.Add(this.label2);
@@ -361,6 +475,16 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Osnovne Informacije";
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(311, 137);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(117, 45);
+            this.button2.TabIndex = 24;
+            this.button2.Text = "Dodaj Sliku";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // radioButton2
             // 
@@ -407,8 +531,11 @@
             this.textBox8.Location = new System.Drawing.Point(134, 163);
             this.textBox8.MaxLength = 40;
             this.textBox8.Name = "textBox8";
+            this.textBox8.PasswordChar = '•';
             this.textBox8.Size = new System.Drawing.Size(125, 22);
             this.textBox8.TabIndex = 22;
+            this.textBox8.Validating += new System.ComponentModel.CancelEventHandler(this.textBox8_Validating);
+            this.textBox8.Validated += new System.EventHandler(this.textBox8_Validated);
             // 
             // textBox1
             // 
@@ -473,7 +600,7 @@
             this.textBox6.Location = new System.Drawing.Point(160, 241);
             this.textBox6.MaxLength = 40;
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(231, 22);
+            this.textBox6.Size = new System.Drawing.Size(226, 22);
             this.textBox6.TabIndex = 10;
             this.textBox6.Validating += new System.ComponentModel.CancelEventHandler(this.textBox6_Validating);
             this.textBox6.Validated += new System.EventHandler(this.textBox6_Validated);
@@ -489,10 +616,12 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(219, 213);
+            this.textBox3.Enabled = false;
+            this.textBox3.Location = new System.Drawing.Point(160, 213);
             this.textBox3.MaxLength = 10;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(172, 22);
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(226, 22);
             this.textBox3.TabIndex = 8;
             this.textBox3.Validating += new System.ComponentModel.CancelEventHandler(this.textBox3_Validating);
             this.textBox3.Validated += new System.EventHandler(this.textBox3_Validated);
@@ -531,11 +660,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 216);
+            this.label6.Location = new System.Drawing.Point(42, 218);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(203, 17);
+            this.label6.Size = new System.Drawing.Size(113, 17);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Datum Rodjenja: (dd-mm-yyyy)";
+            this.label6.Text = "Datum Rodjenja:";
             // 
             // label5
             // 
@@ -573,257 +702,12 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(996, 388);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Zdravstvena Knjizica";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.listBox2);
-            this.groupBox5.Controls.Add(this.listBox1);
-            this.groupBox5.Controls.Add(this.label19);
-            this.groupBox5.Controls.Add(this.label18);
-            this.groupBox5.Location = new System.Drawing.Point(389, 17);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(350, 388);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Zdravstveni Problemi";
-            // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(9, 233);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(335, 132);
-            this.listBox2.TabIndex = 3;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(9, 58);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(335, 132);
-            this.listBox1.TabIndex = 2;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 213);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(194, 17);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Prijasnji Zdravstveni Problemi";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 38);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(199, 17);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "Sadasnji Zdravstveni Problemi";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.textBox16);
-            this.groupBox4.Controls.Add(this.listBox5);
-            this.groupBox4.Controls.Add(this.listBox4);
-            this.groupBox4.Controls.Add(this.listBox3);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.label17);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Location = new System.Drawing.Point(21, 17);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(362, 388);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Pregledi";
-            // 
-            // textBox16
-            // 
-            this.textBox16.Location = new System.Drawing.Point(6, 319);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(350, 22);
-            this.textBox16.TabIndex = 7;
-            // 
-            // listBox5
-            // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.ItemHeight = 16;
-            this.listBox5.Location = new System.Drawing.Point(9, 221);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(347, 52);
-            this.listBox5.TabIndex = 6;
-            // 
-            // listBox4
-            // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 16;
-            this.listBox4.Location = new System.Drawing.Point(9, 138);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(347, 52);
-            this.listBox4.TabIndex = 5;
-            // 
-            // listBox3
-            // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(9, 58);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(347, 52);
-            this.listBox3.TabIndex = 4;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(6, 201);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(124, 17);
-            this.label22.TabIndex = 3;
-            this.label22.Text = "Rezultati Pregleda";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 118);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(142, 17);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "Posjecene Ordinacije";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 38);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(60, 17);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Terapije";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 299);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(123, 17);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Komentar Doktora";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 140);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(173, 17);
-            this.label16.TabIndex = 29;
-            this.label16.Text = "Datum smrti (dd-mm-yyyy)";
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(191, 140);
-            this.textBox11.MaxLength = 10;
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(86, 22);
-            this.textBox11.TabIndex = 30;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(33, 168);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(146, 17);
-            this.label23.TabIndex = 31;
-            this.label23.Text = "Vrijeme smrti (hh-mm)";
-            // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(191, 165);
-            this.textBox12.MaxLength = 5;
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(86, 22);
-            this.textBox12.TabIndex = 32;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 214);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(86, 17);
-            this.label24.TabIndex = 33;
-            this.label24.Text = "Razlog smrti";
-            // 
-            // textBox13
-            // 
-            this.textBox13.Location = new System.Drawing.Point(98, 211);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(179, 22);
-            this.textBox13.TabIndex = 34;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(230, 244);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(47, 21);
-            this.radioButton5.TabIndex = 37;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Ne";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(159, 244);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(47, 21);
-            this.radioButton6.TabIndex = 36;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Da";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(6, 246);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(147, 17);
-            this.label25.TabIndex = 35;
-            this.label25.Text = "Odradjena obdukcija?";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(6, 285);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(147, 17);
-            this.label26.TabIndex = 38;
-            this.label26.Text = "Informacije o obdukciji";
-            // 
-            // textBox14
-            // 
-            this.textBox14.Location = new System.Drawing.Point(9, 311);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(268, 22);
-            this.textBox14.TabIndex = 39;
-            // 
             // FormRegisterPatient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.ClientSize = new System.Drawing.Size(1067, 474);
+            this.ClientSize = new System.Drawing.Size(1096, 474);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -839,16 +723,13 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -880,21 +761,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.ListBox listBox5;
-        private System.Windows.Forms.ListBox listBox4;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox2;
@@ -904,27 +770,29 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button2;
     }
 }
