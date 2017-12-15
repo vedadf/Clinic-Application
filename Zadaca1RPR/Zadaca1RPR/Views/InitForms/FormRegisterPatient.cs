@@ -46,6 +46,8 @@ namespace Zadaca1RPR.Views.InitForms
             groupBox4.Hide();
             textBox9.Text = DateTime.Today.ToShortDateString();
             Clin = clinic;
+            label26.Hide();
+            textBox14.Hide();
         }
 
         private void pomocToolStripMenuItem_Click(object sender, EventArgs e)
@@ -308,6 +310,18 @@ namespace Zadaca1RPR.Views.InitForms
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            if (textBox2.Text.Length == 0 ||
+                           textBox4.Text.Length == 0 ||
+                           textBox5.Text.Length == 0 ||
+                           textBox1.Text.Length == 0 ||
+                           textBox8.Text.Length == 0 ||
+                           textBox6.Text.Length == 0)
+            {
+                toolStripStatusLabel1.Text = "Niste popunili sva polja";
+                return;
+            }
+
             if (!radioButton1.Checked && !radioButton2.Checked)
                 toolStripStatusLabel1.Text = "Odaberite spol osobe";
             else if (!radioButton3.Checked && !radioButton4.Checked && groupBox1.Visible)
@@ -346,6 +360,35 @@ namespace Zadaca1RPR.Views.InitForms
                 {
                     if (radioButton1.Checked) gender = EnumGender.Male;
                     else if (radioButton2.Checked) gender = EnumGender.Female;
+
+                    if (deceased)
+                    {
+                        if (textBox10.Text.Length == 0 ||
+                            textBox11.Text.Length == 0 ||
+                            textBox12.Text.Length == 0 ||
+                            textBox13.Text.Length == 0)
+                        {
+                            toolStripStatusLabel1.Text = "Niste popunili sva polja";
+                            return;
+                        }
+
+                        if (radioButton6.Checked && textBox14.Text.Length == 0)
+                        {
+                            toolStripStatusLabel1.Text = "Popunite informacije o obdukciji";
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(textBox10.Text.Length == 0)
+                        {
+                            toolStripStatusLabel1.Text = "Niste popunili sva polja";
+                            return;
+                        }
+                    
+                    }
+                   
+
                     Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, obduction);
                     HealthCard card = new HealthCard(pat as UrgentPatient, causeOfDeath, timeOfDeath, dateOfDeath);
                 }
@@ -386,6 +429,19 @@ namespace Zadaca1RPR.Views.InitForms
                 textBox14.Show();
             }
         }
-        
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
+            {
+                label26.Hide();
+                textBox14.Hide();
+            }
+            else if (radioButton6.Checked)
+            {
+                label26.Show();
+                textBox14.Show();
+            }
+        }
     }
 }

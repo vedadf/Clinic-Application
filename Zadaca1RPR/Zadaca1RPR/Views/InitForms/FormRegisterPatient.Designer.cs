@@ -234,6 +234,7 @@
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "Da";
             this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // label25
             // 
