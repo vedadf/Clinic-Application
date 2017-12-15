@@ -45,6 +45,30 @@ namespace SharedView
             return true;
         }
 
+        public static bool ValidDate(string input, out string error)
+        {
+
+            if(input.Length != 10)
+            {
+                error = "Velicina polja mora biti 10";
+                return false;
+            }
+                        
+            string day = "" + input[0] + input[1];
+            string month = "" + input[3] + input[4];
+            string year = "" + input[6] + input[7] + input[8] + input[9];
+            string Bdate = year + "-" + month + "-" + day;
+            DateTime bDate = new DateTime();
+            if (!DateTime.TryParse(Bdate, out bDate))
+            {
+                error = "Datum nije ispravan";
+                return false;
+            }
+
+            error = "";
+            return true;
+        }
+
         public static void NoCommand()
         {
             Console.WriteLine("Komanda ne postoji.");
@@ -117,6 +141,55 @@ namespace SharedView
                 return true;
 
             return false;
+        }
+
+        public static bool HasOnlyLetters(string s, out string error)
+        {
+            if(s == null || s == "")
+            {
+                error = "Polje ne smije biti prazno";
+                return false;
+            }
+
+            if (s.All(Char.IsLetter))
+            {                 
+                error = "";
+                return true;
+            }
+            error = "Polje mora sadrzavati samo slova";
+            
+            return false;
+        }
+
+        public static bool HasOnlyLettersAndDigits(string s, out string error)
+        {
+            if (s == null || s == "")
+            {
+                error = "Polje ne smije biti prazno";
+                return false;
+            }
+
+            if (s.All(Char.IsLetterOrDigit))
+            {
+                error = "";
+                return true;
+            }
+            error = "Polje mora sadrzavati slova ili brojeve";
+            return false;
+        }
+
+        public static bool HasOnlyLettersAndDigitsAllowSpace(string s, out string error)
+        {
+            foreach (char c in s)
+            {
+                if (c != ' ' && !Char.IsLetterOrDigit(c))
+                {
+                    error = "Polje mora sadrzavati slova ili brojeve";
+                    return false;
+                }
+            }
+            error = "";
+            return true;           
         }
 
     }

@@ -86,6 +86,12 @@
     <Compile Include="Views\InitForms\FormPatientInit.Designer.cs">
       <DependentUpon>FormPatientInit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\InitForms\FormRegisterPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InitForms\FormRegisterPatient.Designer.cs">
+      <DependentUpon>FormRegisterPatient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ManagementView.cs" />
     <Compile Include="Views\PatientView.cs" />
     <Compile Include="Views\StaffForms\FormDoctor.cs">
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\InitForms\FormPatientInit.resx">
       <DependentUpon>FormPatientInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\InitForms\FormRegisterPatient.resx">
+      <DependentUpon>FormRegisterPatient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\StaffForms\FormDoctor.resx">
       <DependentUpon>FormDoctor.cs</DependentUpon>

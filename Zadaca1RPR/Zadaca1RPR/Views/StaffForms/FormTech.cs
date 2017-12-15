@@ -100,71 +100,55 @@ namespace Zadaca1RPR.Views.StaffForms
 
         private void button4_Click(object sender, EventArgs e)
         {
-            /*
-            else if (Pat.Schedule.Count > 0) Console.WriteLine("Pacijent nije zavrsio sa svojim pregledima.");
+            
+            if (textBox3.Text == "") return;
+            if (Clin.GetCardFromCitizenID(textBox2.Text) == null) toolStripStatusLabel1.Text = "Pacijent nema karton, doktor kreira kartone";
             else
             {
-                bool regular = false;
-                Console.WriteLine("Pacijent je {0} {1}", Pat.Name, Pat.Surname);
-                Console.WriteLine("Pacijent je posjetio kliniku {0} puta.", Pat.numOfTimesVisited);
-                if (Pat.numOfTimesVisited > 3) regular = true;
-                else regular = false;
-                Console.WriteLine("Pacijent je odradio {0} pregleda.", Pat.HealthBook.ExaminationDates.Count);
-                string cc;
-                while (true)
-                {
-                    Console.WriteLine("Da li pacijent zeli platiti na rate ili gotovinom? (R/G)");
-                    cc = Console.ReadLine();
-                    if (cc == "R" || cc == "G") break;
-                    else SView.NoCommand();
-                }
-
-                Console.WriteLine("Glavna cijena je: {0}", Pat.Cost);
-
-                foreach (string str in Pat.HealthBook.CompletedOrdinations)
-                    Console.WriteLine("Ordinacija: {0}; Cijena: {1};", str, clinic.Ordinations.Find(o => o.Name == str).Price);
-
-                //delegat iskoristen za racunanje cijene za pacijenta
-                CalculatePatientDebt price = () =>
-                {
-                    double res = Pat.Cost;
-                    if (cc == "R")
-                        if (!regular) res = Pat.Cost + 0.15 * Pat.Cost;
-                        else if (cc == "G")
-                            if (regular) res = Pat.Cost - 0.1 * Pat.Cost;
-                    return res;
-                };
-
-                double cost = price();
-
-                if (cc == "R")
-                {
-                    Console.WriteLine("Pacijent moze platiti na 3 rate podijeljene na 3 jednaka dijela.");
-                    if (regular)
-                    {
-                        Console.WriteLine("Cijena za placanje na rate za redovnog pacijenta ostaje ista.");
-                        Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", cost / 3.0);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Cijena za placanje na rate za novog pacijenta: {0}KM", cost);
-                        Console.WriteLine("Prva rata koja mora biti placena odmah iznosi {0}KM", cost / 3.0);
-                    }
-                }
+                Patient pat = Clin.GetCardFromCitizenID(textBox2.Text).Patient;
+                if (pat.Schedule.Count > 0) toolStripStatusLabel1.Text = "Pacijent nije zavrsio sa svojim pregledima";
                 else
                 {
-                    if (regular)
-                        Console.WriteLine("Cijena za placanje gotovinom za redovnog pacijenta: {0}KM.", cost);
-                    else
-                        Console.WriteLine("Cijena za placanje gotovinom za novog pacijenta ostaje ista.");
-                }
+                    bool regular = false;
+                    if (pat.numOfTimesVisited > 3) regular = true;
+                    else regular = false;
 
-                Console.WriteLine("Karton za pacijenta je zatvoren.");
-                clinic.GetCardFromPatientID(idd).CardActive = false;
-                Pat.HasHealthCard = false;
-                clinic.HealthCards.Remove(clinic.GetCardFromPatientID(idd));
-                
-            }*/
+                    double res = pat.Cost;
+                    if (!regular) res = pat.Cost + 0.15 * pat.Cost;
+                    else res = pat.Cost - 0.1 * pat.Cost;
+
+                    string message = "Pacijent je posjetio kliniku " + pat.numOfTimesVisited + " puta.\n";
+                    message += "Pacijent je odradio " + pat.HealthBook.ExaminationDates.Count + " pregleda.\n";
+                    
+                    message += "Cijena za placanje na 3 rate je: " + res / 3.0 + " po rati. \n";
+                    message += "Cijena za placanje gotovinom je: " + res + "\n";
+
+                    message += "Da li zelite izvrsiti naplatu?";
+
+                    if(MessageBox.Show(message, "Naplata", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        Clin.GetCardFromCitizenID(textBox2.Text).CardActive = false;
+                        pat.HasHealthCard = false;
+                        Clin.HealthCards.Remove(Clin.GetCardFromCitizenID(textBox2.Text));
+                        MessageBox.Show("Operacija uspjesna.");
+                    }
+                }
+            }
+        }
+
+        private void pomocToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Da bi se odjavili: desni klik -> Odjava");
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new FormRegisterPatient(ref Clin).ShowDialog();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Zadaca1RPR.Views.StaffForms
             InitializeComponent();
             textBox1.Hide();
             Clin = clinic;
-            Man = man;
+            Man = man;            
             label2.Text = "" + Man.Name + " " + Man.Surname;
             label9.Text = "";
             label10.Text = "";
