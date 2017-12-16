@@ -152,7 +152,7 @@ namespace Zadaca1RPR.Views.InitForms
                     if (pat.UserName == textBox1.Text)
                     {
                         e.Cancel = true;
-                        error = "JMBG vec postoji";
+                        error = "Korisnicko ime vec postoji";
                         textBox1.Select(0, textBox1.Text.Length);
                         errorProvider1.SetError(textBox1, error);
                         break;
@@ -174,8 +174,7 @@ namespace Zadaca1RPR.Views.InitForms
         }
 
         private void textBox3_Validated(object sender, EventArgs e)
-        {
-            DateTime.TryParse(textBox3.Text, out dateOfBirth);
+        {            
             errorProvider1.SetError(textBox3, "");
         }
 
@@ -310,6 +309,26 @@ namespace Zadaca1RPR.Views.InitForms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            bool exists = false;
+            foreach (Patient pat in Clin.Patients)
+            {
+                if (pat.CitizenID == textBox5.Text)
+                {
+                    exists = true;
+                    toolStripStatusLabel1.Text = "JMBG vec postoji";
+                    break;
+                }
+            }
+            foreach (Patient pat in Clin.Patients)
+            {
+                if (pat.UserName == textBox1.Text)
+                {
+                    exists = true;
+                    toolStripStatusLabel1.Text = "Korisnicko ime vec postoji";
+                    break;
+                }
+            }
+            if (exists) return;
 
             if (textBox2.Text.Length == 0 ||
                            textBox4.Text.Length == 0 ||
@@ -356,10 +375,14 @@ namespace Zadaca1RPR.Views.InitForms
                 if (radioButton3.Checked) deceased = false;
                 else if (radioButton4.Checked) deceased = true;
 
+                if (radioButton1.Checked) gender = EnumGender.Male;
+                else if (radioButton2.Checked) gender = EnumGender.Female;
+
+                DateTime.TryParse(textBox3.Text, out dateOfBirth);
+
                 if (urgentCase)
                 {
-                    if (radioButton1.Checked) gender = EnumGender.Male;
-                    else if (radioButton2.Checked) gender = EnumGender.Female;
+                    
 
                     if (deceased)
                     {
@@ -385,17 +408,30 @@ namespace Zadaca1RPR.Views.InitForms
                             toolStripStatusLabel1.Text = "Niste popunili sva polja";
                             return;
                         }
-                    
+                        causeOfDeath = "";
+                        dateOfDeath = default(DateTime);
+                        timeOfDeath = "";
                     }
                    
 
                     Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, obduction);
                     HealthCard card = new HealthCard(pat as UrgentPatient, causeOfDeath, timeOfDeath, dateOfDeath);
+                    Clin.Patients.Add(pat);
+                    Clin.HealthCards.Add(card);
+                    MessageBox.Show("Pacijent uspjesno dodan.\nKarton je kreiran.");
+                    this.Close();
                 }
                 else
                 {
-
+                    Patient pat = new NormalPatient(name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, username, password, ordinations);
+                    HealthCard card = new HealthCard(pat as NormalPatient);
+                    Clin.Patients.Add(pat);
+                    Clin.HealthCards.Add(card);
+                    MessageBox.Show("Pacijent uspjesno dodan.\nKarton je kreiran.");
+                    this.Close();
                 }
+
+                
             }
         }
 
