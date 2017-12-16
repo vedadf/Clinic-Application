@@ -49,7 +49,7 @@ namespace Zadaca1RPR
             EnumGender male = EnumGender.Male;
             HealthBook healthbook17336_1 = new HealthBook("Pacijent je jos u losem stanju", new List<string> { "Teska povreda noge", "Prevelik C# fanboi"}, new List<string> { "Nema" }, "Nema");
             HealthBook healthbook17336_2 = new HealthBook("Pacijent je jos u dobrom stanju", new List<string> { "Prehlada", "Glavobolja" }, new List<string> { "Problemi" }, "Nema");
-            Patient patient17336_1 = new NormalPatient("Amar", "Buric", new DateTime(1996, 1, 1), "0101199612345", "Visoko, Piramida 2", false, DateTime.Today, male, "aburic", "amar", new List<string> { /*"L", "K" */}, healthbook17336_2);
+            Patient patient17336_1 = new NormalPatient("Amar", "Buric", new DateTime(1996, 1, 1), "0101199612345", "Visoko, Piramida 2", false, DateTime.Today, male, "aburic", "amar", new List<string> { "L", "K" }, healthbook17336_2);
             Patient patient17336_2 = new UrgentPatient("Prva pomoc je uspjesna.", false, "Elvir", "Crncevic", new DateTime(1996, 8, 17), "1708199612345", "Dobrinja 4568", false, DateTime.Today, male, new List<string> { "L", "R", "H" }, "ecrncevic", "elvir", "Nema", healthbook17336_1);
             patients17336_1.Add(patient17336_1);
             patients17336_1.Add(patient17336_2);

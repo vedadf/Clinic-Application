@@ -24,6 +24,7 @@ namespace Zadaca1RPR.Models.Ordinations
         public double Price { get; set; }
 
         public string Name { get; set; }
+        public string FullName { get; set; }
 
         public Dermatology(Doctor doctor)
         {
@@ -33,6 +34,7 @@ namespace Zadaca1RPR.Models.Ordinations
             Patient = null;
             Price = 18.15;
             Name = "D";
+            FullName = "Dermatologija";
         }
 
         public bool NewPatient(Patient patient)

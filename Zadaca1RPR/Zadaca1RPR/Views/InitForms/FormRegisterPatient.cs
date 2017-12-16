@@ -36,7 +36,7 @@ namespace Zadaca1RPR.Views.InitForms
         DateTime dateOfDeath = DateTime.Now;
         string timeOfDeath = null;
         string causeOfDeath = null;
-        string obduction = null; 
+        string obduction = ""; 
 
         public FormRegisterPatient(ref Clinic clinic)
         {
@@ -412,9 +412,9 @@ namespace Zadaca1RPR.Views.InitForms
                         dateOfDeath = default(DateTime);
                         timeOfDeath = "";
                     }
-                   
 
-                    Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, obduction);
+                    HealthBook hb = new HealthBook("");
+                    Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, obduction, hb);
                     HealthCard card = new HealthCard(pat as UrgentPatient, causeOfDeath, timeOfDeath, dateOfDeath);
                     Clin.Patients.Add(pat);
                     Clin.HealthCards.Add(card);
@@ -423,7 +423,8 @@ namespace Zadaca1RPR.Views.InitForms
                 }
                 else
                 {
-                    Patient pat = new NormalPatient(name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, username, password, ordinations);
+                    HealthBook hb = new HealthBook("");
+                    Patient pat = new NormalPatient(name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, username, password, ordinations, hb);
                     HealthCard card = new HealthCard(pat as NormalPatient);
                     Clin.Patients.Add(pat);
                     Clin.HealthCards.Add(card);

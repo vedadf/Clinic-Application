@@ -24,6 +24,7 @@ namespace Zadaca1RPR.Models.Ordinations
         public double Price { get; set; }
 
         public string Name { get; set; }
+        public string FullName { get; set; }
 
         public Laboratory(Doctor doctor)
         {
@@ -34,6 +35,7 @@ namespace Zadaca1RPR.Models.Ordinations
             Price = 10.6;
             Name = "L";
             PatientsQueue = new List<Patient>();
+            FullName = "Laboratorija";
         }
 
         public bool NewPatient(Patient patient)

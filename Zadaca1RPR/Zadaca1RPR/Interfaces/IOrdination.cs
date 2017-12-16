@@ -20,6 +20,7 @@ namespace Zadaca1RPR.Interfaces
         double Price { get; set; }
 
         string Name { get; set; }
+        string FullName { get; set; }
 
         bool ProcessPatient();
         bool NewPatient(Patient patient);

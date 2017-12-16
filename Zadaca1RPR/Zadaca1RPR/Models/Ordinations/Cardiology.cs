@@ -27,6 +27,7 @@ namespace Zadaca1RPR.Models.Ordinations
         public double Price { get; set; }
 
         public string Name { get; set; }
+        public string FullName { get; set; }
 
         public Cardiology(Doctor doctor)
         {
@@ -38,6 +39,7 @@ namespace Zadaca1RPR.Models.Ordinations
             Price = 20.6;
             Name = "K";
             DeviceName = "EKG";
+            FullName = "Kardiologija";
         }
 
         public bool NewPatient(Patient patient)
