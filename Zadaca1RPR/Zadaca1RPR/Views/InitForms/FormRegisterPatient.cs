@@ -221,23 +221,7 @@ namespace Zadaca1RPR.Views.InitForms
             if (radioButton4.Checked) groupBox4.Show();
             else if (radioButton3.Checked) groupBox4.Hide();
         }
-
-        private void textBox11_Validated(object sender, EventArgs e)
-        {
-            DateTime.TryParse(textBox11.Text, out dateOfDeath);
-            errorProvider1.SetError(textBox11, "");
-        }
-
-        private void textBox11_Validating(object sender, CancelEventArgs e)
-        {
-            string error;
-            if (!SView.ValidDate(textBox11.Text, out error))
-            {
-                e.Cancel = true;
-                textBox11.Select(0, textBox11.Text.Length);
-                errorProvider1.SetError(textBox11, error);
-            }
-        }
+        
 
         private void textBox12_Validating(object sender, CancelEventArgs e)
         {
@@ -387,7 +371,6 @@ namespace Zadaca1RPR.Views.InitForms
                     if (deceased)
                     {
                         if (textBox10.Text.Length == 0 ||
-                            textBox11.Text.Length == 0 ||
                             textBox12.Text.Length == 0 ||
                             textBox13.Text.Length == 0)
                         {
@@ -413,8 +396,10 @@ namespace Zadaca1RPR.Views.InitForms
                         timeOfDeath = "";
                     }
 
-                    HealthBook hb = new HealthBook("");
-                    Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, obduction, hb);
+                    dateOfDeath = dateTimePicker1.Value;
+
+                    //HealthBook hb = new HealthBook("");
+                    Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, obduction);
                     HealthCard card = new HealthCard(pat as UrgentPatient, causeOfDeath, timeOfDeath, dateOfDeath);
                     Clin.Patients.Add(pat);
                     Clin.HealthCards.Add(card);
@@ -423,8 +408,8 @@ namespace Zadaca1RPR.Views.InitForms
                 }
                 else
                 {
-                    HealthBook hb = new HealthBook("");
-                    Patient pat = new NormalPatient(name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, username, password, ordinations, hb);
+                    //HealthBook hb = new HealthBook("");
+                    Patient pat = new NormalPatient(name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, username, password, ordinations);
                     HealthCard card = new HealthCard(pat as NormalPatient);
                     Clin.Patients.Add(pat);
                     Clin.HealthCards.Add(card);

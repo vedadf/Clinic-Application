@@ -85,6 +85,8 @@ namespace Zadaca1RPR.Views.InitForms
         
         private void FillHealthBookInfo(Patient pat)
         {
+            if (pat.HealthBook == null) return;
+
             if (pat.HealthBook.CurrentHealthIssues.Count != 0)
                 foreach (string p in pat.HealthBook.CurrentHealthIssues)
                     listBox1.Items.Add(p);
@@ -110,7 +112,7 @@ namespace Zadaca1RPR.Views.InitForms
                     listBox5.Items.Add(p);
             else listBox5.Items.Add("Nema");
 
-            if (pat.HealthBook.DoctorNotes == null)
+            if (pat.HealthBook.DoctorNotes == null || pat.HealthBook.DoctorNotes == "")
                 textBox16.Text = "Nema";
             else textBox16.Text = pat.HealthBook.DoctorNotes;
         }
