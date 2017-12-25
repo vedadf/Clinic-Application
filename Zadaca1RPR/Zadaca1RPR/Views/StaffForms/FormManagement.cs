@@ -22,6 +22,12 @@ namespace Zadaca1RPR.Views.StaffForms
         Clinic Clin;
         Staff Man;
 
+        string name = null;
+        string surname = null;
+        string userName = null;
+        string password = null;
+        double salary = 0;
+
         public FormManagement(ref Clinic clinic, Staff man)
         {
             InitializeComponent();
@@ -174,5 +180,140 @@ namespace Zadaca1RPR.Views.StaffForms
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+
+
+            if(textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || textBox7.Text == "")
+            {
+                toolStripStatusLabel1.Text = "Neka polja su prazna";
+                return;
+            }
+
+            salary = (double)numericUpDown1.Value;
+            userName = textBox4.Text;
+            password = textBox5.Text;
+
+            name = textBox6.Text;
+            surname = textBox7.Text;
+
+            if (!radioButton1.Checked && !radioButton2.Checked)
+            {
+                toolStripStatusLabel1.Text = "Odaberite jednu od opcija";
+                return;
+            }
+
+            if (radioButton1.Checked)
+            {
+
+                Staff staff = new Technician(name, surname, salary, userName, password);
+
+                foreach(Staff s in Clin.Employees)
+                    if(s.UserName == staff.UserName)
+                    {
+                        toolStripStatusLabel1.Text = "Korisnicko ime vec postoji";
+                        return;
+                    }
+                    
+
+                Clin.Employees.Add(staff);
+            }
+            else if (radioButton2.Checked)
+            {
+                Staff staff = new Doctor(name, surname, salary, userName, password);
+
+                foreach (Staff s in Clin.Employees)
+                    if (s.UserName == staff.UserName)
+                    {
+                        toolStripStatusLabel1.Text = "Korisnicko ime vec postoji";
+                        return;
+                    }
+
+                Clin.Employees.Add(staff);
+            }
+
+            MessageBox.Show("Korisnik uspjesno registrovan");
+
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
+
+        }
+
+        private void textBox6_Validating(object sender, CancelEventArgs e)
+        {
+
+            string error;
+            if (!SView.HasOnlyLetters(textBox6.Text, out error))
+            {
+                e.Cancel = true;
+                textBox6.Select(0, textBox6.Text.Length);
+                errorProvider1.SetError(textBox6, error);
+            }
+
+        }
+
+        private void textBox6_Validated(object sender, EventArgs e)
+        {
+            name = textBox6.Text;
+            errorProvider1.SetError(textBox6, "");
+        }
+
+        private void textBox4_Validated(object sender, EventArgs e)
+        {
+            userName = textBox4.Text;
+            errorProvider1.SetError(textBox4, "");
+        }
+
+        private void textBox4_Validating(object sender, CancelEventArgs e)
+        {
+            string error;
+            if (!SView.HasOnlyLettersAndDigits(textBox4.Text, out error))
+            {
+                e.Cancel = true;
+                textBox4.Select(0, textBox4.Text.Length);
+                errorProvider1.SetError(textBox4, error);
+            }
+
+        }
+
+        private void textBox5_Validated(object sender, EventArgs e)
+        {
+            password = textBox5.Text;
+            errorProvider1.SetError(textBox5, "");
+        }
+
+        private void textBox5_Validating(object sender, CancelEventArgs e)
+        {
+            string error;
+            if (textBox5.Text.Length == 0)
+            {
+                error = "Ne smije biti prazno";
+                e.Cancel = true;
+                textBox5.Select(0, textBox5.Text.Length);
+                errorProvider1.SetError(textBox5, error);
+            }
+        }
+
+        private void textBox7_Validated(object sender, EventArgs e)
+        {
+            surname = textBox7.Text;
+            errorProvider1.SetError(textBox7, "");
+        }
+
+        private void textBox7_Validating(object sender, CancelEventArgs e)
+        {
+            string error;
+            if (!SView.HasOnlyLetters(textBox7.Text, out error))
+            {
+                e.Cancel = true;
+                textBox7.Select(0, textBox7.Text.Length);
+                errorProvider1.SetError(textBox7, error);
+            }
+        }
+        
     }
 }

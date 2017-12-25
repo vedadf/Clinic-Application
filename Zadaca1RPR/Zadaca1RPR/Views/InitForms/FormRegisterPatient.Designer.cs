@@ -539,12 +539,12 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 134);
+            this.label2.Location = new System.Drawing.Point(46, 134);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 24;
-            this.label2.Text = "Password:";
+            this.label2.Text = "Lozinka:";
             // 
             // label1
             // 

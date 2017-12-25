@@ -22,7 +22,7 @@ namespace Zadaca1RPR.Views.InitForms
         public FormInitial(ref Clinic clinic)
         {
             InitializeComponent();            
-            Clin = clinic;            
+            Clin = clinic;        
         }
         
         private void ValidatePatient(MD5 md5)
@@ -65,7 +65,7 @@ namespace Zadaca1RPR.Views.InitForms
         }
 
         private void ValidateManagement(MD5 md5)
-        {
+        {            
             bool found = false;
             foreach (Staff man in Clin.Employees)
                 if (man is Management && man.UserName == textBox1.Text && man.Password == SView.GetHash(md5, textBox2.Text))
@@ -73,6 +73,7 @@ namespace Zadaca1RPR.Views.InitForms
                     found = true;
                     toolStripStatusLabel1.Text = "";
                     new FormManagement(ref Clin, man).ShowDialog();
+                    break;
                 }
             if (!found) toolStripStatusLabel1.Text = "Uprava sa navedenim podacima ne postoji";
         }
