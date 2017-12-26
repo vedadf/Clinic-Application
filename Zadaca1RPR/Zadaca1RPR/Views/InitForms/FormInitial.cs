@@ -22,7 +22,7 @@ namespace Zadaca1RPR.Views.InitForms
         public FormInitial(ref Clinic clinic)
         {
             InitializeComponent();            
-            Clin = clinic;        
+            Clin = clinic;
         }
         
         private void ValidatePatient(MD5 md5)
@@ -97,6 +97,24 @@ namespace Zadaca1RPR.Views.InitForms
                 radioButton4.Checked = false;
                 
             }
+        }
+
+        private void FormInitial_Paint(object sender, PaintEventArgs e)
+        {
+
+            Graphics graphObj = this.CreateGraphics();
+            Pen pen = new Pen(Color.Red, 5);
+            Pen pen2 = new Pen(Color.Green, 5);
+            Pen pen3 = new Pen(Color.Black, 5);
+
+            graphObj.DrawRectangle(pen, 40, 100, 100, 5);
+            graphObj.DrawRectangle(pen, 85, 55, 5, 100);
+
+            Rectangle rt = new Rectangle(25, 10, 130, 240);
+            graphObj.DrawArc(pen2, rt, 0, -180);
+
+            graphObj.DrawLine(pen3, 25, 160, 150, 160);
+
         }
     }
 }

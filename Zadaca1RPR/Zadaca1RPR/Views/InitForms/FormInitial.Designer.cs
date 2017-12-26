@@ -50,7 +50,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(100, 7);
+            this.label1.Location = new System.Drawing.Point(276, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 26);
@@ -62,10 +62,10 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 208);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 242);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(334, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(508, 22);
             this.statusStrip1.TabIndex = 21;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -88,10 +88,10 @@
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(9, 36);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(190, 59);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(304, 171);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
@@ -102,7 +102,7 @@
             this.radioButton4.AutoSize = true;
             this.radioButton4.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.radioButton4.Location = new System.Drawing.Point(231, 99);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton4.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(63, 17);
             this.radioButton4.TabIndex = 22;
@@ -113,7 +113,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(112, 121);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(73, 31);
             this.button1.TabIndex = 19;
@@ -135,7 +135,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(102, 99);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(67, 17);
             this.radioButton3.TabIndex = 20;
@@ -147,7 +147,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(170, 99);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(60, 17);
             this.radioButton2.TabIndex = 19;
@@ -159,7 +159,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(44, 99);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(57, 17);
             this.radioButton1.TabIndex = 18;
@@ -170,7 +170,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(91, 33);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(210, 20);
             this.textBox1.TabIndex = 16;
@@ -178,7 +178,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(91, 67);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '•';
             this.textBox2.Size = new System.Drawing.Size(210, 20);
@@ -208,14 +208,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 230);
+            this.ClientSize = new System.Drawing.Size(508, 264);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormInitial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Prijava";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormInitial_Paint);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
