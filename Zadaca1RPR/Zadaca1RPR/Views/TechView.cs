@@ -40,8 +40,8 @@ namespace Zadaca1RPR.Views
                         Console.WriteLine("1. Registruj pacijenta");
                         Console.WriteLine("2. Obrisi pacijenta");
                         i = Console.ReadLine();
-                        if (i == "1") ProcessPatientRegistration(ref clinic);
-                        else if (i == "2") ProcessPatientDeletion(ref clinic);
+                       // if (i == "1")// ProcessPatientRegistration(ref clinic);
+                        if (i == "2") ProcessPatientDeletion(ref clinic);
                         else { SView.NoCommand(); Main(ref clinic); }
                         break;
                     case "2":
@@ -200,7 +200,7 @@ namespace Zadaca1RPR.Views
             }
             Main(ref clinic);
         }
-
+        /*
         void ProcessPatientRegistration(ref Clinic clinic)
         {
 
@@ -427,7 +427,7 @@ namespace Zadaca1RPR.Views
             Console.WriteLine();
             Main(ref clinic);
         }
-
+        */
         void ProcessPatientDeletion(ref Clinic clinic)
         {
             int id;
@@ -448,7 +448,7 @@ namespace Zadaca1RPR.Views
             Main(ref clinic);
 
         }
-
+        
         void DoAnamnesis(ref Patient patient)
         {
             int num;

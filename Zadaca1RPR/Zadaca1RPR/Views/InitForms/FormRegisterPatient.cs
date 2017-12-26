@@ -36,7 +36,8 @@ namespace Zadaca1RPR.Views.InitForms
         DateTime dateOfDeath = DateTime.Now;
         string timeOfDeath = null;
         string causeOfDeath = null;
-        string obduction = ""; 
+        string obduction = "";
+        Image image = null;
 
         public FormRegisterPatient(ref Clinic clinic)
         {
@@ -364,6 +365,12 @@ namespace Zadaca1RPR.Views.InitForms
 
                 DateTime.TryParse(textBox3.Text, out dateOfBirth);
 
+                if(pictureBox1.Image == null)
+                {
+                    toolStripStatusLabel1.Text = "Odaberite sliku";
+                    return;
+                }
+
                 if (urgentCase)
                 {
                     
@@ -399,7 +406,8 @@ namespace Zadaca1RPR.Views.InitForms
                     dateOfDeath = dateTimePicker1.Value;
 
                     //HealthBook hb = new HealthBook("");
-                    Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, obduction);
+                    image = pictureBox1.Image;
+                    Patient pat = new UrgentPatient(firstaid, deceased, name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, ordinations, username, password, image, obduction);
                     HealthCard card = new HealthCard(pat as UrgentPatient, causeOfDeath, timeOfDeath, dateOfDeath);
                     Clin.Patients.Add(pat);
                     Clin.HealthCards.Add(card);
@@ -408,8 +416,9 @@ namespace Zadaca1RPR.Views.InitForms
                 }
                 else
                 {
+                    image = pictureBox1.Image;
                     //HealthBook hb = new HealthBook("");
-                    Patient pat = new NormalPatient(name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, username, password, ordinations);
+                    Patient pat = new NormalPatient(name, surname, dateOfBirth, citizenID, address, married, registerDate, gender, username, password, image, ordinations);
                     HealthCard card = new HealthCard(pat as NormalPatient);
                     Clin.Patients.Add(pat);
                     Clin.HealthCards.Add(card);
@@ -463,6 +472,27 @@ namespace Zadaca1RPR.Views.InitForms
             {
                 label26.Show();
                 textBox14.Show();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog win = new OpenFileDialog();
+            win.InitialDirectory = @"C:\";
+            win.Title = "Odaberite sliku";
+            if (win.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                    image = pictureBox1.Image;
+                    pictureBox1.Image = Image.FromFile(win.FileName);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("File je prevelik ili nije slika.");
+                }
+                
             }
         }
     }

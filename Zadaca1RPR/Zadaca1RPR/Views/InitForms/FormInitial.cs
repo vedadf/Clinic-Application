@@ -101,7 +101,6 @@ namespace Zadaca1RPR.Views.InitForms
 
         private void FormInitial_Paint(object sender, PaintEventArgs e)
         {
-
             Graphics graphObj = this.CreateGraphics();
             Pen pen = new Pen(Color.Red, 5);
             Pen pen2 = new Pen(Color.Green, 5);
@@ -114,7 +113,6 @@ namespace Zadaca1RPR.Views.InitForms
             graphObj.DrawArc(pen2, rt, 0, -180);
 
             graphObj.DrawLine(pen3, 25, 160, 150, 160);
-
         }
     }
 }

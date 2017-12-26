@@ -31,7 +31,7 @@ namespace Zadaca1RPR.Models.Patients
         public override Image img { get; set; }
 
         public NormalPatient(string name, string surname, DateTime birthDate, string citizenID, string address,
-           bool married, DateTime registerDate, EnumGender gender, string userName, string password, 
+           bool married, DateTime registerDate, EnumGender gender, string userName, string password, Image image,
            List<string> schedule, HealthBook healthBook = null)
         {
             Name = name;
@@ -47,6 +47,7 @@ namespace Zadaca1RPR.Models.Patients
             Cost = 0;
             CitizenID = citizenID;
             UserName = userName;
+            img = image;
             MD5 PasswordMD5 = MD5.Create();
             Password = SView.GetHash(PasswordMD5, password);
         }

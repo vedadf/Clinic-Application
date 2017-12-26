@@ -46,6 +46,9 @@ namespace Zadaca1RPR.Views.InitForms
             textBox9.Text = pat.RegisterDate.ToShortDateString();
             textBox10.Text = pat.numOfTimesVisited.ToString();
 
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Image = pat.img;
+
             if (card.CardActive) textBox11.Text = "Aktivan";
             else textBox11.Text = "Neaktivan";
 

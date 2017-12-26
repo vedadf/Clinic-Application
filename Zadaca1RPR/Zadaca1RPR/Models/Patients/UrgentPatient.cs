@@ -35,7 +35,7 @@ namespace Zadaca1RPR.Models.Patients
 
         public UrgentPatient(string firstAid, bool deceased,
             string name, string surname, DateTime birthDate, string citizenID ,string address,
-            bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string userName, string password,
+            bool married, DateTime registerDate, EnumGender gender, List<string> schedule, string userName, string password, Image image,
             string obduction = "",
             HealthBook healthBook = null)
         {
@@ -55,6 +55,7 @@ namespace Zadaca1RPR.Models.Patients
             CitizenID = citizenID;
             Obduction = obduction;
             UserName = userName;
+            img = image;
             MD5 PasswordMD5 = MD5.Create();
             Password = SView.GetHash(PasswordMD5, password);
         }
