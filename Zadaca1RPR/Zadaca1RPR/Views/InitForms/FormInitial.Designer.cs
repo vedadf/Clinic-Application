@@ -42,6 +42,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +79,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.radioButton4);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label2);
@@ -112,7 +114,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(112, 121);
+            this.button1.Location = new System.Drawing.Point(28, 120);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(73, 31);
@@ -204,6 +206,17 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Lozinka:";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(117, 120);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(160, 31);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "Forma za izlistavanje direktorija";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // FormInitial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,5 +254,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button2;
     }
 }

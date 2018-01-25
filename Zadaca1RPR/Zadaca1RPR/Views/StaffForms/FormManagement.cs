@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using Zadaca1RPR.Abstracts;
 using Zadaca1RPR.Interfaces;
 using Zadaca1RPR.Models;
 using Zadaca1RPR.Models.Employees;
+using Zadaca1RPR.Models.Patients;
 using Zadaca1RPR.Views.InfoForms;
 using Zadaca1RPR.Views.InitForms;
 
@@ -42,7 +45,7 @@ namespace Zadaca1RPR.Views.StaffForms
                 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (textBox3.Text == "") return;
+            if (textBox3.Text == "") { toolStripStatusLabel1.Text = "Prazno polje"; return; }
             if (Clin.GetCardFromCitizenID(textBox2.Text) == null) toolStripStatusLabel1.Text = "Pacijent nema karton, doktor kreira kartone";
             else
             {
@@ -314,6 +317,46 @@ namespace Zadaca1RPR.Views.StaffForms
                 errorProvider1.SetError(textBox7, error);
             }
         }
-        
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "") { toolStripStatusLabel1.Text = "Prazno polje"; return; }
+            if (Clin.GetCardFromCitizenID(textBox2.Text) == null) toolStripStatusLabel1.Text = "Pacijent nema karton, doktor kreira kartone";
+            else
+            {
+                if (textBox3.Text != "")
+                {
+                    HealthCard card = Clin.HealthCards.Find(hc => hc.Patient.CitizenID == textBox2.Text);
+                                       
+                    List<HealthCard> cards = new List<HealthCard> { card };
+                    string id = card.Patient.CitizenID;
+                    try
+                    {
+                        bool exists = false;
+                        if (File.Exists(id + ".xml"))
+                            exists = true;                        
+                        
+                        XmlSerializer xs = new XmlSerializer(typeof(List<HealthCard>), new Type[] { typeof(HealthBook), typeof(Patient),
+                            typeof(NormalPatient), typeof(UrgentPatient) });
+                        FileStream fs = new FileStream(id + ".xml", FileMode.Create);
+                        xs.Serialize(fs, cards.ToList<HealthCard>());
+                        fs.Close();
+
+                        if (exists) MessageBox.Show("Datoteka je ponovno kreirana.");
+                        else MessageBox.Show("Datoteka je kreirana bin -> debug.");
+
+                    }
+                    catch(Exception exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+
+                }
+                if (textBox2.Text == "") toolStripStatusLabel1.Text = "Prazno polje";
+            }
+
+
+
+        }
     }
 }

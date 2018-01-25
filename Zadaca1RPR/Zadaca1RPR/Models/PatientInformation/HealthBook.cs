@@ -7,8 +7,12 @@ using Zadaca1RPR.Models.Patients;
 //ZDRAVSTVENA KNJIZICA
 namespace Zadaca1RPR.Models
 {
+    [Serializable]
     public class HealthBook
     {
+
+        public HealthBook() { }
+
         public string DoctorNotes { get; set; }
         public List<string> CurrentHealthIssues { get; set; }
         public List<string> PastHealthIssues { get; set; }

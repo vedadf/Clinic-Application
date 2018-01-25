@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadaca1RPR
 {
+    [Serializable]
     public enum EnumGender
     {
         Male,

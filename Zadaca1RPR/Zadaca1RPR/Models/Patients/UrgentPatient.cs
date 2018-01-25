@@ -6,10 +6,12 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Zadaca1RPR.Abstracts;
 
 namespace Zadaca1RPR.Models.Patients
 {
+    [Serializable]
     public class UrgentPatient : Patient
     {
         
@@ -23,6 +25,7 @@ namespace Zadaca1RPR.Models.Patients
         public override string Address { get; set; }
         public override bool Married { get; set; }
         public override DateTime RegisterDate { get; set; }
+        [XmlIgnore]
         public override EnumGender Gender { get; set; }
         public override HealthBook HealthBook { get; set; }
         public override bool HasHealthCard { get; set; }
@@ -31,7 +34,10 @@ namespace Zadaca1RPR.Models.Patients
         public override double Cost { get; set; }
         public override int numOfTimesVisited { get; set; }
         public override string CitizenID { get; set; }
+        [XmlIgnore]
         public override Image img { get; set; }
+
+        public UrgentPatient() { }
 
         public UrgentPatient(string firstAid, bool deceased,
             string name, string surname, DateTime birthDate, string citizenID ,string address,

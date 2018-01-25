@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 using Zadaca1RPR.Models;
 using System.Drawing;
 using System.Security.Cryptography;
+using System.Xml.Serialization;
 
 namespace Zadaca1RPR.Abstracts
 {
+    [Serializable]
     public abstract class Patient
     {
 
+        public Patient() { }
+        
+        [XmlIgnore]
         protected static int ID { get; set; }
 
         public virtual string UserName { get; set; }
@@ -31,7 +36,8 @@ namespace Zadaca1RPR.Abstracts
         public virtual bool Married { get; set; }
 
         public virtual DateTime RegisterDate { get; set; }
-
+        
+        [XmlIgnore]
         public virtual EnumGender Gender { get; set; }
 
         public virtual HealthBook HealthBook { get; set; }
@@ -48,6 +54,7 @@ namespace Zadaca1RPR.Abstracts
 
         public virtual string CitizenID { get; set; }
 
+        [XmlIgnore]
         public virtual Image img { get; set; }
 
     }

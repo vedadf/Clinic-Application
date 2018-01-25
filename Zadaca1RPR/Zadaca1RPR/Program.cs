@@ -14,6 +14,7 @@ using Zadaca1RPR.Views;
 using SharedView;
 using Zadaca1RPR.Views.InitForms;
 using System.Drawing;
+using System.IO;
 
 namespace Zadaca1RPR
 {
@@ -71,6 +72,7 @@ namespace Zadaca1RPR
             ordinations17336_1.Add(ordination17336_5);
 
             Clinic clinic17336_1 = new Clinic(employees17336_1, ordinations17336_1, cards17336_1, patients17336_1);
+
 
             //ChooseRole(ref clinic17336_1);
             Application.Run(new FormInitial(ref clinic17336_1));

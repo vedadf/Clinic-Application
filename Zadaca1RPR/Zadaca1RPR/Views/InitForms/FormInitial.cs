@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Zadaca1RPR.Abstracts;
@@ -19,6 +20,7 @@ namespace Zadaca1RPR.Views.InitForms
     public partial class FormInitial : Form
     {
         Clinic Clin;
+        Thread thread;
         public FormInitial(ref Clinic clinic)
         {
             InitializeComponent();            
@@ -109,10 +111,34 @@ namespace Zadaca1RPR.Views.InitForms
             graphObj.DrawRectangle(pen, 40, 100, 100, 5);
             graphObj.DrawRectangle(pen, 85, 55, 5, 100);
 
-            Rectangle rt = new Rectangle(25, 10, 130, 240);
-            graphObj.DrawArc(pen2, rt, 0, -180);
+            thread = new Thread(AnimateArc);
+            thread.Start();
 
             graphObj.DrawLine(pen3, 25, 160, 150, 160);
+        }
+
+        private void AnimateArc()
+        {
+            Graphics graphObj = this.CreateGraphics();
+            Rectangle rt = new Rectangle(25, 10, 130, 240);
+            Pen pen2 = new Pen(Color.Green, 5);
+            for (int i = 0; i >= -180; i--)
+            {
+                graphObj.DrawArc(pen2, rt, 0, i);
+                Thread.Sleep(5);
+            }
+            thread.Abort();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            thread.Abort();
+            base.OnClosing(e);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new DirectoryListing().ShowDialog();
         }
     }
 }

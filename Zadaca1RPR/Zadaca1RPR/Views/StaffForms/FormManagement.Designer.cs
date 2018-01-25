@@ -56,6 +56,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -79,7 +80,7 @@
             this.listaRegistrovanihKorisnikaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.odjavaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -88,11 +89,11 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -218,6 +219,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.textBox3);
@@ -235,7 +237,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(138, 189);
+            this.button3.Location = new System.Drawing.Point(77, 186);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(107, 41);
@@ -414,6 +416,19 @@
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Dodatne informacije";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Location = new System.Drawing.Point(94, 158);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(115, 20);
+            this.numericUpDown1.TabIndex = 6;
             // 
             // label17
             // 
@@ -619,18 +634,16 @@
             this.odjavaToolStripMenuItem.Text = "Odjava";
             this.odjavaToolStripMenuItem.Click += new System.EventHandler(this.odjavaToolStripMenuItem_Click);
             // 
-            // numericUpDown1
+            // button2
             // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(94, 158);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(115, 20);
-            this.numericUpDown1.TabIndex = 6;
+            this.button2.Location = new System.Drawing.Point(205, 186);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(107, 41);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Spasi u datoteku";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormManagement
             // 
@@ -661,13 +674,13 @@
             this.tabPage4.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -725,5 +738,6 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Zadaca1RPR.Abstracts;
 using Zadaca1RPR.Interfaces;
 using Zadaca1RPR.Models.Patients;
 //KARTON
 namespace Zadaca1RPR.Models
 {
+    [Serializable]
     public class HealthCard
     {
-
         public static int ID;
 
         public Patient Patient { get; set; }
@@ -25,6 +26,8 @@ namespace Zadaca1RPR.Models
         public bool CardActive { get; set; }
 
         public List<string> Ordinations { get; set; }
+
+        public HealthCard() { }
 
         public HealthCard(UrgentPatient patient, string causeOfDeath = "", string timeOfDeath = "", DateTime dateOfDeath = default(DateTime))
         {
